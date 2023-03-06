@@ -106,7 +106,7 @@ async (req, res)=>{
 
 
 // @route   GET api/profile
-// @desc    get current user profile
+// @desc    get all user profiles
 // @access  public
 
 router.get('/', async(req,res)=>{
@@ -122,7 +122,7 @@ router.get('/', async(req,res)=>{
 })
 
 // @route   GET api/profile/user/:user_id
-// @desc    get current user profile
+// @desc    get single user profile
 // @access  public
 
 router.get('/user/:user_id', async(req,res)=>{

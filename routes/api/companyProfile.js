@@ -27,13 +27,13 @@ router.get('/me', companyAuth, async (req,res)=>{
     }
 })
 
-// @route   POST api/profile/:edit
-// @desc    Create or Update User Profile
+// @route   POST api/companyProfile/:edit
+// @desc    Create or Update Company Profile
 // @access  private
 
-router.post('/:edit', [auth,  [
-    check('status','status is required').not().isEmpty(),
-    check('skills', 'skills are required').not().isEmpty()
+router.post('/:edit', [companyAuth,  [
+    check('location','location is required').not().isEmpty(),
+    check('industry', 'industry niche is required').not().isEmpty()
 ]],
 async (req, res)=>{
     const errors = validationResult(req);
@@ -57,7 +57,7 @@ async (req, res)=>{
 
     //Build profile object
     const profileFields = {}
-    profileFields.user = req.user.id
+    profileFields.company = req.company.id
     if(company) {profileFields.company = company}
     if(website) {profileFields.website = website}
     if (location) {profileFields.location = location}
@@ -74,22 +74,22 @@ async (req, res)=>{
     if (instagram) {profileFields.social.instagram = instagram}
 
     try{
-        let companyProfile = CompanyProfile.findOne({user: req.user.id})
+        let companyProfile = CompanyProfile.findOne({company: req.company.id})
         
         if(req.params.edit == 1){
             //update
-            profile = await Profile.findOneAndUpdate(
-                {user: req.user.id},
+            companyProfile = await CompanyProfile.findOneAndUpdate(
+                {company: req.company.id},
                 {$set: profileFields},
                 {new: true}
                 )
 
-            return res.json(profile)
+            return res.json(companyProfile)
         }
         // create
-        profile = new Profile(profileFields)
-        await profile.save()
-        res.json(profile)
+        companyProfile = new CompanyProfile(profileFields)
+        await companyProfile.save()
+        res.json(companyProfile)
 
     }catch(err){
         console.log(err.message)
@@ -100,13 +100,13 @@ async (req, res)=>{
 
 
 // @route   GET api/profile
-// @desc    get current user profile
+// @desc    get all companies profiles
 // @access  public
 
 router.get('/', async(req,res)=>{
     try {
-        let profiles = await Profile.find().populate('user',['name','avatar'])
-        res.json(profiles)
+        let companyProfiles = await CompanyProfile.find().populate('company',['name','avatar'])
+        res.json(companyProfiles)
         
     } catch (err) {
         console.error(err.message)
@@ -116,20 +116,20 @@ router.get('/', async(req,res)=>{
 })
 
 // @route   GET api/profile/user/:user_id
-// @desc    get current user profile
+// @desc    get single company profile
 // @access  public
 
-router.get('/user/:user_id', async(req,res)=>{
+router.get('/company/:company_id', async(req,res)=>{
     try {
-        let profile = await Profile.findOne({user:req.params.user_id}).populate('user',['name','avatar'])
+        let companyProfile = await CompanyProfile.findOne({company:req.params.company_id}).populate('company',['name','avatar'])
 
-        if(!profile) return res.status(400).json({msg: 'Profile not found'})
-        res.json(profile)
+        if(!companyProfile) return res.status(400).json({msg: 'No company profile found'})
+        res.json(companyProfile)
         
     } catch (err) {
         console.error(err.message)
         if(err.kind == 'ObjectId'){
-            return res.status(400).json({msg: 'Profile not found'}  )
+            return res.status(400).json({msg: 'No company profile found'}  )
         }
         res.status(500).send('Server Error')
         
@@ -141,20 +141,20 @@ router.get('/user/:user_id', async(req,res)=>{
 // @desc    delete user profile, user and posts
 // @access  private
 
-router.delete('/', auth, async(req,res)=>{
+router.delete('/', companyAuth, async(req,res)=>{
 
     
     try {
-        //remove posts
-        await Post.deleteMany({ user: req.user.id })
+        // @to-do remove jobs
+        // await Post.deleteMany({ user: req.user.id })
 
         //remove profile
-        await Profile.findOneAndRemove({user: req.user.id})
+        await CompanyProfile.findOneAndRemove({company: req.company.id})
 
         //remove user
-        await User.findOneAndRemove({_id: req.user.id})
+        await Company.findOneAndRemove({_id: req.company.id})
 
-        res.json({msg: 'User deleted'})
+        res.json({msg: 'Company Account deleted'})
     } catch (err) {
         console.error(err.message)
         res.status(500).send('Server Error')

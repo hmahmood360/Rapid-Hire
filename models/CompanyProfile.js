@@ -13,7 +13,8 @@ const CompanyProfileSchema = new mongoose.Schema({
     type: String
   },
   location: {
-    type: String
+    type: String,
+    required: true
   },
   industry: {
     type: String,
