@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createProfile } from '../../actions/profile'
 
@@ -18,8 +18,9 @@ const CreateProfile = ({ createProfile }) => {
         youtube:'',
         instagram:''
     })
-
     const [displaySocialInputs, toggleSocialInputs] = useState(false)
+
+    const navigate = useNavigate(); 
 
     const {
         company,
@@ -43,9 +44,10 @@ const CreateProfile = ({ createProfile }) => {
             })
         }
         
-        const handleSubmit = e => {
+        const handleSubmit = async (e) => {
             e.preventDefault()
-            createProfile(formData,0) // sending 0 to create profile
+            await createProfile(formData,0) // sending 0 to create profile
+            navigate('/dashboard'); // navigate to create-profile after successful registration
         }
 
   return (
@@ -139,7 +141,7 @@ const CreateProfile = ({ createProfile }) => {
             </Fragment>}
             
             <input type="submit" className="btn btn-primary my-1"  />
-            <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+            <Link className="btn btn-light my-1" to="/dashboard">Skip</Link>
         </form>
     </div>
   )

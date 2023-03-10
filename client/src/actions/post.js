@@ -1,3 +1,5 @@
+import axios from 'axios'
+import {setAlert} from './alert'
 import {
     DELETE_POST, 
     GET_POSTS, 
@@ -8,8 +10,6 @@ import {
     ADD_COMMENT,
     REMOVE_COMMENT  
 } from './types'
-import axios from 'axios'
-import {setAlert} from './alert'
 
 // Get Posts
 export const getPosts = () => async dispatch => {

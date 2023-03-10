@@ -23,8 +23,8 @@ const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading
         Welcome {user && user.name}
       </p>
       {profile !== null ? (
+        // User has profile
       <Fragment>
-        {/* User has profile */}
         <DashboardActions />
         <Experience experience={profile.experience} />
         <Education education={profile.education} />
@@ -35,6 +35,7 @@ const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading
           </button>
         </div>
       </Fragment>) : (
+        // User does not have Profile
       <Fragment>
         <p>You have not created profile.</p>
         <Link to='/create-profile' className='btn btn-primary my-1' >Create Profile</Link> 

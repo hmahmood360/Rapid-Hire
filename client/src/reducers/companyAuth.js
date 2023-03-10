@@ -7,18 +7,15 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     ACCOUNT_DELETED,
-    COMPANY_LOADED,
-    COMPANY_REGISTER_SUCCESS,
-    COMPANY_LOGIN_SUCCESS
+    COMPANY_LOADED
 } from "../actions/types";
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
     isCompanyAuthenticated: null,
     loading: true,
     user: null,
-    company: null
+    company:null
 }
 
 export default function(state = initialState, action){
@@ -34,15 +31,6 @@ export default function(state = initialState, action){
                 loading: false,
                 isAuthenticated: true,
             }
-        case COMPANY_REGISTER_SUCCESS:
-        case COMPANY_LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.token)
-            return {
-                ...state,
-                ...payload,
-                loading: false,
-                isCompanyAuthenticated: true,
-            }
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
@@ -53,8 +41,7 @@ export default function(state = initialState, action){
                 ...state,
                 token: null,
                 loading: false,
-                isAuthenticated:false,
-                isCompanyAuthenticated: false
+                isAuthenticated:false
             }
         case USER_LOADED:
             return {
@@ -66,10 +53,11 @@ export default function(state = initialState, action){
         case COMPANY_LOADED:
             return {
                 ...state,
-                isCompanyAuthenticated: true,
+                isAuthenticated: true,
                 loading: false,
                 company: payload
-            }        
+            }
+        
         default:
             return state
     }

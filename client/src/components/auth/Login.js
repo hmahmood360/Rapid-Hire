@@ -2,20 +2,25 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { login } from '../../actions/auth'
+import { login, companyLogin } from '../../actions/auth'
 
-function Login({login, isAuthenticated}) {
+function Login({login, isAuthenticated, isCompanyAuthenticated, companyLogin}) {
     const [formData, setFormData] = useState({ 
         email: '',
         password: '' 
     })
+    const [showCompanyLogin, setShowCompanyLogin] = useState(false)
 
     const {email, password} = formData
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         
-        login({email, password})
+        if (showCompanyLogin) {
+          companyLogin({ email, password })
+        } else {
+          login({ email, password })
+        }
         
     }
 
@@ -23,20 +28,30 @@ function Login({login, isAuthenticated}) {
       setFormData({...formData, [e.target.name] : e.target.value})
         
     }
-    //Redirect if logged in
-    if (isAuthenticated){
-      return <Navigate to='/dashboard' />
+    
+    if (isAuthenticated) {
+      return <Navigate to="/dashboard" />
+    }
+    if (isCompanyAuthenticated) {
+      return <Navigate to="/company-dashboard" />
     }
 
 
   return (
-    <div >
-        <h1 className="large text-primary">Log in</h1>
+    <div>
+      <div className="btn-container ">
+         <button disabled={!showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-primary" : "btn btn-disable"}>User Login</button>
+         <button disabled={showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-disable" : "btn btn-primary"}>Company Login</button>
+      </div>
+      <h1 className="large text-primary">
+        {showCompanyLogin ? 'Company Login' : 'User Login'}
+      </h1>
       <p className="lead"><i className="fas fa-user"></i> Sign in Account</p>
       <form className="form" onSubmit={e => handleSubmit(e)} >
         <div className="form-group">
           <input type="email" placeholder="Email Address" name="email" value={email} onChange={(e) => handleChange(e)} />
         </div>
+        
         <div className="form-group">
           <input
             type="password"
@@ -58,11 +73,13 @@ function Login({login, isAuthenticated}) {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
+    companyLogin: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isCompanyAuthenticated: state.auth.isCompanyAuthenticated
 })
 
-export default connect(mapStateToProps,{ login })(Login) 
+export default connect(mapStateToProps,{ login, companyLogin })(Login) 

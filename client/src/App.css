@@ -137,6 +137,17 @@ img {
 .mx-3 {
   margin: 0 3rem;
 }
+.btn-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 20px 0;
+}
+.btn-container .btn {
+  flex: 1;
+  margin: 0 5px;
+  font-size: 1.6rem;
+}
 
 .btn {
   display: inline-block;
@@ -215,6 +226,11 @@ img {
   background: #fff;
   color: #333;
   border: #ccc solid 1px;
+}
+.btn-disable{
+  cursor: not-allowed;
+  background: var(--light-color);
+  color: #999999;
 }
 
 .btn:hover {

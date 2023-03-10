@@ -20,6 +20,8 @@ app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/company', require('./routes/api/company'))
 app.use('/api/companyAuth', require('./routes/api/companyAuth'))
 app.use('/api/companyProfile', require('./routes/api/companyProfile'))
+app.use('/api/jobs', require('./routes/api/jobs'))
+
 
 
 
