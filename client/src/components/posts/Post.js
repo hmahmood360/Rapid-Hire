@@ -14,14 +14,14 @@ const Post = ({getPost, post:{loading, post}}) => {
         getPost(id)
     },[getPost])
   return (
-    loading || post === null ? <Spinner /> : <Fragment>
+    loading || post === null ? <Spinner /> : <div className='container'>
         <Link to={'/Posts'} className='btn btn-dark' >Back to Posts</Link>
         <PostItem post={post} showActions={false} /> 
         <CommentForm postId={post._id} />
         {post.comments.map((comment)=> (
             <CommentItem key={comment._id} comment={comment} postId={post._id} />
             )) }
-    </Fragment>
+    </div>
   )
 }
 

@@ -11,7 +11,7 @@ const Profiles = ({getProfiles, profile:{profiles, loading}}) => {
         getProfiles()
     },[getProfiles])
   return (
-    <Fragment>
+    <div className='container'>
         {loading ? <Spinner /> : <Fragment>
             <h1 className="large text-primary">Developers</h1>
             <p className="lead">
@@ -28,7 +28,7 @@ const Profiles = ({getProfiles, profile:{profiles, loading}}) => {
                 )}
             </div>
             </Fragment>}
-    </Fragment>
+    </div>
   )
 }
 

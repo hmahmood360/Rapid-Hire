@@ -15,7 +15,7 @@ const Profile = ({getProfileById, profile:{profile, loading}, auth}) => {
         getProfileById(id)
     },[getProfileById])
   return (
-    <div>
+    <div className='container'>
         {profile === null || loading ? (
         <Spinner />
         ) : (

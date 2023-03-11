@@ -8,9 +8,11 @@ const JobAbout = ({job:{description,requiredSkills}}) => {
         <p>{description}</p>
         <div className="line"></div>    
         <h2 className="text-primary mt-1">Skills Required:</h2>
-        {requiredSkills.map((skill, index) => {
-            <div key={index } className="p-1"><i className="fas fa-check"></i> {skill} </div>
-        })}
+        <div className="skills">
+          {requiredSkills.map((skill, index) => (
+              <div key={index } className="p-1"><i className="fas fa-check"></i> {skill} </div>
+          ))}
+        </div>
     </div>
   )
 }

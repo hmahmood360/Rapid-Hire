@@ -41,7 +41,7 @@ const AddEducation = ({addEducation}) => {
     }
 
   return (
-    <div>
+    <div >
         <h1 className="large text-primary">
         Add An Experience
         </h1>

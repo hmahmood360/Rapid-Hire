@@ -11,7 +11,7 @@ const Jobs = ({getJobs, job:{ jobs, loading}}) => {
     },[getJobs])
   return (
     loading ? <Spinner /> : (
-        <Fragment>
+        <div className='container'>
             <h1 className="large text-primary">Jobs</h1>
             <p className="lead">
                 <i className="fas fa-user"></i> Welcome to the community
@@ -21,7 +21,7 @@ const Jobs = ({getJobs, job:{ jobs, loading}}) => {
                     <JobItem key={job._id} job={job} />
                 ))}
             </div>
-        </Fragment>
+        </div>
     ) 
   )
 }

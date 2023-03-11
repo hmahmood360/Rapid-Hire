@@ -16,7 +16,7 @@ const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading
   },[])
 
   return (
-    loading && profile === null ? <Spinner /> : <Fragment>
+    loading && profile === null ? <Spinner /> : <div className='container'>
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">
         <i className="fas fa-user "></i>
@@ -41,7 +41,7 @@ const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading
         <Link to='/create-profile' className='btn btn-primary my-1' >Create Profile</Link> 
       </Fragment>
       )}
-    </Fragment>
+    </div>
   )
 }
 

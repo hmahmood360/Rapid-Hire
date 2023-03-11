@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const CompanyDashboard = props => {
   return (
-    <div>
+    <div className='container'>
         <Link to={'/post-job'} className="btn">Post Job</Link>
     </div>
     

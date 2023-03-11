@@ -42,7 +42,7 @@ const PostJob = ({addJob}) => {
   useEffect(() => {getJobs()},[])
 
   return (
-    <div>
+    <div className='container'>
       <h1 className="large text-primary">Post a Job</h1>
       <p className="lead">
         <i className="fas fa-code-branch" /> Add a job posting

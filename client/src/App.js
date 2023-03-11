@@ -1,6 +1,6 @@
 import './App.css';
 import { Fragment, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route,   } from 'react-router-dom';
 
 import setAuthToken from './utils/setAuthToken';
 //components
@@ -41,36 +41,37 @@ function App() {
     store.dispatch(loadCompany())
   },[])
 
+
   return (
     <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar />
-          <div className='container'>
+          <div className='alert-container'>
             <Alert />
-            <Routes>
-                <Route exact path="/" element={<Landing />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Register />} />
-                <Route exact path="/profiles" element={<Profiles />} />
-                <Route exact path="/profile/:id" element={<Profile />} />
-                <Route exact path="/jobs" element={<Jobs />} />
-                <Route exact path="/job/:id" element={<Job />} />
-                <Route element={<PrivateRoutes/>} >
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/create-profile" element={<CreateProfile />} />
-                  <Route path="/edit-profile" element={<EditProfile />} />
-                  <Route path="/add-experience" element={<AddExperience />} />
-                  <Route path="/add-education" element={<AddEducation />} />
-                  <Route path="/posts" element={<Posts />} />
-                  <Route path="/posts/:id" element={<Post />} />
-                </Route>
-                <Route element={<PrivateCompanyRoutes />} >
-                  <Route path="/company-dashboard" element={<CompanyDashboard />} />
-                  <Route path="/post-job" element={<PostJob />} />
-                </Route>
-            </Routes>
           </div>
+            <Routes>
+              <Route exact path="/" element={<Landing />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
+              <Route exact path="/profiles" element={<Profiles />} />
+              <Route exact path="/profile/:id" element={<Profile />} />
+              <Route exact path="/jobs" element={<Jobs />} />
+              <Route exact path="/job/:id" element={<Job />} />
+              <Route element={<PrivateRoutes/>} >
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/create-profile" element={<CreateProfile />} />
+                <Route path="/edit-profile" element={<EditProfile />} />
+                <Route path="/add-experience" element={<AddExperience />} />
+                <Route path="/add-education" element={<AddEducation />} />
+                <Route path="/posts" element={<Posts />} />
+                <Route path="/posts/:id" element={<Post />} />
+              </Route>
+              <Route element={<PrivateCompanyRoutes />} >
+                <Route path="/company-dashboard" element={<CompanyDashboard />} />
+                <Route path="/post-job" element={<PostJob />} />
+              </Route>
+            </Routes>
         </Fragment>
       </Router>
     </Provider>

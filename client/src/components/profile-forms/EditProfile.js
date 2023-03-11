@@ -67,7 +67,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
         }
 
   return ( 
-    <div>
+    <div className='container'>
         <h1 className="large text-primary">
             Edit Your Profile
         </h1>

@@ -48,7 +48,7 @@ function Register ({setAlert, register, isAuthenticated, companyRegister })  {
     }
 
     return (
-    <div>
+    <div className='container'>
       <div className="btn-container ">
          <button disabled={!showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-primary" : "btn btn-disable"}>User Registration</button>
          <button disabled={showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-disable" : "btn btn-primary"}>Company Registration</button>

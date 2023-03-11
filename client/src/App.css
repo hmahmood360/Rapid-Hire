@@ -40,8 +40,15 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
+  margin-top: 4rem;
   margin-bottom: 3rem;
+}
+.alert-container{
+  max-width: 1400px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 1rem;
+  margin: 4rem 0 0.5rem 0;;
 }
 
 /* Text Styles*/
@@ -486,9 +493,8 @@ button {
   grid-area: about;
   text-align: center;
 }
-
-
-.profile-about .skills {
+/* removed .profile-about from here */
+.skills {
   display: flex;
   align-items: center;
   justify-content: center;

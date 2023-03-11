@@ -51,7 +51,7 @@ const CreateProfile = ({ createProfile }) => {
         }
 
   return (
-    <div>
+    <div className='container'>
         <h1 className="large text-primary">
             Create Your Profile
         </h1>

@@ -38,7 +38,7 @@ function Login({login, isAuthenticated, isCompanyAuthenticated, companyLogin}) {
 
 
   return (
-    <div>
+    <div className='container'>
       <div className="btn-container ">
          <button disabled={!showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-primary" : "btn btn-disable"}>User Login</button>
          <button disabled={showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-disable" : "btn btn-primary"}>Company Login</button>
