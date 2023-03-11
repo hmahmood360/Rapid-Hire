@@ -3,7 +3,8 @@ import {setAlert} from './alert'
 import { 
     ADD_JOB,
     GET_JOBS,
-    JOB_ERROR
+    JOB_ERROR,
+    GET_JOB
  } from './types'
 
  // Add Job
@@ -52,6 +53,24 @@ export const getJobs = () => async dispatch => {
         dispatch({
             type: JOB_ERROR,
             payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+
+// Get Get single Job by id
+export const getJobById = (jobID) => async dispatch => {
+    try { 
+        const res = await axios.get(`/api/jobs/job/${jobID}`)
+
+        dispatch({
+            type: GET_JOB,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
         })
     }
 }

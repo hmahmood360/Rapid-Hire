@@ -102,7 +102,7 @@ router.put('/:id', companyAuth, async (req, res) => {
 // @desc    get single job
 // @access  public
 
-router.get('/:id', async (req, res) => {
+router.get('/job/:id', async (req, res) => {
     try {
       const job = await Job.findById(req.params.id).populate('company', ['name', 'avatar'])
       if (!job) {

@@ -61,6 +61,10 @@ img {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+.medium{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
 
 .text-center {
   text-align: center;
@@ -125,6 +129,30 @@ img {
 .my-3 {
   margin: 3rem 0;
 }
+.mt {
+  margin: 0.5rem 0 0 0;
+}
+.mt-1 {
+  margin: 1rem 0 0 0;
+}
+.mt-2 {
+  margin: 2rem 0 0 0;
+}
+.mt-3 {
+  margin: 3rem 0 0 0;
+}
+.mr {
+  margin: 0 0.5rem 0 0;
+}
+.mr-1 {
+  margin: 0 1rem 0 0;
+}
+.mr-2 {
+  margin: 0 2rem 0 0;
+}
+.mr-3 {
+  margin: 0 3rem 0 0;
+}
 .mx {
   margin: 0 ;
 }
@@ -142,6 +170,10 @@ img {
   flex-direction: row;
   width: 100%;
   margin: 20px 0;
+}
+.btn-to-right{
+  display: flex;
+  justify-content: end;
 }
 .btn-container .btn {
   flex: 1;
@@ -389,19 +421,45 @@ button {
   line-height: 1.8;
   margin-bottom: 1rem;
 }
+.job {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  align-items: top;
+  grid-gap: 2rem;
+  padding: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
 
-/* Profile Page */
+/* Profile Page and job page */
 .profile-grid {
   display: grid;
   grid-template-areas:
     'top top'
     'about about'
-    'exp edu'
+    'edu edu'
     'github github';
   grid-gap: 1rem;
 }
+.job-grid{
+  display: grid;
+  grid-template-areas:
+    'top top'
+    'about about'
+    'bottom bottom';
+  grid-gap: 1rem;
+}
+.job-details{
+  grid-area: bottom;
+  flex-direction: column;
+  text-align: start;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: #ccc 1px dotted;
+}
 
-.profile-top {
+.profile-top,
+.job-top {
   grid-area: top;
   display: flex;
   flex-direction: column;
@@ -423,10 +481,12 @@ button {
   color: var(--dark-color);
 }
 
-.profile-about {
+.profile-about,
+.job-about {
   grid-area: about;
   text-align: center;
 }
+
 
 .profile-about .skills {
   display: flex;
@@ -610,3 +670,9 @@ button {
     padding: 0.3rem 0.4rem;
   }
 }
+
+.logo{
+  display: block;
+  margin: 0 auto;
+}
+

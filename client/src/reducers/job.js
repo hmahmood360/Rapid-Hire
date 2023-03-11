@@ -1,5 +1,6 @@
 import { 
     ADD_JOB, 
+    GET_JOB, 
     GET_JOBS,
     JOB_ERROR   
  } from "../actions/types"
@@ -18,7 +19,7 @@ export default function(state=initialState, action) {
         case ADD_JOB:
             return{
                 ...state,
-                jobs: [payload,...state.posts],
+                jobs: [payload,...state.jobs],
                 loading: false
             }
         case GET_JOBS: 
@@ -31,6 +32,12 @@ export default function(state=initialState, action) {
             return{
                 ...state,
                 error: payload,
+                loading: false
+            }
+        case GET_JOB:
+            return {
+                ...state,
+                job: payload,
                 loading: false
             }
         default:
