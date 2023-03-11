@@ -67,7 +67,6 @@ router.post('/',[companyAuth, [
 router.put('/:id', companyAuth, async (req, res) => {
     try {
       const job = await Job.findById(req.params.id);
-      console.log(job)
   
       if (!job) {
         return res.status(404).json({ msg: 'Job not found' });

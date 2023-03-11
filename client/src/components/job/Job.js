@@ -24,6 +24,9 @@ const Job = ({getJobById, job:{job, loading}, auth}) => {
         <Fragment>
             <Link to='/jobs' className='btn btn-light' >Back to Jobs</Link>
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
+                <Link to={`/edit-job/${job._id}`} className='btn btn-dark ' >Edit Job</Link>
+            )}
+            {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
                 <Link to='/edit-profile' className='btn btn-danger ' >Delete Job</Link>
             )}
             <div className="job-grid my-1">

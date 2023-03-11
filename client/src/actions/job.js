@@ -8,7 +8,7 @@ import {
  } from './types'
 
  // Add Job
-export const addJob = (formData) => async dispatch => {
+export const addJob = (formData, update=0) => async dispatch => {
     try {
 
         const config = {
@@ -38,6 +38,35 @@ export const addJob = (formData) => async dispatch => {
               payload: {msg: err.message, status: null}
             })
           }
+    }
+}
+
+// Edit job
+export const editJob = (formData,jobId) => async dispatch => {
+    try {
+        const config = { 
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put(`/api/jobs/${jobId}`, formData, config)
+
+        dispatch({
+            type: GET_JOB,
+            payload: res.data
+        })
+        dispatch(setAlert('Profile Updated', 'success'))
+
+    } catch (err) {
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })        
     }
 }
 
@@ -74,3 +103,4 @@ export const getJobById = (jobID) => async dispatch => {
         })
     }
 }
+

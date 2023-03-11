@@ -23,13 +23,15 @@ import Alert from './components/layout/Alert';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Jobs from './components/job/Jobs';
+import Job from './components/job/Job';
+import EditJob from './components/job/EditJob';
 // Redux
 import { Provider } from 'react-redux'
 import store from './store'
 //actions
 import { loadUser } from './actions/auth';
 import { loadCompany } from './actions/auth';
-import Job from './components/job/Job';
+
 
 if (localStorage.token){
   setAuthToken(localStorage.token)
@@ -70,6 +72,7 @@ function App() {
               <Route element={<PrivateCompanyRoutes />} >
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />
                 <Route path="/post-job" element={<PostJob />} />
+                <Route path="/edit-job/:id" element={<EditJob />} />
               </Route>
             </Routes>
         </Fragment>

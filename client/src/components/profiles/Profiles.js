@@ -7,12 +7,13 @@ import ProfileItem from './ProfileItem'
 
 const Profiles = ({getProfiles, profile:{profiles, loading}}) => {
     
+    
     useEffect(() => {
         getProfiles()
-    },[getProfiles])
+      }, [getProfiles]);
   return (
     <div className='container'>
-        {loading ? <Spinner /> : <Fragment>
+        {loading || profiles===null ? <Spinner /> : <Fragment>
             <h1 className="large text-primary">Developers</h1>
             <p className="lead">
                 <i className="fab fa-connectdevelop"></i>
@@ -34,7 +35,7 @@ const Profiles = ({getProfiles, profile:{profiles, loading}}) => {
 
 Profiles.propTypes = {
     getProfiles: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object
 }
 
 const mapStateToProps = state => ({
