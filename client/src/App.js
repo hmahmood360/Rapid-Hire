@@ -25,6 +25,9 @@ import Landing from './components/layout/Landing';
 import Jobs from './components/job/Jobs';
 import Job from './components/job/Job';
 import EditJob from './components/job/EditJob';
+import CreateCompanyProfile from './components/profile-forms/CreateCompanyProfile';
+import EditCompanyProfile from './components/profile-forms/EditCompanyProfile';
+
 // Redux
 import { Provider } from 'react-redux'
 import store from './store'
@@ -73,6 +76,8 @@ function App() {
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />
                 <Route path="/post-job" element={<PostJob />} />
                 <Route path="/edit-job/:id" element={<EditJob />} />
+                <Route path="/create-company-profile" element={<CreateCompanyProfile />} />
+                <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
               </Route>
             </Routes>
         </Fragment>

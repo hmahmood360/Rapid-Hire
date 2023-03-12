@@ -53,6 +53,8 @@ export default function(state = initialState, action){
                 ...state,
                 token: null,
                 loading: false,
+                user: null,
+                company: null,
                 isAuthenticated:false,
                 isCompanyAuthenticated: false
             }

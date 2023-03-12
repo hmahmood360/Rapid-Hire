@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
 import { logout } from '../../actions/auth'
 
-function Navbar({ auth:{isAuthenticated, loading}, logout }) {
+function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout }) {
 
   const authLinks = (
     <ul>
@@ -48,7 +48,7 @@ function Navbar({ auth:{isAuthenticated, loading}, logout }) {
       </h1>
       {!loading && (
       <Fragment>
-        {isAuthenticated ? authLinks : guestLinks}
+        {isAuthenticated || isCompanyAuthenticated ? authLinks : guestLinks}
       </Fragment>)}
     </nav>
   )

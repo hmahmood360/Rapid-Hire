@@ -25,6 +25,22 @@ export const getCurrentProfile = () => async dispatch => {
         })
     }
 }
+// Get current company profile
+export const getCurrentCompanyProfile = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/companyProfile/me')
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
 
 // Get all profile
 export const getProfiles = () => async dispatch => {
@@ -200,4 +216,50 @@ export const deleteAccount = () => async dispatch => {
             })
         }
     } 
+}
+// Delete Company Account
+export const deleteCompanyAccount = () => async dispatch => {
+    if(window.confirm('Are you sure you want to delete your account? This cannot be undone!')){
+        try {
+            const res = await axios.delete('/api/companyProfile')
+            dispatch({ type: ACCOUNT_DELETED})
+            dispatch({ type: CLEAR_PROFILE })
+            dispatch(setAlert('Account deleted', 'success'))
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status}
+            })
+        }
+    } 
+}
+
+
+//Create or Update Company Profile
+export const createCompanyProfile = (formData, update=0 ) => async dispatch => {
+    try {
+        const config = { 
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.post(`/api/companyProfile/${update}`, formData, config)
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+        dispatch(setAlert(update === 0 ? 'Profile Created' : 'Profile Updated', 'success'))
+
+    } catch (err) {
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })        
+    }
 }

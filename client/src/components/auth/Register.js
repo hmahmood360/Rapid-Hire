@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { register, companyRegister } from '../../actions/auth'
 
 
-function Register ({setAlert, register, isAuthenticated, companyRegister })  {
+function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, companyRegister })  {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -39,8 +39,8 @@ function Register ({setAlert, register, isAuthenticated, companyRegister })  {
         
     }
 
-    if (isAuthenticated) {
-      return showCompanyRegister ? (
+    if (isAuthenticated || isCompanyAuthenticated) {
+      return isCompanyAuthenticated ? (
         <Navigate to="/company-dashboard" />
       ) : (
         <Navigate to="/dashboard" />
@@ -130,7 +130,8 @@ Register.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isCompanyAuthenticated: state.auth.isCompanyAuthenticated,
 })
 
 export default connect(
