@@ -168,10 +168,10 @@ router.post('/apply/:id', auth, async (req, res) => {
       if (!job) {
         return res.status(404).json({ msg: 'Job not found' })
       }
-  
+
       // Check if user has already applied for this job
       if (job.applicants.find(applicant => applicant.user.toString() === req.user.id)) {
-        return res.status(400).json({ msg: 'You have already applied for this job' })
+        return res.status(400).json({errors: [{msg: 'You have already applied for this job'}]})
       }
   
       const applicant = {

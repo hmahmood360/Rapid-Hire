@@ -34,7 +34,6 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout
 
   const guestLinks = (
     <ul>
-      <li><Link to="/jobs">Jobs</Link></li>
       <li><Link to="/profiles">Developers</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login">Login</Link></li>

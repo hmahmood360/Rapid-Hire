@@ -40,16 +40,10 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 4rem;
+  margin-top: 6rem;
   margin-bottom: 3rem;
 }
-.alert-container{
-  max-width: 1400px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 1rem;
-  margin: 4rem 0 0.5rem 0;;
-}
+
 
 /* Text Styles*/
 .x-large {
@@ -210,12 +204,31 @@ img {
   color: #333;
 }
 
+.alert-container{
+  position:fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 70%;
+  height: auto;
+  z-index: 2;
+}
+
+.alert-container button{
+  position: absolute;
+  height:67px;
+  
+  right: -7px;
+  z-index: 3;
+}
+
 .alert {
-  padding: 0.8rem;
-  margin: 1rem 0;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+  
 }
 
 .btn-primary,
@@ -444,8 +457,7 @@ button {
   grid-template-areas:
     'top top'
     'about about'
-    'edu edu'
-    'github github';
+    'edu exp';
   grid-gap: 1rem;
 }
 .job-grid{

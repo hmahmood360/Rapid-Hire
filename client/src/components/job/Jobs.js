@@ -34,4 +34,4 @@ const mapStateToProps = state => ({
     job: state.job
 })
 
-export default connect( mapStateToProps,{getJobs} )( Jobs)
+export default connect( mapStateToProps, {getJobs} )( Jobs)

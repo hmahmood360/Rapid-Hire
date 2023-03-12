@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Spinner} from '../layout/Spinner'
 import { Link, useParams } from 'react-router-dom'
-import { getJobById } from '../../actions/job'
+import { getJobById, ApplyForJob } from '../../actions/job'
 
 import JobTop from './JobTop'
 import JobAbout from './JobAbout'
 import JobBottom from './JobBottom'
 
-const Job = ({getJobById, job:{job, loading}, auth}) => {
+const Job = ({getJobById,ApplyForJob, job:{job, loading}, auth}) => {
 
     const {id} = useParams()
     useEffect(()=>{
@@ -17,7 +17,7 @@ const Job = ({getJobById, job:{job, loading}, auth}) => {
     },[getJobById])
 
   return (
-    <div>
+    <div className='container'>
         {job=== null || loading ? (
         <Spinner />
         ) : (
@@ -37,7 +37,7 @@ const Job = ({getJobById, job:{job, loading}, auth}) => {
             </div>
             <div className="btn-to-right">
                 <button className="btn btn-light">Add to Favourites</button>
-                <button className="btn btn-primary">Apply for job</button>
+                <button onClick={()=> ApplyForJob(id)} className="btn btn-primary">Apply for job</button>
             </div>
         </Fragment> )}
     </div>
@@ -46,8 +46,9 @@ const Job = ({getJobById, job:{job, loading}, auth}) => {
 
 Job.propTypes = {
     getJobById: PropTypes.func.isRequired,
+    ApplyForJob: PropTypes.func.isRequired,
     job: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -56,4 +57,4 @@ const mapStateToProps = state => ({
 })
     
 
-export default connect(mapStateToProps, { getJobById } )(Job)
+export default connect(mapStateToProps, { getJobById, ApplyForJob } )(Job)

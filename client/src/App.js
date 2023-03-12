@@ -52,17 +52,14 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
-          <div className='alert-container'>
             <Alert />
-          </div>
             <Routes>
               <Route exact path="/" element={<Landing />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/profiles" element={<Profiles />} />
               <Route exact path="/profile/:id" element={<Profile />} />
-              <Route exact path="/jobs" element={<Jobs />} />
-              <Route exact path="/job/:id" element={<Job />} />
+              
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create-profile" element={<CreateProfile />} />
@@ -71,6 +68,8 @@ function App() {
                 <Route path="/add-education" element={<AddEducation />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/posts/:id" element={<Post />} />
+                <Route exact path="/jobs" element={<Jobs />} />
+                <Route exact path="/job/:id" element={<Job />} />
               </Route>
               <Route element={<PrivateCompanyRoutes />} >
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />

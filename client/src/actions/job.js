@@ -104,3 +104,26 @@ export const getJobById = (jobID) => async dispatch => {
     }
 }
 
+// User apply for job
+export const ApplyForJob = (jobID) => async dispatch => {
+    try {
+        await axios.post(`/api/jobs/apply/${jobID}`)
+        const res = await axios.get(`/api/jobs/job/${jobID}`)
+        dispatch({
+            type: GET_JOB,
+            payload: res.data
+        })
+        dispatch(setAlert('You have successfully applied for job', 'success'))
+    } catch (err) {
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
