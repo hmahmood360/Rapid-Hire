@@ -4,7 +4,10 @@ import {
     ADD_JOB,
     GET_JOBS,
     JOB_ERROR,
-    GET_JOB
+    GET_JOB,
+    UPDATE_JOBS,
+    DELETE_JOB
+
  } from './types'
 
  // Add Job
@@ -86,6 +89,22 @@ export const getJobs = () => async dispatch => {
     }
 }
 
+// Get Jobs user has applied to
+export const getAppliedJobs = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/jobs/applied')
+        dispatch({
+            type: UPDATE_JOBS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
 
 // Get Get single Job by id
 export const getJobById = (jobID) => async dispatch => {
@@ -105,7 +124,7 @@ export const getJobById = (jobID) => async dispatch => {
 }
 
 // User apply for job
-export const ApplyForJob = (jobID) => async dispatch => {
+export const applyForJob = (jobID) => async dispatch => {
     try {
         await axios.post(`/api/jobs/apply/${jobID}`)
         const res = await axios.get(`/api/jobs/job/${jobID}`)
@@ -126,4 +145,28 @@ export const ApplyForJob = (jobID) => async dispatch => {
         })
     }
 }
+// User Delete job application
+export const deleteApplication = (jobId) => async dispatch => {
+    try {
+        console.log(jobId)
+        await axios.delete(`/api/jobs/apply/${jobId}`);
+        dispatch({
+            type: DELETE_JOB,
+            payload: jobId
+        })
+        dispatch(setAlert('You have deleted your application request', 'success'))
+    } catch (err) {
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+
 

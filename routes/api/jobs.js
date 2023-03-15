@@ -119,7 +119,7 @@ router.get('/job/:id', async (req, res) => {
 
 
 // @route   GET api/jobs/
-// @desc    get all job
+// @desc    get all jobs
 // @access  public
 router.get('/', async (req, res) => {
     try {
@@ -158,7 +158,7 @@ router.delete('/:id',companyAuth, async (req, res) => {
   })
 
 
-// @route   POST api/apply/:id
+// @route   POST api/jobs/apply/:id
 // @desc    User can apply for a job
 // @access  private
 
@@ -190,6 +190,21 @@ router.post('/apply/:id', auth, async (req, res) => {
       res.status(500).send('Server Error')
     }
   })
+
+
+// @route   GET api/jobs/applied
+// @desc    Get jobs which user has applied
+// @access  private
+
+router.get('/applied', auth, async (req, res) => {
+  try {
+    const jobs = await Job.find({ 'applicants.user': req.user.id }).populate('company', ['name'])
+    res.json(jobs)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
 
 
 // @route   DELETE api/apply/:id

@@ -7,31 +7,35 @@ import { Link } from 'react-router-dom'
 import { DashboardActions } from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
+import AppliedJobs from './AppliedJobs'
+import { getAppliedJobs } from '../../actions/job'
 
 
-const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
+const Dashboard = ({ getAppliedJobs, job:{jobs}, getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
 
   useEffect(() => {
     getCurrentProfile()
-  },[])
+    getAppliedJobs()
+  },[getCurrentProfile, getAppliedJobs])
 
   return (
     loading && profile === null ? <Spinner /> : <div className='container'>
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">
         <i className="fas fa-user "></i>
-        Welcome {user && user.name}
+        <span className='inline-block ml-1 '>Welcome {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}</span>
       </p>
       {profile !== null ? (
         // User has profile
       <Fragment>
-        <DashboardActions />
+        <DashboardActions id={user._id} />
         <Experience experience={profile.experience} />
         <Education education={profile.education} />
+        <AppliedJobs jobs={jobs} />
         <div className='my-2'>
           <button onClick={() => deleteAccount()} className="btn btn-danger">
             <i className="fas fa-user-minus"></i>
-            Delete Account
+            <p className='inline-block ml-1'>Delete Account</p>
           </button>
         </div>
       </Fragment>) : (
@@ -47,6 +51,7 @@ const Dashboard = ({ getCurrentProfile, auth:{ user }, profile:{profile, loading
 
 Dashboard.propTypes = { 
   getCurrentProfile: PropTypes.func.isRequired,
+  getAppliedJobs: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   deleteAccount: PropTypes.func.isRequired
@@ -54,7 +59,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  job: state.job
 })
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard)
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getAppliedJobs })(Dashboard)

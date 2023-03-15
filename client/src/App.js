@@ -27,6 +27,7 @@ import Job from './components/job/Job';
 import EditJob from './components/job/EditJob';
 import CreateCompanyProfile from './components/profile-forms/CreateCompanyProfile';
 import EditCompanyProfile from './components/profile-forms/EditCompanyProfile';
+import CompanyProfile from './components/profile/CompanyProfile';
 
 // Redux
 import { Provider } from 'react-redux'
@@ -59,6 +60,7 @@ function App() {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/profiles" element={<Profiles />} />
               <Route exact path="/profile/:id" element={<Profile />} />
+              <Route exact path="/company-profile/:id" element={<CompanyProfile />} />
               
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />

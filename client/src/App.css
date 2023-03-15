@@ -15,7 +15,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   line-height: 1.6;
   background-color: #fff;
   color: #333;
@@ -40,30 +40,32 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
+  margin-top: 7rem;
   margin-bottom: 3rem;
 }
 
 
 /* Text Styles*/
-.x-large {
+.normal{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.lead {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.medium{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.large {
   font-size: 4rem;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
-
-.large {
-  font-size: 3rem;
+.x-large {
+  font-size: 5rem;
   line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.lead {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-.medium{
-  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -77,6 +79,24 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+.font-light{
+  font-weight: 300;
+}
+.font-normal{
+  font-weight: 400;
+}
+.font-medium{
+  font-weight: 500;
+}
+.font-semibold{
+  font-weight: 600;
+}
+.font-bold{
+  font-weight: 700;
+}
+.font-extrabold{
+  font-weight: 800;
 }
 
 /* Padding */
@@ -103,6 +123,54 @@ img {
 }
 .py-3 {
   padding: 3rem 0;
+}
+.pt {
+  padding: 0.5rem 0 0 0;
+}
+.pt-1 {
+  padding: 1rem 0 0 0;
+}
+.pt-2 {
+  padding: 2rem 0 0 0;
+}
+.pt-3 {
+  padding: 3rem 0 0 0;
+}
+.pr {
+  padding: 0 0.5rem 0 0;
+}
+.pr-1 {
+  padding: 0 1rem 0 0;
+}
+.pr-2 {
+  padding: 0 2rem 0 0;
+}
+.pr-3 {
+  padding: 0 3rem 0 0;
+}
+.pb {
+  padding: 0 0 0.5rem 0;
+}
+.pb-1 {
+  padding: 0 0 1rem 0;
+}
+.pb-2 {
+  padding: 0 0 2rem 0;
+}
+.pb-3 {
+  padding: 0 0 3rem 0;
+}
+.pl {
+  padding: 0 0 0 0.5rem;
+}
+.pl-1 {
+  padding: 0 0 0 1rem;
+}
+.pl-2 {
+  padding: 0 0 0 2rem;
+}
+.pl-3 {
+  padding: 0 0 0 3rem;
 }
 
 /* Margin */
@@ -141,6 +209,30 @@ img {
 }
 .mt-3 {
   margin: 3rem 0 0 0;
+}
+.ml {
+  margin:  0 0 0 0.5rem;
+}
+.ml-1 {
+  margin:  0 0 0 1rem;
+}
+.ml-2 {
+  margin:  0 0 0 2rem;
+}
+.ml-3 {
+  margin:  0 0 0 3rem;
+}
+.mb {
+  margin:  0 0 0.5rem 0 ;
+}
+.mb-1 {
+  margin:  0 0 1rem 0 ;
+}
+.mb-2 {
+  margin:  0 0 2rem 0 ;
+}
+.mb-3 {
+  margin:  0 0 3rem 0 ;
 }
 .mr {
   margin: 0 0.5rem 0 0;
@@ -186,13 +278,14 @@ img {
   display: inline-block;
   background: var(--light-color);
   color: #333;
-  padding: 0.4rem 1.3rem;
-  font-size: 1rem;
+  padding: 0.5rem 1.3rem;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+  border-radius: 6px;
 }
 
 .badge {
@@ -292,6 +385,10 @@ img {
 .bg-light,
 .badge-light {
   border: #ccc solid 1px;
+}
+
+.inline-block{
+  display: inline-block;
 }
 
 .round-img {
@@ -457,7 +554,8 @@ button {
   grid-template-areas:
     'top top'
     'about about'
-    'edu exp';
+    'edu exp'
+    'bottom bottom';
   grid-gap: 1rem;
 }
 .job-grid{
@@ -667,7 +765,14 @@ button {
       'about'
       'exp'
       'edu'
+      'bottom'
       'github';
+  }
+  .profile-bottom{
+    grid-area: bottom;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .profile-about .skills {

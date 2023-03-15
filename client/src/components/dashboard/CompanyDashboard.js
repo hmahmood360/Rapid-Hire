@@ -17,10 +17,13 @@ const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:
   return (
     loading && profile === null ? <Spinner /> : <div className='container'>
       <h1 className="large text-primary">Company Dashboard</h1>
-      <p className="lead">
+      <div className="lead">
         <i className="fas fa-user "></i>
-        Welcome {company && company.name}
-      </p>
+        <p className='inline-block ml-1'>
+          Welcome {company && company.name.charAt(0).toUpperCase() + company.name.slice(1)}
+        </p>
+        
+      </div>
       
       {profile !== null ? (
         // Company has profile
@@ -29,9 +32,15 @@ const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:
         <div className="dash-buttons">
           <Link to='/edit-company-profile' className="btn btn-light">
             <i className="fas fa-user-circle text-primary"></i>
-            Edit Profile
+            <p className='inline-block ml'>Edit Profile</p>
           </Link>
-          <Link to={'/post-job'} className="btn btn-light">Post Job</Link>
+          <Link to={'/post-job'} className="btn btn-light">
+            <i className="fa fa-briefcase text-primary"></i>
+            <p className='inline-block ml'>Post Job</p>
+          </Link>
+          <Link to={`/company-profile/${company._id}`}  className="btn btn-primary">
+            <p className='inline-block ml'>View Company Profile</p>
+          </Link>
         </div>
         
         <div className='my-2'>

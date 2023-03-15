@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const JobSchema = Schema({
     company: {
         type: Schema.Types.ObjectId,
-        ref: 'companies'
+        ref: 'company'
     },
     title: {
         type: String,

@@ -1,4 +1,5 @@
 import React , {Fragment} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
@@ -26,8 +27,9 @@ const Education = ({education, deleteEducation}) => {
     ))
   return (
     <Fragment>
-        <h2 className="my-2">Educational Experiences</h2>
-        <table className="table">
+        <h2 className="mt-2">Educational Experiences</h2>
+        {education.length > 0 ? (
+            <table className="table">
             <thead>
                 <tr>
                     <th>Institute</th>
@@ -41,6 +43,15 @@ const Education = ({education, deleteEducation}) => {
                 {degrees}
             </tbody>
         </table>
+        ) : (
+            <div>
+                <span>
+                    No Education Record found 
+                </span>
+                <p>Click here to <Link style={{textDecoration: 'underline'}} to={'/add-education'} >Add Education</Link> </p>
+            </div>
+        ) }
+        
     </Fragment>
   )
 }

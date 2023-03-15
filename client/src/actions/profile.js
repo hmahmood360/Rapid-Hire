@@ -25,6 +25,7 @@ export const getCurrentProfile = () => async dispatch => {
         })
     }
 }
+
 // Get current company profile
 export const getCurrentCompanyProfile = () => async dispatch => {
     try {
@@ -64,6 +65,23 @@ export const getProfiles = () => async dispatch => {
 export const getProfileById = (userID) => async dispatch => {
     try { 
         const res = await axios.get(`/api/profile/user/${userID}`)
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Get company profile by ID
+export const getCompanyProfileById = (id) => async dispatch => {
+    try { 
+        const res = await axios.get(`/api/companyProfile/company/${id}`)
 
         dispatch({
             type: GET_PROFILE,

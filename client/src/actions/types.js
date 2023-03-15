@@ -28,4 +28,6 @@ export const JOB_ERROR = 'JOB_ERROR'
 export const GET_JOBS = 'GET_JOBS'
 export const GET_JOB = 'GET_JOB'
 export const ADD_JOB = 'ADD_JOB'
+export const UPDATE_JOBS = 'UPDATE_JOBS'
+export const DELETE_JOB = 'DELETE_JOB'
 

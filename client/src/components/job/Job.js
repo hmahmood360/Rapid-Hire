@@ -1,21 +1,27 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Spinner} from '../layout/Spinner'
 import { Link, useParams } from 'react-router-dom'
-import { getJobById, ApplyForJob } from '../../actions/job'
+import { getJobById, applyForJob, getAppliedJobs  } from '../../actions/job'
 
 import JobTop from './JobTop'
 import JobAbout from './JobAbout'
 import JobBottom from './JobBottom'
 
-const Job = ({getJobById,ApplyForJob, job:{job, loading}, auth}) => {
-
+const Job = ({getJobById, getAppliedJobs, applyForJob, job:{job, jobs, loading}, auth}) => {
+    
     const {id} = useParams()
     useEffect(()=>{
-        getJobById(id)
-    },[getJobById])
+        const fetchJobs = async () => {
+            await getAppliedJobs()
+            await getJobById(id)
+        }
+        fetchJobs()
+        
+    },[])
 
+    
   return (
     <div className='container'>
         {job=== null || loading ? (
@@ -37,7 +43,12 @@ const Job = ({getJobById,ApplyForJob, job:{job, loading}, auth}) => {
             </div>
             <div className="btn-to-right">
                 <button className="btn btn-light">Add to Favourites</button>
-                <button onClick={()=> ApplyForJob(id)} className="btn btn-primary">Apply for job</button>
+                {jobs.some(jobx => jobx._id === id) ? (
+                    <button onClick={()=> applyForJob(id)} className="btn btn-primary">Revoke Application</button>
+                ) : (
+                    <button onClick={()=> applyForJob(id)} className="btn btn-primary">Apply for job</button>
+                )}
+                
             </div>
         </Fragment> )}
     </div>
@@ -46,7 +57,7 @@ const Job = ({getJobById,ApplyForJob, job:{job, loading}, auth}) => {
 
 Job.propTypes = {
     getJobById: PropTypes.func.isRequired,
-    ApplyForJob: PropTypes.func.isRequired,
+    applyForJob: PropTypes.func.isRequired,
     job: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
@@ -57,4 +68,4 @@ const mapStateToProps = state => ({
 })
     
 
-export default connect(mapStateToProps, { getJobById, ApplyForJob } )(Job)
+export default connect(mapStateToProps, { getJobById, applyForJob, getAppliedJobs } )(Job)
