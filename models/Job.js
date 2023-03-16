@@ -50,6 +50,15 @@ const JobSchema = Schema({
         avatar: {
             type: String
         },
+        location: {
+            type: String
+        },
+        qualification:{
+            type: String
+        },
+        field:{
+            type: String
+        },
         date:{
             type: Date,
             default: Date.now

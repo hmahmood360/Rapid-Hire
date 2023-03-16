@@ -44,6 +44,11 @@ img {
   margin-bottom: 3rem;
 }
 
+.content-center{
+  display: flex;
+  justify-content: center;
+}
+
 
 /* Text Styles*/
 .normal{
@@ -396,6 +401,14 @@ img {
   max-width: 200px;
   margin: 0 auto;
 }
+.small-img {
+  border-radius: 50%;
+  max-width: 40px;
+  margin: 0 auto;
+}
+.applicant{
+  border-bottom: 1px solid #000;
+}
 
 .line {
   height: 1px;
@@ -471,7 +484,13 @@ button {
 .table td {
   padding: 1rem;
   text-align: left;
+  border-bottom: 2px solid var(--light-color);
 }
+
+.company-job .table td {
+  border-bottom: 2px solid #d3d3d3;
+}
+
 
 .table th {
   background: var(--light-color);
@@ -573,6 +592,13 @@ button {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
+}
+
+.company-job{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 2rem 5rem;
 }
 
 .profile-top,

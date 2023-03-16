@@ -19,7 +19,7 @@ const CompanyProfileTop = ({
       /> */}
       <h1 className="large">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
       <p className="lead">{industry+' '} Industry </p>
-      <p>{location && <span> {location}</span>}</p>
+      <p className='lead'>{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
       <div className="icons my-1">
             {website && (
                 <a href={`https://${website}`} target="_blank" rel="noopener noreferrer">

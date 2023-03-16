@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import {Spinner} from '../layout/Spinner'
 import {connect} from 'react-redux'
 import JobItem from './JobItem'
@@ -9,20 +10,24 @@ const Jobs = ({getJobs, job:{ jobs, loading}}) => {
     useEffect(()=>{
         getJobs()
     },[getJobs])
+    const navigate = useNavigate()
   return (
-    loading ? <Spinner /> : (
-        <div className='container'>
-            <h1 className="large text-primary">Jobs</h1>
-            <p className="lead">
-                <i className="fas fa-user"></i> Welcome to the community
-            </p>
-            <div className="posts">
-                {jobs.map(job => (
-                    <JobItem key={job._id} job={job} />
-                ))}
-            </div>
-        </div>
-    ) 
+    <div className='container'>
+        <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
+        {loading ? (<Spinner />) : (
+            <Fragment>
+                <h1 className="large text-primary">Jobs</h1>
+                <p className="lead">
+                    <i className="fas fa-user"></i> Welcome to the community
+                </p>
+                <div className="posts">
+                    {jobs.map(job => (
+                        <JobItem key={job._id} job={job} />
+                    ))}
+                </div>
+            </Fragment>
+        ) }
+    </div>
   )
 }
 

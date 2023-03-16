@@ -2,14 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Spinner} from '../layout/Spinner'
-import { Link, useParams } from 'react-router-dom'
-import { getJobById, applyForJob, getAppliedJobs  } from '../../actions/job'
-
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { getJobById, applyForJob, getAppliedJobs, deleteJob } from '../../actions/job'
 import JobTop from './JobTop'
 import JobAbout from './JobAbout'
 import JobBottom from './JobBottom'
 
-const Job = ({getJobById, getAppliedJobs, applyForJob, job:{job, jobs, loading}, auth}) => {
+const Job = ({getJobById, deleteJob, getAppliedJobs, applyForJob, job:{job, jobs, loading}, auth}) => {
     
     const {id} = useParams()
     useEffect(()=>{
@@ -21,6 +20,7 @@ const Job = ({getJobById, getAppliedJobs, applyForJob, job:{job, jobs, loading},
         
     },[])
 
+    const navigate= useNavigate()
     
   return (
     <div className='container'>
@@ -28,12 +28,12 @@ const Job = ({getJobById, getAppliedJobs, applyForJob, job:{job, jobs, loading},
         <Spinner />
         ) : (
         <Fragment>
-            <Link to='/jobs' className='btn btn-light' >Back to Jobs</Link>
+            <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
                 <Link to={`/edit-job/${job._id}`} className='btn btn-dark ' >Edit Job</Link>
             )}
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
-                <Link to='/edit-profile' className='btn btn-danger ' >Delete Job</Link>
+                <button onClick={() => deleteJob(job._id)} className="btn btn-danger">Delete Job</button>
             )}
             <div className="job-grid my-1">
                 <JobTop job={job} />
@@ -58,6 +58,7 @@ const Job = ({getJobById, getAppliedJobs, applyForJob, job:{job, jobs, loading},
 Job.propTypes = {
     getJobById: PropTypes.func.isRequired,
     applyForJob: PropTypes.func.isRequired,
+    deleteJob: PropTypes.func.isRequired,
     job: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
@@ -68,4 +69,4 @@ const mapStateToProps = state => ({
 })
     
 
-export default connect(mapStateToProps, { getJobById, applyForJob, getAppliedJobs } )(Job)
+export default connect(mapStateToProps, { getJobById, applyForJob, getAppliedJobs, deleteJob } )(Job)

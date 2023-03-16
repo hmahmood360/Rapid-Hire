@@ -4,18 +4,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Spinner } from '../layout/Spinner'
 import { getCurrentCompanyProfile, deleteCompanyAccount } from '../../actions/profile'
+import { getPostedJobs } from '../../actions/job'
+import PostedJobs from './PostedJobs'
 
-const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:{ company }, profile:{profile, loading}}) => {
+const CompanyDashboard = ({getCurrentCompanyProfile, getPostedJobs, job, deleteCompanyAccount, auth:{ company }, profile:{profile, loading}}) => {
 
   useEffect(() => {
      async function fetchData() {
       await getCurrentCompanyProfile()
+      await getPostedJobs()
     }
     fetchData();
   }, [loading]);
 
   return (
-    loading && profile === null ? <Spinner /> : <div className='container'>
+    loading && job.loading && profile === null ? <Spinner /> : <div className='container'>
       <h1 className="large text-primary">Company Dashboard</h1>
       <div className="lead">
         <i className="fas fa-user "></i>
@@ -28,6 +31,7 @@ const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:
       {profile !== null ? (
         // Company has profile
       <Fragment>
+
         {/* Dashboard Actions */}
         <div className="dash-buttons">
           <Link to='/edit-company-profile' className="btn btn-light">
@@ -38,10 +42,14 @@ const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:
             <i className="fa fa-briefcase text-primary"></i>
             <p className='inline-block ml'>Post Job</p>
           </Link>
-          <Link to={`/company-profile/${company._id}`}  className="btn btn-primary">
+          {company && <Link to={`/company-profile/${company._id}`}  className="btn btn-primary">
             <p className='inline-block ml'>View Company Profile</p>
-          </Link>
+          </Link>}
+          
         </div>
+
+        <PostedJobs jobs={job.jobs} />
+
         
         <div className='my-2'>
           <button onClick={() => deleteCompanyAccount()} className="btn btn-danger">
@@ -66,12 +74,14 @@ const CompanyDashboard = ({getCurrentCompanyProfile, deleteCompanyAccount, auth:
 
 CompanyDashboard.propTypes = {
   getCurrentCompanyProfile: PropTypes.func.isRequired,
-  deleteCompanyAccount: PropTypes.func.isRequired
+  deleteCompanyAccount: PropTypes.func.isRequired,
+  getPostedJobs: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  job: state.job
 })
 
-export default connect(mapStateToProps,{getCurrentCompanyProfile, deleteCompanyAccount})(CompanyDashboard)
+export default connect(mapStateToProps,{getCurrentCompanyProfile, deleteCompanyAccount, getPostedJobs})(CompanyDashboard)

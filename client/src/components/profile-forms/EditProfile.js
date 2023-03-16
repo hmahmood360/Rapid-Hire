@@ -10,6 +10,9 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
         website:'',
         location:'',
         status:'',
+        qualification:'',
+        field:'',
+        field:'',
         skills:'',
         bio:'',
         twitter:'',
@@ -28,6 +31,8 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
             company: loading || !profile.company ? '' : profile.company,
             website: loading || !profile.website ? '' : profile.website,
             location: loading || !profile.location ? '' : profile.location,
+            qualification: loading || !profile.qualification ? '' : profile.qualification,
+            field: loading || !profile.field ? '' : profile.field,
             status: loading || !profile.status ? '' : profile.status,
             skills: loading || !profile.skills ? '' : profile.skills.join(','),
             bio: loading || !profile.bio ? '' : profile.bio,
@@ -44,6 +49,8 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
         website, 
         location, 
         status, 
+        qualification,
+        field,
         skills, 
         bio, 
         twitter, 
@@ -83,7 +90,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
                     <option value="0">* Select Professional Status</option>
                     <option value="Developer">Developer</option>
                     <option value="Junior Developer">Junior Developer</option>
-                    <option value="Senior Developer">Senior Developer</option>
+                    <option value="Senior Developer">Engineer</option>
                     <option value="Manager">Manager</option>
                     <option value="Student or Learning">Student or Learning</option>
                     <option value="Instructor">Instructor or Teacher</option>
@@ -95,21 +102,40 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
                 </small>
             </div>
             <div className="form-group">
+                <input type="text" placeholder="Location" name="location"  value={location} onChange={e => onChange(e)}/>
+                <small className="form-text">
+                    City & state suggested (eg. Boston, MA)
+                </small>
+            </div>
+            <div className="form-group">
                 <input type="text" placeholder="Company" name="company" value={company} onChange={e => onChange(e)} />
                 <small className="form-text">
                     Could be your own company or one you work for 
                 </small>
             </div>
             <div className="form-group">
-                <input type="text" placeholder="Website" name="website"  value={website} onChange={e => onChange(e)} />
+                <select name="qualification" value={qualification} onChange={e => onChange(e)}>
+                    <option value="0">* Select Qualification</option>
+                    <option value="Matric">Matric</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Masters">Masters</option>
+                    <option value="PhD">PhD</option>
+                </select>
                 <small className="form-text">
-                    Could be your own or a company website
+                    Select your Qualification
                 </small>
             </div>
             <div className="form-group">
-                <input type="text" placeholder="Location" name="location"  value={location} onChange={e => onChange(e)}/>
+                <input type="text" placeholder="Field Of Study (eg. Computer Science)" name="field" value={field} onChange={e => onChange(e)} />
                 <small className="form-text">
-                    City & state suggested (eg. Boston, MA)
+                    Enter field of Study
+                </small>
+            </div>
+            <div className="form-group">
+                <input type="text" placeholder="Website" name="website"  value={website} onChange={e => onChange(e)} />
+                <small className="form-text">
+                    Could be your own or a company website
                 </small>
             </div>
             <div className="form-group">

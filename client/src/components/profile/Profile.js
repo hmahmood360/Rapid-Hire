@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Spinner} from '../layout/Spinner'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getProfileById } from '../../actions/profile'
 import ProfileTop from './ProfileTop'
 import ProfileAbout from './ProfileAbout'
@@ -14,13 +14,15 @@ const Profile = ({getProfileById, profile:{profile, loading}, auth}) => {
     useEffect(()=>{
         getProfileById(id)
     },[getProfileById])
+
+    const navigate = useNavigate()
   return (
     <div className='container'>
         {profile === null || loading ? (
         <Spinner />
         ) : (
         <Fragment>
-            <Link to='/profiles' className='btn btn-light' >Back to profile</Link>
+            <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
             {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id && (
                 <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
             )}

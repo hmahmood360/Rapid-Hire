@@ -3,10 +3,14 @@ import { Link, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-function Landing({isAuthenticated}) {
+function Landing({isAuthenticated, isCompanyAuthenticated}) {
   if(isAuthenticated){
     return <Navigate to='/dashboard' />
   }
+  if(isCompanyAuthenticated){
+    return <Navigate to='/company-dashboard' />
+  }
+  
   return (
     <section className="landing ">
       <div className="dark-overlay">
@@ -27,11 +31,13 @@ function Landing({isAuthenticated}) {
 }
 
 Landing.propTypes ={
-  auth: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  isCompanyAuthenticated: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isCompanyAuthenticated: state.auth.isCompanyAuthenticated
 })
 
 export default connect(mapStateToProps)(Landing)

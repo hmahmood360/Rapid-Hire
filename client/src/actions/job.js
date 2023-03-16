@@ -106,7 +106,24 @@ export const getAppliedJobs = () => async dispatch => {
 }
 
 
-// Get Get single Job by id
+// Get Jobs user has applied to
+export const getPostedJobs = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/jobs/posted')
+        dispatch({
+            type: UPDATE_JOBS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+
+// Get single Job by id
 export const getJobById = (jobID) => async dispatch => {
     try { 
         const res = await axios.get(`/api/jobs/job/${jobID}`)
@@ -115,6 +132,24 @@ export const getJobById = (jobID) => async dispatch => {
             type: GET_JOB,
             payload: res.data
         })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Delete Job by id
+export const deleteJob = (jobID) => async dispatch => {
+    try { 
+        const res = await axios.delete(`/api/jobs/${jobID}`)
+
+        dispatch({
+            type: DELETE_JOB,
+            payload: jobID
+        })
+        dispatch(setAlert('Job has been deleted', 'success'))
     } catch (err) {
         dispatch({
             type: JOB_ERROR,

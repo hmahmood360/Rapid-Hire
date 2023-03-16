@@ -9,6 +9,8 @@ const CreateProfile = ({ createProfile }) => {
         company:'',
         website:'',
         location:'',
+        qualification:'',
+        field:'',
         status:'',
         skills:'',
         bio:'',
@@ -26,6 +28,8 @@ const CreateProfile = ({ createProfile }) => {
         company,
         website, 
         location, 
+        qualification,
+        field,
         status, 
         skills, 
         bio, 
@@ -63,30 +67,43 @@ const CreateProfile = ({ createProfile }) => {
         <small>* = required field</small>
         <form className="form" onSubmit={(e) => handleSubmit(e)}>
             <div className="form-group">
-            <select name="status" value={status} onChange={e => onChange(e)}>
-                <option value="0">* Select Professional Status</option>
-                <option value="Developer">Developer</option>
-                <option value="Junior Developer">Junior Developer</option>
-                <option value="Senior Developer">Senior Developer</option>
-                <option value="Manager">Manager</option>
-                <option value="Student or Learning">Student or Learning</option>
-                <option value="Instructor">Instructor or Teacher</option>
-                <option value="Intern">Intern</option>
-                <option value="Other">Other</option>
-            </select>
-            <small className="form-text">Give us an idea of where you are at in your career</small>
+                <select name="status" value={status} onChange={e => onChange(e)}>
+                    <option value="0">* Select Professional Status</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Junior Developer">Junior Developer</option>
+                    <option value="Senior Developer">Engineer</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Student or Learning">Student or Learning</option>
+                    <option value="Instructor">Instructor or Teacher</option>
+                    <option value="Intern">Intern</option>
+                    <option value="Other">Other</option>
+                </select>
+                <small className="form-text">Give us an idea of where you are at in your career</small>
             </div>
             <div className="form-group">
-            <input type="text" placeholder="Company" name="company" value={company} onChange={e => onChange(e)} />
-            <small className="form-text">
-                Could be your own company or one you work for 
-            </small>
+                <select name="qualification" value={qualification} onChange={e => onChange(e)}>
+                    <option value="0">* Select Qualification</option>
+                    <option value="Matric">Matric</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Masters">Masters</option>
+                    <option value="PhD">PhD</option>
+                </select>
+                <small className="form-text">
+                    Select your Qualification
+                </small>
             </div>
             <div className="form-group">
-            <input type="text" placeholder="Website" name="website"  value={website} onChange={e => onChange(e)} />
-            <small className="form-text">
-                Could be your own or a company website
-            </small>
+                <input type="text" placeholder="Field Of Study (eg. Computer Science)" name="field" value={field} onChange={e => onChange(e)} />
+                <small className="form-text">
+                    Enter field of Study
+                </small>
+            </div>
+            <div className="form-group">
+                <input type="text" placeholder="Company" name="company" value={company} onChange={e => onChange(e)} />
+                <small className="form-text">
+                    Could be your own company or one you work for 
+                </small>
             </div>
             <div className="form-group">
                 <input type="text" placeholder="Location" name="location"  value={location} onChange={e => onChange(e)}/>
@@ -98,6 +115,12 @@ const CreateProfile = ({ createProfile }) => {
                 <input type="text" placeholder="* Skills" name="skills" value={skills} onChange={e => onChange(e)} />
                 <small className="form-text">
                     Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
+                </small>
+            </div>
+            <div className="form-group">
+                <input type="text" placeholder="Website" name="website"  value={website} onChange={e => onChange(e)} />
+                <small className="form-text">
+                    Could be your own or a company website
                 </small>
             </div>
             <div className="form-group">

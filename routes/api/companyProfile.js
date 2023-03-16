@@ -2,10 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {check, validationResult} = require('express-validator')
 const companyAuth = require('../../middleware/companyAuth')
-const auth = require('../../middleware/auth')
 const CompanyProfile = require('../../models/CompanyProfile')
-const User = require('../../models/User')
-const Post = require('../../models/Post')
 
 
 // @route   GET api/companyProfile/me

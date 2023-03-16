@@ -28,6 +28,7 @@ import EditJob from './components/job/EditJob';
 import CreateCompanyProfile from './components/profile-forms/CreateCompanyProfile';
 import EditCompanyProfile from './components/profile-forms/EditCompanyProfile';
 import CompanyProfile from './components/profile/CompanyProfile';
+import JobCompany from './components/job/JobCompany';
 
 // Redux
 import { Provider } from 'react-redux'
@@ -62,6 +63,7 @@ function App() {
               <Route exact path="/profile/:id" element={<Profile />} />
               <Route exact path="/company-profile/:id" element={<CompanyProfile />} />
               
+              
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create-profile" element={<CreateProfile />} />
@@ -77,8 +79,10 @@ function App() {
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />
                 <Route path="/post-job" element={<PostJob />} />
                 <Route path="/edit-job/:id" element={<EditJob />} />
+                <Route path="/job-company/:id" element={<JobCompany />} />
                 <Route path="/create-company-profile" element={<CreateCompanyProfile />} />
                 <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
+                
               </Route>
             </Routes>
         </Fragment>

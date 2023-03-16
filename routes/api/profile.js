@@ -34,8 +34,10 @@ router.get('/me', auth, async (req,res)=>{
 // @access  private
 
 router.post('/:edit', [auth,  [
-    check('status','status is required').not().isEmpty(),
-    check('skills', 'skills are required').not().isEmpty()
+    check('status','Status is required').not().isEmpty(),
+    check('skills', 'Skills are required').not().isEmpty(),
+    check('qualification', 'Qualification is required').not().isEmpty(),
+    check('field', 'Field of study is required').not().isEmpty()
 ]],
 async (req, res)=>{
     const errors = validationResult(req);
@@ -49,6 +51,8 @@ async (req, res)=>{
         location,
         bio,
         status,
+        qualification,
+        field,
         githubusername,
         skills,
         youtube,
@@ -64,6 +68,8 @@ async (req, res)=>{
     if(company) {profileFields.company = company}
     if(website) {profileFields.website = website}
     if (location) {profileFields.location = location}
+    if (field) {profileFields.field = field}
+    if (qualification) {profileFields.qualification = qualification}
     if (bio) {profileFields.bio = bio}
     if (status) {profileFields.status = status}
     if (githubusername) {profileFields.githubusername = githubusername}

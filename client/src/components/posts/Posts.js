@@ -5,26 +5,32 @@ import {connect} from 'react-redux'
 import { getPosts } from '../../actions/post'
 import PostItem from './PostItem'
 import PostForm from './PostForm'
+import { useNavigate } from 'react-router-dom'
 
 const Posts = ({getPosts, post:{ posts, loading}}) => {
     useEffect(()=>{
         getPosts()
     },[getPosts])
+    const navigate = useNavigate()
   return (
-    loading ? <Spinner /> : (
-        <div className='container'>
-            <h1 className="large text-primary">Posts</h1>
-            <p className="lead">
-                <i className="fas fa-user"></i> Welcome to the community
-            </p>
-            <PostForm />
-            <div className="posts">
-                {posts.map(post => (
-                    <PostItem key={post._id} post={post} />
-                ))}
-            </div>
-        </div>
-    ) 
+    <div className="container">
+        <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i class="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
+        {loading ? <Spinner /> : (
+            <Fragment>
+                <h1 className="large text-primary">Posts</h1>
+                <p className="lead">
+                    <i className="fas fa-user"></i> Welcome to the community
+                </p>
+                <PostForm />
+                <div className="posts">
+                    {posts.map(post => (
+                        <PostItem key={post._id} post={post} />
+                    ))}
+                </div>
+            </Fragment>
+            ) 
+        }
+    </div>
   )
 }
 

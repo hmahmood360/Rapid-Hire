@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Job = require('../../models/Job');
 const companyAuth = require('../../middleware/companyAuth')
 const auth = require('../../middleware/auth')
 const {check, validationResult} = require('express-validator')
+const User = require('../../models/User')
+const Job = require('../../models/Job')
+const Profile = require('../../models/Profile')
 
 
 // @route   POST api/jobs
@@ -165,6 +167,9 @@ router.delete('/:id',companyAuth, async (req, res) => {
 router.post('/apply/:id', auth, async (req, res) => {
     try {
       const job = await Job.findById(req.params.id)
+      const user = await User.findById(req.user.id)
+      const profile = await Profile.findOne({user: req.user.id})
+
       if (!job) {
         return res.status(404).json({ msg: 'Job not found' })
       }
@@ -176,8 +181,11 @@ router.post('/apply/:id', auth, async (req, res) => {
   
       const applicant = {
         user: req.user.id,
-        name: req.user.name,
-        avatar: req.user.avatar
+        name: user.name,
+        location: profile.location,
+        qualification: profile.qualification,
+        field: profile.field,
+        avatar: user.avatar
       }
   
       job.applicants.unshift(applicant)
@@ -199,6 +207,20 @@ router.post('/apply/:id', auth, async (req, res) => {
 router.get('/applied', auth, async (req, res) => {
   try {
     const jobs = await Job.find({ 'applicants.user': req.user.id }).populate('company', ['name'])
+    res.json(jobs)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// @route   GET api/jobs/posted
+// @desc    Get jobs which company has posted
+// @access  private
+
+router.get('/posted', companyAuth, async (req, res) => {
+  try {
+    const jobs = await Job.find({ 'company': req.company.id }).populate('company', ['name'])
     res.json(jobs)
   } catch (err) {
     console.error(err.message)

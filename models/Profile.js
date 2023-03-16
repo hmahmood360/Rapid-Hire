@@ -9,6 +9,12 @@ const ProfileSchema = new mongoose.Schema({
   company: {
     type: String
   },
+  qualification:{
+    type: String
+  },
+  field:{
+    type: String
+  },
   website: {
     type: String
   },
