@@ -38,15 +38,16 @@ function Login({login, isAuthenticated, isCompanyAuthenticated, companyLogin}) {
 
 
   return (
-    <div className='container'>
+    <div className="auth">
+      <div className='auth-container '>
       <div className="btn-container ">
          <button disabled={!showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-primary" : "btn btn-disable"}>User Login</button>
          <button disabled={showCompanyLogin} onClick={()=> setShowCompanyLogin(!showCompanyLogin)} className={showCompanyLogin ? "btn btn-disable" : "btn btn-primary"}>Company Login</button>
       </div>
-      <h1 className="large text-primary">
+      <h1 className="large text-center text-primary">
         {showCompanyLogin ? 'Company Login' : 'User Login'}
       </h1>
-      <p className="lead"><i className="fas fa-user"></i> Sign in Account</p>
+      <p className="lead ml"><i className="fas fa-user"></i> Sign in Account</p>
       <form className="form" onSubmit={e => handleSubmit(e)} >
         <div className="form-group">
           <input type="email" placeholder="Email Address" name="email" value={email} onChange={(e) => handleChange(e)} />
@@ -62,11 +63,12 @@ function Login({login, isAuthenticated, isCompanyAuthenticated, companyLogin}) {
             onChange={(e) => handleChange(e)} 
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Log in" />
-      </form>
-      <p className="my-1">
-        Do not have an account? <Link to="/register">Sign Up</Link>
-      </p>
+        <input type="submit" className="btn btn-primary mb-1" value="Log in" />
+        </form>
+        <p className="mb-3">
+          Do not have an account? <Link to="/register">Sign Up</Link>
+        </p>
+      </div>
     </div>
   )
 }

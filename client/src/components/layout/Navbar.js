@@ -43,9 +43,6 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout
         <Link to="/profiles"> Profiles </Link>
       </li>
       <li>
-        <Link to="/jobs">Jobs</Link>
-      </li>
-      <li>
         <a href='#!' onClick={ logout }>
           <i className='fas fa-sign-out-alt' />{' '} 
           <span className='hide-sm' >Logout</span>

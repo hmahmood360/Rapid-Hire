@@ -3,6 +3,7 @@ const router = express.Router()
 const {check, validationResult} = require('express-validator')
 const companyAuth = require('../../middleware/companyAuth')
 const CompanyProfile = require('../../models/CompanyProfile')
+const Job = require('../../models/Job')
 
 
 // @route   GET api/companyProfile/me
@@ -135,7 +136,7 @@ router.get('/company/:company_id', async(req,res)=>{
 
 
 // @route   DELETE api/profile/
-// @desc    delete user profile, user and posts
+// @desc    delete company profile, user and posts
 // @access  private
 
 router.delete('/', companyAuth, async(req,res)=>{
@@ -145,11 +146,14 @@ router.delete('/', companyAuth, async(req,res)=>{
         // @to-do remove jobs
         // await Post.deleteMany({ user: req.user.id })
 
-        //remove profile
+        //remove company profile
         await CompanyProfile.findOneAndRemove({company: req.company.id})
 
-        //remove user
+        //remove company
         await Company.findOneAndRemove({_id: req.company.id})
+
+        //remove jobs
+        await Job.deleteMany({company: req.company.id})
 
         res.json({msg: 'Company Account deleted'})
     } catch (err) {

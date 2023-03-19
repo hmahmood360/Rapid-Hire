@@ -57,7 +57,7 @@ const CreateCompanyProfile = ({ createCompanyProfile }) => {
         </h1>
         <p className="lead">
             <i className="fas fa-user"></i> 
-            Let's get some information to make your company's profile stand out
+            <p className="inline-block ml">Let's get some information to make your company's profile stand out</p>
         </p>
          
         <small>* = required field</small>

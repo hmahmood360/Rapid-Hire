@@ -48,17 +48,18 @@ function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, 
     }
 
     return (
-    <div className='container'>
+    <div className="auth">
+      <div className='auth-container'>
       <div className="btn-container ">
          <button disabled={!showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-primary" : "btn btn-disable"}>User Registration</button>
          <button disabled={showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-disable" : "btn btn-primary"}>Company Registration</button>
       </div>
-      <h1 className="large text-primary">
+      <h1 className="large text-primary text-center ">
         {showCompanyRegister ? 'Company Registration' : 'User Sign Up'}
       </h1>
       <p className="lead">
-        <i className="fas fa-user"></i> 
-        {showCompanyRegister ? 'Create Company Account' : 'Create User Account'}
+        <i className="fas fa-user ml"></i> 
+        <p className='inline-block ml' >{showCompanyRegister ? 'Create Company Account' : 'Create User Account'}</p>
       </p>
       <form className="form" onSubmit={e => handleSubmit(e)} >
         {showCompanyRegister && (
@@ -87,10 +88,6 @@ function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, 
         )}
         <div className="form-group">
           <input type="email" placeholder="Email Address" name="email" value={email} onChange={(e) => handleChange(e)} />
-          <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
         </div>
         <div className="form-group">
           <input
@@ -112,13 +109,14 @@ function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, 
             onChange={(e) => handleChange(e)} 
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
+        <input type="submit" className="btn btn-primary mb-1" value="Register" />
       </form>
-      <p className="my-1">
+      <p className="mb-3">
         Already have an account?
         {showCompanyRegister ? (<Link to="/login">Sign In</Link>) : (<Link to={{ pathname: '/login', state: { company: true } }}>Sign In</Link>)}
       </p>
       
+    </div>
     </div>
   )
 }

@@ -14,7 +14,7 @@ const Posts = ({getPosts, post:{ posts, loading}}) => {
     const navigate = useNavigate()
   return (
     <div className="container">
-        <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i class="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
+        <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
         {loading ? <Spinner /> : (
             <Fragment>
                 <h1 className="large text-primary">Posts</h1>

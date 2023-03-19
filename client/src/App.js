@@ -62,8 +62,6 @@ function App() {
               <Route exact path="/profiles" element={<Profiles />} />
               <Route exact path="/profile/:id" element={<Profile />} />
               <Route exact path="/company-profile/:id" element={<CompanyProfile />} />
-              
-              
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create-profile" element={<CreateProfile />} />

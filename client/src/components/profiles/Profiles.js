@@ -18,7 +18,7 @@ const Profiles = ({getProfiles, profile:{profiles, loading}}) => {
     <div className='container'>
         <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
         {loading || profiles===null ? <Spinner /> : <Fragment>
-            <h1 className="large text-primary">Developers</h1>
+            <h1 className="large text-primary">Users</h1>
             <p className="lead">
                 <i className="fab fa-connectdevelop"></i>
                 Browse and Connect with Other Users
