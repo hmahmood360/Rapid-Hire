@@ -2,13 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Spinner} from '../layout/Spinner'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getJobById,  deleteJob } from '../../actions/job'
 import Moment from 'react-moment'
-import JobTop from './JobTop'
-import JobAbout from './JobAbout'
-import JobBottom from './JobBottom'
-import { useNavigate } from 'react-router-dom'
 
 const JobCompany = ({getJobById, deleteJob, job:{job, loading}, auth}) => {
 
@@ -29,9 +25,9 @@ const JobCompany = ({getJobById, deleteJob, job:{job, loading}, auth}) => {
         <Spinner />
         ) : (
         <Fragment>
-            <Link to='/company-dashboard' className='btn btn-light' > Back</Link>
+            <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
-                <button onClick={() => navigate(-1)} className='btn btn-dark ' >Edit Job</button>
+                <Link to={`/edit-job/${job._id}`}  className='btn btn-dark ' >Edit Job</Link>
             )}
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
                 <button onClick={() => deleteJob(job._id)} className="btn btn-danger">Delete Job</button>

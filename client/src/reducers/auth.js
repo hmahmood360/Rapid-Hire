@@ -9,13 +9,16 @@ import {
     ACCOUNT_DELETED,
     COMPANY_LOADED,
     COMPANY_REGISTER_SUCCESS,
-    COMPANY_LOGIN_SUCCESS
+    COMPANY_LOGIN_SUCCESS,
+    ADMIN_LOADED,
+    ADMIN_LOGIN_SUCCESS
 } from "../actions/types";
 
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     isCompanyAuthenticated: null,
+    isAdminAuthenticated: null,
     loading: true,
     user: null,
     company: null
@@ -56,6 +59,7 @@ export default function(state = initialState, action){
                 user: null,
                 company: null,
                 isAuthenticated:false,
+                isAdminAuthenticated:null,
                 isCompanyAuthenticated: false
             }
         case USER_LOADED:
@@ -72,6 +76,20 @@ export default function(state = initialState, action){
                 loading: false,
                 company: payload
             }        
+        case ADMIN_LOADED:
+            return {
+                ...state,
+                isAdminAuthenticated: true,
+                loading: false
+            }     
+        case ADMIN_LOGIN_SUCCESS:  
+            localStorage.setItem('token', payload.token)
+            return {
+                ...state,
+                ...payload,
+                loading: false,
+                isAdminAuthenticated: true,
+            }
         default:
             return state
     }

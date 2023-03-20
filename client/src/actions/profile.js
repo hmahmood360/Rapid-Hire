@@ -281,3 +281,19 @@ export const createCompanyProfile = (formData, update=0 ) => async dispatch => {
         })        
     }
 }
+
+// Get spam companies
+export const getSpamCompanies = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/spam/companies')
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}

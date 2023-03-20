@@ -158,47 +158,125 @@ router.delete('/:id',companyAuth, async (req, res) => {
       res.status(500).send('Server Error')
     }
   })
+  
+  
+  // @route   POST api/jobs/apply/:id
+  // @desc    User can apply for a job
+  // @access  private
+  
+  router.post('/apply/:id', auth, async (req, res) => {
+      try {
+        const job = await Job.findById(req.params.id)
+        const user = await User.findById(req.user.id)
+        const profile = await Profile.findOne({user: req.user.id})
+  
+        if (!job) {
+          return res.status(404).json({ msg: 'Job not found' })
+        }
+        console.log(user.name)
+        console.log(profile.location)
+  
+        // Check if user has already applied for this job
+        if (job.applicants.find(applicant => applicant.user.toString() === req.user.id)) {
+          return res.status(400).json({errors: [{msg: 'You have already applied for this job'}]})
+        }
+    
+        const applicant = {
+          user: req.user.id,
+          name: user.name,
+          location: profile.location,
+          qualification: profile.qualification,
+          field: profile.field,
+          avatar: user.avatar
+        }
+    
+        job.applicants.unshift(applicant)
+    
+        await job.save()
+    
+        res.json(job.applicants)
+      } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
+      }
+    })
+  
+  
+  // @route   POST api/jobs/favorite/:id
+  // @desc    User can add job to favorites
+  // @access  private
+  
+  router.post('/favorite/:id', auth, async (req, res) => {
+      try {
+        const job = await Job.findById(req.params.id)
+        const user = await User.findById(req.user.id)
+        const profile = await Profile.findOne({user: req.user.id})
+  
+        if (!job) {
+          return res.status(404).json({ msg: 'Job not found' })
+        }
+  
+        // Check if user has already added job to favorites
+        if (job.favorites.find(favorite => favorite.user.toString() === req.user.id)) {
+          return res.status(400).json({errors: [{msg: 'You have already added job to favorites'}]})
+        }
+    
+        const favorite = {
+          user: req.user.id,
+          name: user.name,
+          location: profile.location,
+          qualification: profile.qualification,
+          field: profile.field,
+          avatar: user.avatar
+        }
+    
+        job.favorites.unshift(favorite)
+    
+        await job.save()
+    
+        res.json(job.favorites)
+      } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
+      }
+    })
 
-
-// @route   POST api/jobs/apply/:id
-// @desc    User can apply for a job
+  
+// @route   DELETE api/favorite/:id
+// @desc    User can remove job from favorites
 // @access  private
 
-router.post('/apply/:id', auth, async (req, res) => {
-    try {
-      const job = await Job.findById(req.params.id)
-      const user = await User.findById(req.user.id)
-      const profile = await Profile.findOne({user: req.user.id})
+router.delete('/favorite/:id', auth, async (req, res) => {
+  try {
+    // Find the job document that has an applicant with the same user_id as the currently authenticated user
+    const job = await Job.findOne({ 'favorites.user': req.user.id })
 
-      if (!job) {
-        return res.status(404).json({ msg: 'Job not found' })
-      }
-
-      // Check if user has already applied for this job
-      if (job.applicants.find(applicant => applicant.user.toString() === req.user.id)) {
-        return res.status(400).json({errors: [{msg: 'You have already applied for this job'}]})
-      }
-  
-      const applicant = {
-        user: req.user.id,
-        name: user.name,
-        location: profile.location,
-        qualification: profile.qualification,
-        field: profile.field,
-        avatar: user.avatar
-      }
-  
-      job.applicants.unshift(applicant)
-  
-      await job.save()
-  
-      res.json(job.applicants)
-    } catch (err) {
-      console.error(err.message)
-      res.status(500).send('Server Error')
+    // If the job document is not found, return a 404 error response with a JSON object containing an error message
+    if (!job) {
+      return res.status(404).json({ msg: 'Job not found' })
     }
-  })
 
+    // Find the index of the user's application in the applicants array
+    const removeIndex = job.favorites.map(favorite => favorite.user.toString()).indexOf(req.user.id)
+
+    // If the user has not applied for this job, return a 404 error response with a JSON object containing an error message
+    if (removeIndex === -1) {
+      return res.status(404).json({ msg: 'You have not added job to favorites' })
+    }
+
+    // Remove the user's application from the applicants array
+    job.favorites.splice(removeIndex, 1)
+
+    // Save the modified job document
+    await job.save()
+
+    // Return a JSON object containing the updated applicants array
+    res.json(job.favorites)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
 
 // @route   GET api/jobs/applied
 // @desc    Get jobs which user has applied
@@ -207,6 +285,20 @@ router.post('/apply/:id', auth, async (req, res) => {
 router.get('/applied', auth, async (req, res) => {
   try {
     const jobs = await Job.find({ 'applicants.user': req.user.id }).populate('company', ['name'])
+    res.json(jobs)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// @route   GET api/jobs/favorites
+// @desc    Get favorite jobs
+// @access  private
+
+router.get('/favorites', auth, async (req, res) => {
+  try {
+    const jobs = await Job.find({ 'favorites.user': req.user.id }).populate('company', ['name'])
     res.json(jobs)
   } catch (err) {
     console.error(err.message)

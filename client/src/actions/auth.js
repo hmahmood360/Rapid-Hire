@@ -11,7 +11,9 @@ import {
     LOGIN_FAIL, 
     LOGOUT,
     CLEAR_PROFILE,
-    COMPANY_LOADED
+    COMPANY_LOADED,
+    ADMIN_LOADED,
+    ADMIN_LOGIN_SUCCESS
 } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
@@ -181,4 +183,56 @@ export const companyLogin = ({email, password}) => async dispatch => {
 export const logout =() => dispatch => {
     dispatch({ type: CLEAR_PROFILE})
     dispatch({ type: LOGOUT })
+}
+
+
+// Load Company
+export const loadAdmin = () => async dispatch => {
+    if (localStorage.token){
+        setAuthToken(localStorage.token)
+    }
+
+    try {
+        const res = await axios.get('/api/admin')
+        dispatch({
+            type: ADMIN_LOADED,
+            payload: res.data
+        })
+        
+    } catch (err) {
+        dispatch({
+            type: AUTH_ERROR
+        })
+    }
+}
+
+// Login Admin
+export const adminLogin = ({email, password}) => async dispatch => {
+    const config ={
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    const body = JSON.stringify({ email, password})
+
+    try {
+        const res = await axios.post('/api/admin/login', body, config)
+        dispatch({
+            type: ADMIN_LOGIN_SUCCESS,
+            payload: res.data
+        })
+
+        dispatch(loadAdmin())
+
+    } catch (err) {
+        const errors = err.response.data.errors
+        if (errors){
+            errors.forEach(error => {
+                dispatch(setAlert(error.msg, 'danger'))
+            });
+        }
+        dispatch({
+            type: LOGIN_FAIL
+        })
+    }
 }

@@ -1,16 +1,14 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { deleteApplication } from '../../actions/job'
+import { removeFromFavorites } from '../../actions/job'
 import { Link } from 'react-router-dom'
 
-
-const AppliedJobs = ({jobs, deleteApplication}) => {
-
+const FavoriteJobs = ({jobs, removeFromFavorites}) => {
   return (
     <Fragment>
-        <h2 className="mt-2">Applied Jobs</h2>
-            <table className="table">
+        <h2 className="mt-2">Favorite Jobs</h2>
+        <table className="table">
             <thead>
                 <tr>
                     <th>Job Title</th>
@@ -34,7 +32,7 @@ const AppliedJobs = ({jobs, deleteApplication}) => {
                             </Link>
                         </td>
                         <td>
-                            <button onClick={() => deleteApplication(job._id)} className="btn btn-danger">Revoke</button>
+                            <button onClick={() => removeFromFavorites(job._id)} className="btn btn-danger">Remove</button>
                         </td>
                     </tr>
                 ))
@@ -43,15 +41,13 @@ const AppliedJobs = ({jobs, deleteApplication}) => {
                 ) }
             </tbody>
         </table>
-        
     </Fragment>
   )
 }
 
-AppliedJobs.propTypes = {
+FavoriteJobs.propTypes = {
     jobs: PropTypes.array.isRequired,
-    deleteApplication: PropTypes.func.isRequired
+    removeFromFavorites: PropTypes.func.isRequired
 }
 
-
-export default connect(null, {deleteApplication})(AppliedJobs)
+export default connect( null, {removeFromFavorites})(FavoriteJobs)

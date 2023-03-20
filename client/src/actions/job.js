@@ -6,8 +6,11 @@ import {
     JOB_ERROR,
     GET_JOB,
     UPDATE_JOBS,
-    DELETE_JOB
-
+    DELETE_JOB,
+    GET_APPLIED_JOBS,
+    GET_FAVORITE_JOBS,
+    DELETE_APPLIED_JOB,
+    REMOVE_FAVORITE_JOB
  } from './types'
 
  // Add Job
@@ -94,7 +97,23 @@ export const getAppliedJobs = () => async dispatch => {
     try {
         const res = await axios.get('/api/jobs/applied')
         dispatch({
-            type: UPDATE_JOBS,
+            type: GET_APPLIED_JOBS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Get Jobs user has applied to
+export const getFavoriteJobs = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/jobs/favorites')
+        dispatch({
+            type: GET_FAVORITE_JOBS,
             payload: res.data
         })
     } catch (err) {
@@ -182,11 +201,10 @@ export const applyForJob = (jobID) => async dispatch => {
 }
 // User Delete job application
 export const deleteApplication = (jobId) => async dispatch => {
-    try {
-        console.log(jobId)
+    try {   
         await axios.delete(`/api/jobs/apply/${jobId}`);
         dispatch({
-            type: DELETE_JOB,
+            type: DELETE_APPLIED_JOB,
             payload: jobId
         })
         dispatch(setAlert('You have deleted your application request', 'success'))
@@ -199,6 +217,67 @@ export const deleteApplication = (jobId) => async dispatch => {
         dispatch({
             type: JOB_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// User add job to favorites
+export const addToFavorites = (jobID) => async dispatch => {
+    try {
+        await axios.post(`/api/jobs/favorite/${jobID}`)
+        const res = await axios.get(`/api/jobs/job/${jobID}`)
+        dispatch({
+            type: GET_JOB,
+            payload: res.data
+        })
+        dispatch(setAlert('Job added to favorites', 'success'))
+    } catch (err) { 
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Remove job from favorites
+export const removeFromFavorites = (jobId) => async dispatch => {
+    try {
+        await axios.delete(`/api/jobs/favorite/${jobId}`);
+        dispatch({
+            type: REMOVE_FAVORITE_JOB,
+            payload: jobId
+        })
+        dispatch(setAlert('Job removed from favorites', 'success'))
+    } catch (err) {
+        const errors = err.response.data.errors 
+        if (errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Get spam jobs
+export const getSpamJobs = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/spam/jobs')
+        dispatch({
+            type: GET_JOBS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }

@@ -8,14 +8,16 @@ import { DashboardActions } from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
 import AppliedJobs from './AppliedJobs'
-import { getAppliedJobs } from '../../actions/job'
+import { getAppliedJobs, getFavoriteJobs } from '../../actions/job'
+import FavoriteJobs from './FavoriteJobs'
 
 
-const Dashboard = ({ getAppliedJobs, job:{jobs}, getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
+const Dashboard = ({ getAppliedJobs, getFavoriteJobs, job:{applied_jobs,favorite_jobs}, getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
 
   useEffect(() => {
     getCurrentProfile()
     getAppliedJobs()
+    getFavoriteJobs()
   },[getCurrentProfile, getAppliedJobs])
 
   return (
@@ -28,10 +30,11 @@ const Dashboard = ({ getAppliedJobs, job:{jobs}, getCurrentProfile, auth:{ user 
       {profile !== null ? (
         // User has profile
       <Fragment>
-        <DashboardActions id={user._id} />
+        {user._id && <DashboardActions id={user._id} />}
         <Experience experience={profile.experience} />
         <Education education={profile.education} />
-        <AppliedJobs jobs={jobs} />
+        <AppliedJobs jobs={applied_jobs} />
+        <FavoriteJobs jobs={favorite_jobs} />
         <div className='my-2'>
           <button onClick={() => deleteAccount()} className="btn btn-danger">
             <i className="fas fa-user-minus"></i>
@@ -55,6 +58,7 @@ Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   deleteAccount: PropTypes.func.isRequired
+  
 }
 
 const mapStateToProps = (state) => ({
@@ -63,4 +67,4 @@ const mapStateToProps = (state) => ({
   job: state.job
 })
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getAppliedJobs })(Dashboard)
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getAppliedJobs, getFavoriteJobs })(Dashboard)

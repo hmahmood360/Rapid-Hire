@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createProfile, getCurrentProfile } from '../../actions/profile'
 
@@ -73,15 +73,18 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
             createProfile(formData, 1) // sending 1 to update profile
         }
 
+        const navigate= useNavigate()
+
   return ( 
     <div className='container'>
+        <button onClick={() => navigate(-1)} className='btn btn-light my-1' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
         <h1 className="large text-primary">
             Edit Your Profile
         </h1>
-        <p className="lead">
+        <div className="lead">
             <i className="fas fa-user"></i> 
             <p className="inline-block ml">Let's get some information to make your profile stand out</p>
-        </p>
+        </div>
          
         <small>* = required field</small>
         <form className="form" onSubmit={(e) => handleSubmit(e)}>
@@ -185,7 +188,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
             </Fragment>}
             
             <input type="submit" className="btn btn-primary my-1"  />
-            <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+            <Link className="btn btn-light my-1" to="/dashboard">Skip</Link>
         </form>
     </div>
   )

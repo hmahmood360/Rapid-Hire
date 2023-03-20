@@ -1,6 +1,7 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #1289A7;
+  --secondary-color: #ff9d5c;
   --dark-color: #343a40;
   --light-color: #e2e2e2;
   --danger-color: #dc3545;
@@ -100,6 +101,9 @@ img {
 
 .text-primary {
   color: var(--primary-color);
+}
+.text-secondary {
+  color: var(--secondary-color);
 }
 
 .text-dark {
@@ -283,6 +287,9 @@ img {
 .mx-3 {
   margin: 0 3rem;
 }
+.mx-auto {
+  margin: 0 auto;
+}
 .btn-container{
   display: flex;
   flex-direction: row;
@@ -354,6 +361,13 @@ img {
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
+  color: #fff;
+}
+.btn-secondary,
+.bg-secondary,
+.badge-secondary,
+.alert-secondary {
+  background: var(--secondary-color);
   color: #fff;
 }
 

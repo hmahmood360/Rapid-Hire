@@ -4,11 +4,17 @@ import {
     GET_JOBS,
     JOB_ERROR,   
     UPDATE_JOBS,
-    DELETE_JOB
+    DELETE_JOB,
+    GET_APPLIED_JOBS,
+    GET_FAVORITE_JOBS,
+    DELETE_APPLIED_JOB,
+    REMOVE_FAVORITE_JOB
  } from "../actions/types"
 
 const initialState = {
     jobs: [],
+    applied_jobs:[],
+    favorite_jobs:[],
     job: null,
     loading: true,
     error: {}
@@ -47,6 +53,30 @@ export default function(state=initialState, action) {
             return {
                 ...state,
                 jobs: state.jobs.filter(job => job._id !== payload),
+                loading: false
+            }
+        case GET_APPLIED_JOBS:
+            return{
+                ...state,
+                loading: false,
+                applied_jobs: payload
+            }
+        case GET_FAVORITE_JOBS:
+            return{
+                ...state,
+                loading: false,
+                favorite_jobs: payload
+            }
+        case DELETE_APPLIED_JOB:
+            return {
+                ...state,
+                applied_jobs: state.applied_jobs.filter(job => job._id !== payload),
+                loading: false
+            }
+        case REMOVE_FAVORITE_JOB:
+            return {
+                ...state,
+                favorite_jobs: state.favorite_jobs.filter(job => job._id !== payload),
                 loading: false
             }
         default:

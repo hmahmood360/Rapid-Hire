@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCompanyProfileById } from '../../actions/profile'
 import {Spinner} from '../layout/Spinner'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import CompanyProfileAbout from './CompanyProfileAbout'
 import CompanyProfileTop from './CompanyProfileTop'
 import CompanyProfileBottom from './CompanyProfileBottom'
@@ -14,13 +14,14 @@ const CompanyProfile = ({getCompanyProfileById, profile:{profile, loading}, auth
     useEffect(()=> {
         getCompanyProfileById(id)
     },[getCompanyProfileById])
+    const navigate = useNavigate()
   return (
     <div className='container'>
         {profile === null || loading ? (
             <Spinner />
         ) : (
             <Fragment>
-                <Link to='/company-dashboard' className='btn btn-light' >Back to Dashboard</Link>
+                <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
                 {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === profile.company._id && (
                 <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
                 )}

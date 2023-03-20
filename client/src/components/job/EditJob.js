@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { editJob, getJobById } from '../../actions/job';
 
 const EditJob = ({ editJob, job:{job, loading} }) => {
@@ -58,11 +58,14 @@ const EditJob = ({ editJob, job:{job, loading} }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const navigate = useNavigate()
+
   return (
     <div className='container'>
-      <h1 className="large text-primary">Post a Job</h1>
+      <button  onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i className="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+      <h1 className="large text-primary">Edit Job</h1>
       <p className="lead">
-        <i className="fas fa-code-branch" /> Add a job posting
+        <i className="fas fa-code-branch" /> Edit your job posting
       </p>
       <small>* = required field</small>
       <form className="form" onSubmit={onSubmit}>

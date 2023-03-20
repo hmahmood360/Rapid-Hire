@@ -6,6 +6,7 @@ import setAuthToken from './utils/setAuthToken';
 //components
 import PrivateRoutes from './components/routing/PrivateRoutes';
 import PrivateCompanyRoutes from './components/routing/PrivateCompanyRoutes';
+import PrivateAdminRoutes from './components/routing/PrivateAdminRoutes';
 import EditProfile from './components/profile-forms/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
@@ -29,6 +30,8 @@ import CreateCompanyProfile from './components/profile-forms/CreateCompanyProfil
 import EditCompanyProfile from './components/profile-forms/EditCompanyProfile';
 import CompanyProfile from './components/profile/CompanyProfile';
 import JobCompany from './components/job/JobCompany';
+import AdminLogin from './components/admin/AdminLogin';
+import AdminDashboard from './components/admin/AdminDashboard';
 
 // Redux
 import { Provider } from 'react-redux'
@@ -57,11 +60,14 @@ function App() {
             <Alert />
             <Routes>
               <Route exact path="/" element={<Landing />} />
+              <Route exact path="/admin" element={<AdminLogin />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/profiles" element={<Profiles />} />
               <Route exact path="/profile/:id" element={<Profile />} />
               <Route exact path="/company-profile/:id" element={<CompanyProfile />} />
+              <Route exact path="/jobs" element={<Jobs />} />
+              <Route exact path="/job/:id" element={<Job />} />
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create-profile" element={<CreateProfile />} />
@@ -69,9 +75,7 @@ function App() {
                 <Route path="/add-experience" element={<AddExperience />} />
                 <Route path="/add-education" element={<AddEducation />} />
                 <Route path="/posts" element={<Posts />} />
-                <Route path="/posts/:id" element={<Post />} />
-                <Route exact path="/jobs" element={<Jobs />} />
-                <Route exact path="/job/:id" element={<Job />} />
+                <Route path="/posts/:id" element={<Post />} />  
               </Route>
               <Route element={<PrivateCompanyRoutes />} >
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />
@@ -80,6 +84,9 @@ function App() {
                 <Route path="/job-company/:id" element={<JobCompany />} />
                 <Route path="/create-company-profile" element={<CreateCompanyProfile />} />
                 <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
+              </Route>
+              <Route element={<PrivateAdminRoutes />}>
+                <Route path='/admin-dashboard' element={<AdminDashboard />} />
                 
               </Route>
             </Routes>

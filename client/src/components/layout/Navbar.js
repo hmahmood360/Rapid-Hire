@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
 import { logout } from '../../actions/auth'
 
-function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout }) {
+function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthenticated ,loading}, logout }) {
 
   const authLinks = (
     <ul>
@@ -59,6 +59,17 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout
     </ul>
   )
 
+  const adminLinks = (
+    <ul>
+      <li>
+        <a href='#!' onClick={ logout }>
+          <i className='fas fa-sign-out-alt' />{' '} 
+          <span className='hide-sm' >Logout</span>
+        </a>
+      </li>
+    </ul>
+  )
+
   return (
     <nav className="navbar bg-dark">
       <h1>
@@ -68,7 +79,8 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, loading}, logout
       <Fragment>
         {isAuthenticated && authLinks }
         {isCompanyAuthenticated && companyAuthLinks }
-        {!isCompanyAuthenticated && !isAuthenticated && guestLinks }
+        {isAdminAuthenticated && adminLinks }
+        {!isCompanyAuthenticated && !isAuthenticated && !isAdminAuthenticated && guestLinks }
       </Fragment>
       )}
     </nav>
