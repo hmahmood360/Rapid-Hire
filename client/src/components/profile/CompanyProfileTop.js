@@ -17,8 +17,8 @@ const CompanyProfileTop = ({
             src={avatar}
             alt="profile pic"
       /> */}
-      <h1 className="large">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
-      <p className="lead">{industry+' '} Industry </p>
+      <h1 className="large">{ name && name.charAt(0).toUpperCase() + name.slice(1)}</h1>
+      <p className="lead">{ industry &&   industry+' '} Industry </p>
       <p className='lead'>{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
       <div className="icons my-1">
             {website && (

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addLike, removeLike, deletePost } from '../../actions/post'
+import { addLike, removeLike, deletePost,markPostSpam } from '../../actions/post'
 
 const PostItem = ({
   deletePost, 
+  markPostSpam,
   post:{_id, text, name, avatar, user, likes, comments, date},
   auth, 
   addLike, 
@@ -34,28 +35,34 @@ const PostItem = ({
             </p>
 
             {showActions && (
-              <Fragment>
-                <button type="button" onClick={() => addLike(_id)} className="btn btn-light">
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div>
+                  <button type="button" onClick={() => addLike(_id)} className="btn btn-light">
                   <i className="fas fa-thumbs-up"></i>
-                  <span>{likes.length > 0 && (
+                  <span>{likes && likes.length > 0 && (
                       <span>{likes.length}</span>
                   )}</span>
                 </button>
                 <button type="button" onClick={() => removeLike(_id)} className="btn btn-light">
                   <i className="fas fa-thumbs-down"></i>
                 </button>
-                <Link to={`/posts/${_id}`} className="btn btn-primary">
+                {_id && <Link to={`/posts/${_id}`} className="btn btn-primary">
                   Discussion {' '}
                   {comments.length > 0 && (
                       <span className='comment-count'>{comments.length}</span>
                   )}
                 </Link>
+                }
+                
                 {!auth.loading && user === auth.user._id && (
                     <button onClick={() => deletePost(_id)} type="button" className="btn btn-danger">
                         <i className="fas fa-times"></i>
                     </button>
                 )}
-              </Fragment>
+                </div>
+                
+                <button onClick={() => markPostSpam(_id)} className="btn btn-light">Report</button>
+              </div>
             )}
             
           </div>
@@ -72,6 +79,7 @@ PostItem.propTypes = {
     auth: PropTypes.object.isRequired,
     addLike: PropTypes.func.isRequired,
     removeLike: PropTypes.func.isRequired,
+    markPostSpam: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired
 }
 
@@ -79,4 +87,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps,{addLike, removeLike, deletePost})(PostItem)
+export default connect(mapStateToProps,{addLike, removeLike, deletePost, markPostSpam})(PostItem)

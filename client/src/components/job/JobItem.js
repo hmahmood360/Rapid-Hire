@@ -19,7 +19,7 @@ const JobItem = ({
     <div className="job bg-light">
         <div>
             <h2>{title} - {type}</h2>
-            <p>{name}</p>
+            <p>{name && name}</p>
             <p className="my-1"> {location && <span>{location} </span>} </p>
             <p className="my-1">{description}</p>
             <Link className='btn btn-primary' to={`/job/${_id}`} >

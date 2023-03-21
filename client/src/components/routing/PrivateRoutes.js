@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Outlet, Navigate } from 'react-router-dom'
 
 
-const PrivateRoutes = ({auth:{isAuthenticated, loading}}) => {
+const PrivateRoutes = ({auth:{isAuthenticated, isAdminAuthenticated, loading}}) => {
   return (
-    isAuthenticated && !loading ? <Outlet /> :<Navigate to='/login' />
+    (isAuthenticated || isAdminAuthenticated) && !loading ? <Outlet /> :<Navigate to='/login' />
   )
 }
 

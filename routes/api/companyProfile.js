@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const {check, validationResult} = require('express-validator')
+const adminAuth = require('../../middleware/adminAuth')
 const companyAuth = require('../../middleware/companyAuth')
 const CompanyProfile = require('../../models/CompanyProfile')
 const Job = require('../../models/Job')
+const SpamCompany = require('../../models/SpamCompany')
 
 
 // @route   GET api/companyProfile/me
@@ -143,9 +145,6 @@ router.delete('/', companyAuth, async(req,res)=>{
 
     
     try {
-        // @to-do remove jobs
-        // await Post.deleteMany({ user: req.user.id })
-
         //remove company profile
         await CompanyProfile.findOneAndRemove({company: req.company.id})
 
@@ -154,6 +153,33 @@ router.delete('/', companyAuth, async(req,res)=>{
 
         //remove jobs
         await Job.deleteMany({company: req.company.id})
+
+        //remove company from spamcompanies
+        await SpamCompany.findOneAndRemove({company: req.company.id})
+
+        res.json({msg: 'Company Account deleted'})
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
+    }
+})
+// @route   DELETE api/companyProfile/admin
+// @desc    delete company profile, company and jobs as admin
+// @access  private
+
+router.delete('/admin/:id', adminAuth, async(req,res)=>{
+    try {
+        //remove company profile
+        await CompanyProfile.findOneAndRemove({company: req.params.id})
+
+        //remove company
+        await Company.findOneAndRemove({_id: req.params.id})
+
+        //remove jobs
+        await Job.deleteMany({company: req.params.id})
+
+        //remove company from spamcompanies
+        await SpamCompany.findOneAndRemove({company: req.params.id})
 
         res.json({msg: 'Company Account deleted'})
     } catch (err) {

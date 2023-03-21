@@ -6,7 +6,8 @@ import {
     UPDATE_PROFILE, 
     ACCOUNT_DELETED, 
     CLEAR_PROFILE,
-    GET_PROFILES
+    GET_PROFILES,
+    DELETE_PROFILE
 } from './types'
 
 // Get current user profile
@@ -235,11 +236,29 @@ export const deleteAccount = () => async dispatch => {
         }
     } 
 }
+
 // Delete Company Account
 export const deleteCompanyAccount = () => async dispatch => {
     if(window.confirm('Are you sure you want to delete your account? This cannot be undone!')){
         try {
             const res = await axios.delete('/api/companyProfile')
+            dispatch({ type: ACCOUNT_DELETED})
+            dispatch({ type: CLEAR_PROFILE })
+            dispatch(setAlert('Account deleted', 'success'))
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status}
+            })
+        }
+    } 
+}
+
+// Delete Company Account as admin
+export const deleteCompanyAccountAsAdmin = () => async dispatch => {
+    if(window.confirm('Are you sure you want to delete this company account? This cannot be undone!')){
+        try {
+            const res = await axios.delete('/api/companyProfile/admin')
             dispatch({ type: ACCOUNT_DELETED})
             dispatch({ type: CLEAR_PROFILE })
             dispatch(setAlert('Account deleted', 'success'))
@@ -290,6 +309,36 @@ export const getSpamCompanies = () => async dispatch => {
             type: GET_PROFILES,
             payload: res.data
         })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+//Mark company as spam
+export const markCompanySpam = (id) => async dispatch => {
+    try {
+        await axios.post(`/api/spam/company/${id}`)
+        dispatch(setAlert('Company has been marked spam','success'))
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Remove company from spam companies
+export const removeFromSpamCompanies = (id) => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/spam/company/${id}`)
+        dispatch({
+            type: DELETE_PROFILE,
+            payload: id
+        })
+        dispatch(setAlert('Company removed from spam companies!','success'))
     } catch (err) {
         dispatch({
             type: PROFILE_ERROR,

@@ -10,7 +10,19 @@ import SpamCompanies from './SpamCompanies'
 import SpamJobs from './SpamJobs'
 import SpamPosts from './SpamPosts'
 
-const AdminDashboard = ({getSpamCompanies,getSpamJobs,getSpamPosts,job,post,profile }) => {
+
+const AdminDashboard = ({
+  getSpamCompanies,
+  getSpamJobs,
+  getSpamPosts,
+  job,
+  post,
+  profile,
+  removeFromSpamCompanies,
+  removeFromSpamJobs,
+  removeFromSpamPosts
+
+}) => {
 
   useEffect(() => {
     getSpamCompanies()
@@ -47,4 +59,8 @@ const mapStateToProps = (state) => ({
   post: state.post
 })
 
-export default connect( mapStateToProps, { getSpamCompanies, getSpamJobs, getSpamPosts } )(AdminDashboard)
+export default connect( mapStateToProps, { 
+  getSpamCompanies, 
+  getSpamJobs, 
+  getSpamPosts,
+ } )(AdminDashboard)

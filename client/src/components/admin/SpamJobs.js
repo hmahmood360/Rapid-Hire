@@ -2,8 +2,9 @@ import React , {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { removeFromSpamJobs, deleteJobAsAdmin } from '../../actions/job'
 
-const SpamJobs = ({jobs}) => {
+const SpamJobs = ({jobs, removeFromSpamJobs, deleteJobAsAdmin}) => {
   return (
     <div>
       <h2 className="mt-3 text-primary">Jobs Marked As Spam</h2>
@@ -29,10 +30,10 @@ const SpamJobs = ({jobs}) => {
                       </Link>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-primary">Remove from spam</button>
+                          <button onClick={() => removeFromSpamJobs(job._id)} className="btn btn-primary">Remove from spam</button>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-danger">Delete Job</button>
+                          <button onClick={() => deleteJobAsAdmin(job._id)} className="btn btn-danger">Delete Job</button>
                       </td>
                   </tr>
             ))
@@ -50,4 +51,4 @@ SpamJobs.propTypes = {
   jobs: PropTypes.array.isRequired
 }
 
-export default connect(null, {})(SpamJobs)
+export default connect(null, {removeFromSpamJobs, deleteJobAsAdmin})(SpamJobs)

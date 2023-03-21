@@ -2,8 +2,9 @@ import React , {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { removeFromSpamCompanies, deleteCompanyAccountAsAdmin } from '../../actions/profile'
 
-const SpamCompanies = ({profiles}) => {
+const SpamCompanies = ({profiles, removeFromSpamCompanies, deleteCompanyAccountAsAdmin}) => {
   
   return (
     <div>
@@ -30,10 +31,10 @@ const SpamCompanies = ({profiles}) => {
                           <Link to={`/company-profile/${company.company}`} className="btn btn-light">View Company</Link>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-primary">Remove from spam</button>
+                          <button onClick={() => removeFromSpamCompanies(company._id)} className="btn btn-primary">Remove from spam</button>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-danger">Delete Company</button>
+                          <button onClick={() => deleteCompanyAccountAsAdmin(company._id)} className="btn btn-danger">Delete Company</button>
                       </td>
                   </tr>
             ))
@@ -51,4 +52,4 @@ SpamCompanies.propTypes = {
   profiles: PropTypes.array.isRequired
 }
 
-export default connect(null, {})(SpamCompanies)
+export default connect(null, {removeFromSpamCompanies, deleteCompanyAccountAsAdmin})(SpamCompanies)

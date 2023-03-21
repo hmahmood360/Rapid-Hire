@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const companyAuth = require('../../middleware/companyAuth')
 const auth = require('../../middleware/auth')
+const adminAuth = require('../../middleware/adminAuth')
 const {check, validationResult} = require('express-validator')
 const User = require('../../models/User')
 const Job = require('../../models/Job')
-const Profile = require('../../models/Profile')
+const Profile = require('../../models/Profile');
+const SpamJob = require('../../models/SpamJob');
 
 
 // @route   POST api/jobs
@@ -141,6 +143,7 @@ router.get('/', async (req, res) => {
 router.delete('/:id',companyAuth, async (req, res) => {
     try {
       const job = await Job.findById(req.params.id)
+      const spamJob = await SpamJob.findOne({job: req.params.id})
       if (!job) {
         return res.status(404).json({ msg: 'Job not found' })
       }
@@ -148,6 +151,31 @@ router.delete('/:id',companyAuth, async (req, res) => {
       if (job.company._id.toString() !== req.company.id) {
         return res.status(401).json({ msg: 'You are not authorized to delete this job' })
       }
+      await spamJob.remove()
+      await job.remove()
+      res.json({ msg: 'Job deleted' })
+    } catch (err) {
+      console.error(err.message)
+      if (err.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'Job not found' })
+      }
+      res.status(500).send('Server Error')
+    }
+  })
+
+// @route   Delete api/jobs/admin/:id
+// @desc    delete a job as admin
+// @access  private
+
+router.delete('/admin/:id', adminAuth, async (req, res) => {
+    try {
+      const job = await Job.findById(req.params.id)
+      const spamJob = await SpamJob.findOne({job: req.params.id})
+      if (!job) {
+        return res.status(404).json({ msg: 'Job not found' })
+      }
+
+      await spamJob.remove()
       await job.remove()
       res.json({ msg: 'Job deleted' })
     } catch (err) {
@@ -173,8 +201,6 @@ router.delete('/:id',companyAuth, async (req, res) => {
         if (!job) {
           return res.status(404).json({ msg: 'Job not found' })
         }
-        console.log(user.name)
-        console.log(profile.location)
   
         // Check if user has already applied for this job
         if (job.applicants.find(applicant => applicant.user.toString() === req.user.id)) {

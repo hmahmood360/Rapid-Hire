@@ -75,7 +75,7 @@ function App() {
                 <Route path="/add-experience" element={<AddExperience />} />
                 <Route path="/add-education" element={<AddEducation />} />
                 <Route path="/posts" element={<Posts />} />
-                <Route path="/posts/:id" element={<Post />} />  
+                <Route path="/posts/:id" element={<Post />} />
               </Route>
               <Route element={<PrivateCompanyRoutes />} >
                 <Route path="/company-dashboard" element={<CompanyDashboard />} />

@@ -2,8 +2,9 @@ import React , {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { removeFromSpamPosts, deletePostAsAdmin } from '../../actions/post'
 
-const SpamPosts = ({posts}) => {
+const SpamPosts = ({posts, removeFromSpamPosts, deletePostAsAdmin}) => {
   return (
     <div>
       <h2 className="mt-3 text-primary">Posts Marked As Spam</h2>
@@ -27,10 +28,10 @@ const SpamPosts = ({posts}) => {
                           <Link to={`/posts/${post.post}`} className="btn btn-light" >View Post</Link>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-primary">Remove from spam</button>
+                          <button onClick={() => removeFromSpamPosts(post._id)} className="btn btn-primary">Remove from spam</button>
                       </td>
                       <td className="hide-sm">
-                          <button className="btn btn-danger">Delete Post</button>
+                          <button onClick={() => deletePostAsAdmin(post._id)} className="btn btn-danger">Delete Post</button>
                       </td>
                   </tr>
             ))
@@ -48,4 +49,4 @@ SpamPosts.propTypes = {
   posts: PropTypes.array.isRequired
 }
 
-export default connect(null, {})(SpamPosts)
+export default connect(null, {removeFromSpamPosts, deletePostAsAdmin})(SpamPosts)

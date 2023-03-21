@@ -79,6 +79,26 @@ export const deletePost = (id) => async dispatch => {
     }
 }
 
+// Delete Post as admin
+export const deletePostAsAdmin = (id) => async dispatch => {
+    try {
+        await axios.delete(`/api/posts/admin/${id}`)
+        dispatch({
+            type: DELETE_POST,
+            payload: id
+        })
+        dispatch(
+            setAlert('Post Removed', 'success')
+        )
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
 // Add Post
 export const addPost = (formData) => async dispatch => {
     try {
@@ -162,6 +182,36 @@ export const deleteComment = (postId, commentId) => async dispatch => {
             setAlert('Comment Deleted', 'success')
         )
 
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Mark post as spam
+export const markPostSpam = (id) => async dispatch => {
+    try {
+        const res = await axios.post(`/api/spam/post/${id}`)
+        dispatch(setAlert('Post has been Reported', 'success'))
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Remove post from spam
+export const removeFromSpamPosts = (id) => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/spam/post/${id}`)
+        dispatch({
+            type: DELETE_POST,
+            payload: res.data
+        })
+        dispatch(setAlert('Post removed from reported posts!','success'))
     } catch (err) {
         dispatch({
             type: POST_ERROR,

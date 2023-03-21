@@ -108,7 +108,7 @@ export const getAppliedJobs = () => async dispatch => {
     }
 }
 
-// Get Jobs user has applied to
+// Get Jobs user has marked favorite
 export const getFavoriteJobs = () => async dispatch => {
     try {
         const res = await axios.get('/api/jobs/favorites')
@@ -125,7 +125,7 @@ export const getFavoriteJobs = () => async dispatch => {
 }
 
 
-// Get Jobs user has applied to
+// Get Jobs posted by company
 export const getPostedJobs = () => async dispatch => {
     try {
         const res = await axios.get('/api/jobs/posted')
@@ -163,6 +163,24 @@ export const getJobById = (jobID) => async dispatch => {
 export const deleteJob = (jobID) => async dispatch => {
     try { 
         const res = await axios.delete(`/api/jobs/${jobID}`)
+
+        dispatch({
+            type: DELETE_JOB,
+            payload: jobID
+        })
+        dispatch(setAlert('Job has been deleted', 'success'))
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Delete Job by id as admin
+export const deleteJobAsAdmin = (jobID) => async dispatch => {
+    try { 
+        const res = await axios.delete(`/api/jobs/admin/${jobID}`)
 
         dispatch({
             type: DELETE_JOB,
@@ -262,6 +280,36 @@ export const removeFromFavorites = (jobId) => async dispatch => {
         dispatch({
             type: JOB_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+//Mark job as spam
+export const markJobSpam = (id) => async dispatch => {
+    try {
+        await axios.post(`/api/spam/job/${id}`)
+        dispatch(setAlert('Job has been marked spam', 'success'))
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Remove job from spam jobs
+export const removeFromSpamJobs = (id) => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/spam/job/${id}`)
+        dispatch({
+            type: DELETE_JOB,
+            payload: id
+        })
+        dispatch(setAlert('Job removed from spam jobs!'),'success')
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }
