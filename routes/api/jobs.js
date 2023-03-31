@@ -285,7 +285,7 @@ router.delete('/favorite/:id', auth, async (req, res) => {
     // Find the index of the user's application in the applicants array
     const removeIndex = job.favorites.map(favorite => favorite.user.toString()).indexOf(req.user.id)
 
-    // If the user has not applied for this job, return a 404 error response with a JSON object containing an error message
+    // If the user has not favourited this job, return a 404 error response with a JSON object containing an error message
     if (removeIndex === -1) {
       return res.status(404).json({ msg: 'You have not added job to favorites' })
     }

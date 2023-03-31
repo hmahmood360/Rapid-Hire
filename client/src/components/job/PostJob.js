@@ -36,7 +36,6 @@ const PostJob = ({addJob}) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.log(formData)
     addJob(formData);
   };
   useEffect(() => {getJobs()},[])
