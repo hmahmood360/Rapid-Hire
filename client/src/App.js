@@ -20,6 +20,7 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import CompanyDashboard from './components/dashboard/CompanyDashboard';
 import CreateProfile from './components/profile-forms/CreateProfile';
+import CV from './components/dashboard/CV';
 import Alert from './components/layout/Alert';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -74,6 +75,7 @@ function App() {
                 <Route path="/edit-profile" element={<EditProfile />} />
                 <Route path="/add-experience" element={<AddExperience />} />
                 <Route path="/add-education" element={<AddEducation />} />
+                <Route path="/edit-cv" element={<CV/>} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/posts/:id" element={<Post />} />
               </Route>

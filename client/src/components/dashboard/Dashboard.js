@@ -44,7 +44,7 @@ const Dashboard = ({ getAppliedJobs, getFavoriteJobs, job:{applied_jobs,favorite
       </Fragment>) : (
         // User does not have Profile
       <Fragment>
-        <p>You have not created profile.</p>
+        <p>You have not created profile.</p>  
         <Link to='/create-profile' className='btn btn-primary my-1' >Create Profile</Link> 
       </Fragment>
       )}
