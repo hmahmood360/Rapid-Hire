@@ -62,6 +62,11 @@ const JobSchema = Schema({
         date:{
             type: Date,
             default: Date.now
+        },
+        approvedStatus:{
+            type: String,
+            enum : ['Pending','Approved','Rejected'],
+            default: 'Pending'
         }
     }],
     favorites: [{

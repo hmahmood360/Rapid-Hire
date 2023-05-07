@@ -101,6 +101,13 @@ router.put('/:id', companyAuth, async (req, res) => {
     }
   });
 
+
+
+// @route   PUT api/jobs/job_applicant_statuss
+// @desc    Edit an existing job
+// @access  Private
+
+
 // @route   GET api/jobs/:id
 // @desc    get single job
 // @access  public
