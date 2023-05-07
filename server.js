@@ -1,7 +1,13 @@
 const express = require('express')
 const connectDB = require('./config/db')
+const Job = require('./models/Job')
+const cors = require('cors');
 
 const app = express()
+
+app.use(cors({
+    origin: '*'
+}));
 
 //Connect Database
 connectDB() 
@@ -24,7 +30,36 @@ app.use('/api/jobs', require('./routes/api/jobs'))
 app.use('/api/admin', require('./routes/api/admin'))
 app.use('/api/spam', require('./routes/api/spam'))
 
+app.put('/api/jobs/jobstatus/:id', async (req, res) => {
+    try {
+      const job = await Job.findById(req.params.id);
+      const status = req.body.status;
+      const user = req.body.user;
+      console.log({status, user});
+  
+      if (!job) {
+        return res.status(404).json({ msg: 'Job not found' });
+      }
+      console.log(job)
 
+
+      Job.findOneAndUpdate(
+        { _id: req.params.id, "applicants.user": user },
+        { $set: { "applicants.$.approvedStatus": status } },
+        { new: true }
+      ).exec((err, updatedJob) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedJob);
+        }
+      });
+
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 
 
 const PORT = process.env.PORT || 5000
