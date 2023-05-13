@@ -14,35 +14,42 @@ const Education = ({education, deleteEducation}) => {
             <td className="hide-sm"> {edu.fieldofstudy} </td>
             <td className="hide-sm">
                 <Moment format='DD/MM/YYYY'>{edu.from}</Moment> - { edu.to === null ? (
-                    ' Now'
+                    ' Now '
                     ) : (
                 <Moment format='DD/MM/YYYY'>
                     {edu.to}
                 </Moment>) }
             </td>
             <td>
-                <button onClick={() => deleteEducation(edu._id)} className="btn btn-danger">Delete</button>
+                
             </td>
         </tr>
     ))
   return (
-    <Fragment>
-        <h2 className="mt-2">Educational Experiences</h2>
+    <div className='mt-10'>
+        <h2 className="text-3xl font-semibold text-primary mb-5 ">Educational Experiences</h2>
         {education.length > 0 ? (
-            <table className="table">
-            <thead>
-                <tr>
-                    <th>Institute</th>
-                    <th className="hide-sm">Degree</th>
-                    <th className="hide-sm">Field Of Study</th>
-                    <th className="hide-sm">Date</th>
-                    <th ></th>
-                </tr>
-            </thead>
-            <tbody>
-                {degrees}
-            </tbody>
-        </table>
+            education.map(edu => (
+                <div key={edu._id} className='shadow-md border py-4 px-12 rounded-md border-2 border-gray-300 grid grid-cols-6 text-secondary items-center'>
+                    <div className='col-span-5'>
+                        <h3 className='text-2xl font-semibold mb-1'>{edu.degree} in {edu.fieldofstudy}</h3>
+                        <div className='grid grid-cols-2 '>
+                            <p className='text-xl'>{edu.school}</p>
+                            <p className='text-xl'>
+                                <span className='font-semibold'>From: </span>
+                                <Moment format='DD/MM/YYYY'>{edu.from}</Moment> - { edu.to === null ? (
+                                    ' Now'
+                                    ) : (
+                                <Moment format='DD/MM/YYYY'>
+                                    {edu.to}
+                                </Moment>)}
+                            </p>
+                        </div>
+                    </div>
+                    <button onClick={() => deleteEducation(edu._id)} className="btn btn-danger">Delete</button>
+                </div>
+            )
+            )
         ) : (
             <div>
                 <span>
@@ -52,7 +59,7 @@ const Education = ({education, deleteEducation}) => {
             </div>
         ) }
         
-    </Fragment>
+    </div>
   )
 }
 

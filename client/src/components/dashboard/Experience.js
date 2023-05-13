@@ -7,40 +7,31 @@ import { deleteExperience } from '../../actions/profile'
 
 const Experience = ({experience, deleteExperience}) => {
 
-    const experiences = experience.map(exp => (
-        <tr key={exp._id}>
-            <td>{exp.company}</td>
-            <td className="hide-sm"> {exp.title} </td>
-            <td className="hide-sm">
-                <Moment format='DD/MM/YYYY'>{exp.from}</Moment> - { exp.to === null ? (
-                    ' Now'
-                    ) : (
-                <Moment format='DD/MM/YYYY'>
-                    {exp.to}
-                </Moment>) }
-            </td>
-            <td>
-                <button onClick={() => deleteExperience(exp._id)} className="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-    ))
   return (
-    <Fragment>
-        <h2 className="mt-2 ">Job Experiences</h2>
+    <div className='my-10'>
+        <h2 className="text-3xl font-semibold text-primary mb-5">Job Experiences:</h2>
         {experience.length > 0 ? (
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th className="hide-sm">Title</th>
-                    <th className="hide-sm">Years</th>
-                    <th ></th>
-                </tr>
-            </thead>
-            <tbody>
-                {experiences}
-            </tbody>
-        </table>
+            experience.map(exp => (
+                <div key={exp._id} className='shadow-md border py-4 px-12 rounded-md border-2 border-gray-300 grid grid-cols-6 text-secondary items-center'>
+                    <div className='col-span-5'>
+                        <h3 className='text-2xl font-semibold mb-1'>{exp.title} at {exp.company}</h3>
+                        <div className='grid grid-cols-2 '>
+                            <p className='text-xl'>{exp.location}</p>
+                            <p className='text-xl'>
+                                <span className='font-semibold'>From: </span>
+                                <Moment format='DD/MM/YYYY'>{exp.from}</Moment> - { exp.to === null ? (
+                                    ' Now'
+                                    ) : (
+                                <Moment format='DD/MM/YYYY'>
+                                    {exp.to}
+                                </Moment>)}
+                            </p>
+                        </div>
+                    </div>
+                    <button onClick={() => deleteExperience(exp._id)} className="btn btn-danger">Delete</button>
+                </div>
+                )
+            )
         ) : (
             <div>
                 <span>
@@ -48,11 +39,8 @@ const Experience = ({experience, deleteExperience}) => {
                 </span>
                 <p>Click here to <Link style={{textDecoration: 'underline'}} to={'/add-experience'} >Add Experience</Link> </p>
             </div>
-        )
-            
-        }
-        
-    </Fragment>
+        )}
+    </div>
   )
 }
 
