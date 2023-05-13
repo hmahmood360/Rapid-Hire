@@ -1,3 +1,4 @@
+
 import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -16,11 +17,21 @@ import Sidebar from '../layout/Sidebar'
 
 const Dashboard = ({ getAppliedJobs, getFavoriteJobs, job:{applied_jobs,favorite_jobs}, getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
 
+
+const Dashboard = ({
+  getAppliedJobs,
+  getFavoriteJobs,
+  job: { applied_jobs, favorite_jobs },
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile, loading },
+  deleteAccount,
+}) => {
   useEffect(() => {
-    getCurrentProfile()
-    getAppliedJobs()
-    getFavoriteJobs()
-  },[getCurrentProfile, getAppliedJobs])
+    getCurrentProfile();
+    getAppliedJobs();
+    getFavoriteJobs();
+  }, [getCurrentProfile, getAppliedJobs]);
 
   return (
     <>
@@ -110,19 +121,24 @@ const Dashboard = ({ getAppliedJobs, getFavoriteJobs, job:{applied_jobs,favorite
   )
 }
 
-Dashboard.propTypes = { 
+
+Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getAppliedJobs: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  deleteAccount: PropTypes.func.isRequired
-  
-}
+  deleteAccount: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
-  job: state.job
-})
+  job: state.job,
+});
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getAppliedJobs, getFavoriteJobs })(Dashboard)
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  deleteAccount,
+  getAppliedJobs,
+  getFavoriteJobs,
+})(Dashboard);

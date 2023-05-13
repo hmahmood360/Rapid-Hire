@@ -1,12 +1,17 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { deleteApplication } from '../../actions/job'
-import { Link } from 'react-router-dom'
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteApplication } from "../../actions/job";
+import { Link } from "react-router-dom";
 
-
-const AppliedJobs = ({jobs, deleteApplication}) => {
-
+const AppliedJobs = ({ jobs, deleteApplication, user }) => {
+  let status;
+  jobs.map((job) =>
+    job.applicants.map((applicant) =>
+      applicant.user === user ? (status = applicant.approvedStatus) : null
+    )
+  );
+  console.log(status);
   return (
     <div id='applied_jobs' className='my-10'>
         <h2 className="text-3xl font-semibold text-primary mb-5">Applied Jobs:</h2>
@@ -42,10 +47,10 @@ const AppliedJobs = ({jobs, deleteApplication}) => {
   )
 }
 
+
 AppliedJobs.propTypes = {
-    jobs: PropTypes.array.isRequired,
-    deleteApplication: PropTypes.func.isRequired
-}
+  jobs: PropTypes.array.isRequired,
+  deleteApplication: PropTypes.func.isRequired,
+};
 
-
-export default connect(null, {deleteApplication})(AppliedJobs)
+export default connect(null, { deleteApplication })(AppliedJobs);
