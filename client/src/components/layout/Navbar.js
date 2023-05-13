@@ -9,21 +9,6 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
   const authLinks = (
     <ul>
       <li>
-        <Link to="/dashboard">
-          <i className='fas fa-user' />{' '} 
-          <span className='hide-sm'> Dashboard</span> 
-        </Link>
-      </li>
-      <li>
-        <Link to="/posts"> Posts </Link>
-      </li>
-      <li>
-        <Link to="/profiles"> Profiles </Link>
-      </li>
-      <li>
-        <Link to="/jobs">Jobs</Link>
-      </li>
-      <li>
         <a href='#!' onClick={ logout }>
           <i className='fas fa-sign-out-alt' />{' '} 
           <span className='hide-sm' >Logout</span>
@@ -33,15 +18,6 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
   )
   const companyAuthLinks = (
     <ul>
-      <li>
-        <Link to="/dashboard">
-          <i className='fas fa-user' />{' '} 
-          <span className='hide-sm'> Dashboard</span> 
-        </Link>
-      </li>
-      <li>
-        <Link to="/profiles"> Profiles </Link>
-      </li>
       <li>
         <a href='#!' onClick={ logout }>
           <i className='fas fa-sign-out-alt' />{' '} 
@@ -71,9 +47,9 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
   )
 
   return (
-    <nav className="navbar bg-dark">
+    <nav className="navbar bg-dark shadow-xl">
       <h1>
-        <Link to="/"><i className="fas fa-code"></i> RAPID HIRE</Link>
+        <Link className='flex items-center' to="/"><i className="fas fa-code"></i><p className='font-bold ml-1 text-2xl'>RAPID HIRE</p></Link>
       </h1>
       {!loading && (
       <Fragment>

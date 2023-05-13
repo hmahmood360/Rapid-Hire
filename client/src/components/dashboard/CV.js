@@ -21,7 +21,7 @@ function CVForm() {
     name: "education",
   });
 
-  // Feils Array for experience section
+  // Feild Array for experience section
   const {
     fields: experianceFeilds,
     append: experianceAppend,
@@ -31,7 +31,7 @@ function CVForm() {
     name: "experiance",
   });
 
-  // Feils Array for certification section
+  // Feild Array for certification section
   const {
     fields: certificationFeilds,
     append: certificationAppend,

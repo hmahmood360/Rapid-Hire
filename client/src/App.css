@@ -5,7 +5,7 @@
 /* Global Styles */
 :root {
   --primary-color: #1289A7;
-  --secondary-color: #ff9d5c;
+  --secondary-color: #484D54;
   --dark-color: #343a40;
   --light-color: #e2e2e2;
   --danger-color: #dc3545;
@@ -27,10 +27,7 @@ body {
   color: #333;
 }
 
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
+
 
 ul {
   list-style: none;
@@ -47,7 +44,6 @@ img {
   overflow: hidden;
   padding: 0 2rem;
   margin-top: 7rem;
-  margin-bottom: 3rem;
 }
 .auth{
   background: linear-gradient(to right, #0f6b7c, #17a2b8);
@@ -132,168 +128,8 @@ img {
   font-weight: 800;
 }
 
-/* Padding */
-.p {
-  padding: 0.5rem;
-}
-.p-1 {
-  padding: 1rem;
-}
-.p-2 {
-  padding: 2rem;
-}
-.p-3 {
-  padding: 3rem;
-}
-.py {
-  padding: 0.5rem 0;
-}
-.py-1 {
-  padding: 1rem 0;
-}
-.py-2 {
-  padding: 2rem 0;
-}
-.py-3 {
-  padding: 3rem 0;
-}
-.pt {
-  padding: 0.5rem 0 0 0;
-}
-.pt-1 {
-  padding: 1rem 0 0 0;
-}
-.pt-2 {
-  padding: 2rem 0 0 0;
-}
-.pt-3 {
-  padding: 3rem 0 0 0;
-}
-.pr {
-  padding: 0 0.5rem 0 0;
-}
-.pr-1 {
-  padding: 0 1rem 0 0;
-}
-.pr-2 {
-  padding: 0 2rem 0 0;
-}
-.pr-3 {
-  padding: 0 3rem 0 0;
-}
-.pb {
-  padding: 0 0 0.5rem 0;
-}
-.pb-1 {
-  padding: 0 0 1rem 0;
-}
-.pb-2 {
-  padding: 0 0 2rem 0;
-}
-.pb-3 {
-  padding: 0 0 3rem 0;
-}
-.pl {
-  padding: 0 0 0 0.5rem;
-}
-.pl-1 {
-  padding: 0 0 0 1rem;
-}
-.pl-2 {
-  padding: 0 0 0 2rem;
-}
-.pl-3 {
-  padding: 0 0 0 3rem;
-}
 
-/* Margin */
-.m {
-  margin: 0.5rem;
-}
-.m-1 {
-  margin: 1rem;
-}
-.m-2 {
-  margin: 2rem;
-}
-.m-3 {
-  margin: 3rem;
-}
-.my {
-  margin: 0.5rem 0;
-}
-.my-1 {
-  margin: 1rem 0;
-}
-.my-2 {
-  margin: 2rem 0;
-}
-.my-3 {
-  margin: 3rem 0;
-}
-.mt {
-  margin: 0.5rem 0 0 0;
-}
-.mt-1 {
-  margin: 1rem 0 0 0;
-}
-.mt-2 {
-  margin: 2rem 0 0 0;
-}
-.mt-3 {
-  margin: 3rem 0 0 0;
-}
-.ml {
-  margin:  0 0 0 0.5rem;
-}
-.ml-1 {
-  margin:  0 0 0 1rem;
-}
-.ml-2 {
-  margin:  0 0 0 2rem;
-}
-.ml-3 {
-  margin:  0 0 0 3rem;
-}
-.mb {
-  margin:  0 0 0.5rem 0 ;
-}
-.mb-1 {
-  margin:  0 0 1rem 0 ;
-}
-.mb-2 {
-  margin:  0 0 2rem 0 ;
-}
-.mb-3 {
-  margin:  0 0 3rem 0 ;
-}
-.mr {
-  margin: 0 0.5rem 0 0;
-}
-.mr-1 {
-  margin: 0 1rem 0 0;
-}
-.mr-2 {
-  margin: 0 2rem 0 0;
-}
-.mr-3 {
-  margin: 0 3rem 0 0;
-}
-.mx {
-  margin: 0 ;
-}
-.mx-1 {
-  margin: 0 1rem ;
-}
-.mx-2 {
-  margin: 0  2rem;
-}
-.mx-3 {
-  margin: 0 3rem;
-}
-.mx-auto {
-  margin: 0 auto;
-}
+
 .btn-container{
   display: flex;
   flex-direction: row;
@@ -541,13 +377,12 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0.6rem 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
-  border-bottom: solid 1px var(--primary-color);
-  opacity: 0.9;
+  border-bottom: 1px solid #0077b5;
 }
 
 .navbar ul {
@@ -599,17 +434,7 @@ button {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
 }
-.job {
-  display: grid;
-  grid-template-columns: 4fr 2fr;
-  align-items: top;
-  grid-gap: 2rem;
-  padding: 2rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-}
+
 
 /* Profile Page and job page */
 .profile-grid {

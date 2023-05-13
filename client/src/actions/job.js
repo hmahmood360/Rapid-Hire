@@ -162,7 +162,7 @@ export const getJobById = (jobID) => async dispatch => {
 // Delete Job by id
 export const deleteJob = (jobID) => async dispatch => {
     try { 
-        const res = await axios.delete(`/api/jobs/${jobID}`)
+        await axios.delete(`/api/jobs/${jobID}`)
 
         dispatch({
             type: DELETE_JOB,
@@ -180,7 +180,7 @@ export const deleteJob = (jobID) => async dispatch => {
 // Delete Job by id as admin
 export const deleteJobAsAdmin = (jobID) => async dispatch => {
     try { 
-        const res = await axios.delete(`/api/jobs/admin/${jobID}`)
+        await axios.delete(`/api/jobs/admin/${jobID}`)
 
         dispatch({
             type: DELETE_JOB,
@@ -294,13 +294,14 @@ export const markJobSpam = (id) => async dispatch => {
             type: JOB_ERROR,
             payload: {msg: err.response.statusText, status: err.response.status}
         })
+        dispatch(setAlert('You have already marked this job spam', 'danger'))
     }
 }
 
 // Remove job from spam jobs
 export const removeFromSpamJobs = (id) => async dispatch => {
     try {
-        const res = await axios.delete(`/api/spam/job/${id}`)
+         await axios.delete(`/api/spam/job/${id}`)
         dispatch({
             type: DELETE_JOB,
             payload: id
