@@ -205,4 +205,5 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
+
 export default connect(mapStateToProps, { getJobById, deleteJob })(JobCompany);

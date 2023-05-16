@@ -12,8 +12,8 @@ const CommentForm = ({postId, addComment}) => {
     }
   return (
     <div className="post-form">
-        <div className="bg-primary p">
-          <h3>Leave a Comment...</h3>
+        <div className="bg-primary mt-3 py-2 px-4">
+          <h3 className=''>Leave a Comment...</h3>
         </div>
         <form onSubmit={e => handleSubmit(e)} className="form my-1">
           <textarea
@@ -23,8 +23,9 @@ const CommentForm = ({postId, addComment}) => {
             placeholder="Say something..."
             required
             onChange={e => setText(e.target.value)}
+            className='h-20 focus:outline-none mt-3'
           ></textarea>
-          <input type="submit" className="btn btn-dark my-1" value="Submit" />
+          <input type="submit" className="btn btn-dark my-3 " value="Submit" />
         </form>
       </div>
   )

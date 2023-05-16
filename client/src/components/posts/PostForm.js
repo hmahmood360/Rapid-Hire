@@ -13,7 +13,7 @@ const PostForm = ({addPost}) => {
     }
   return (
     <div className="post-form">
-        <div className="bg-primary p">
+        <div className="bg-primary mt-3 py-2 px-4">
           <h3>Say Something...</h3>
         </div>
         <form onSubmit={e => handleSubmit(e)} className="form my-1">
@@ -24,8 +24,9 @@ const PostForm = ({addPost}) => {
             placeholder="Create a post"
             required
             onChange={e => setText(e.target.value)}
+            className='focus:outline-none h-24 mt-4'
           ></textarea>
-          <input type="submit" className="btn btn-dark my-1" value="Submit" />
+          <input type="submit" className="btn btn-dark my-4 right-0" value="Submit" />
         </form>
       </div>
   )

@@ -15,7 +15,7 @@ const PostItem = ({
   showActions
 }) => {
   return (
-    <div className="post bg-white p-1 my-1">
+    <div className="post bg-white px-6 py-3 my-1">
           <div>
             <Link to={`/profile/${user}`} >
               <img
@@ -27,10 +27,10 @@ const PostItem = ({
             </Link>
           </div>
           <div>
-            <p className="my-1">
+            <p className="my-1 text-2xl">
               {text}
             </p>
-             <p className="post-date">
+             <p className=" text-sm text-gray-400">
                 Posted on <Moment format='DD/MM/YYYY' >{date}</Moment>
             </p>
 
