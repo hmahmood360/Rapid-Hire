@@ -3,6 +3,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { Link } from "react-router-dom";
 import CV from "./CvPdf";
 import { PDFViewer } from "@react-pdf/renderer";
+import CVTEMP1 from "./CvPdfTem1";
+import CVTEMP2 from "./CvPdfTem2";
 
 function CVForm() {
   // variables for form validation
@@ -66,6 +68,12 @@ function CVForm() {
     experianceRemove();
     certificationRemove();
     skillRemove();
+  };
+
+  const [activeChild, setActiveChild] = useState(1);
+
+  const handleClick = (child) => {
+    setActiveChild(child);
   };
 
   return (
@@ -320,18 +328,39 @@ function CVForm() {
               🎯 Add Skills
             </button>
 
-            {/* Form Submit button */}
-            <button type="submit" className="mb-1 btn btn-primary ">
-              Save
-            </button>
-            <button onClick={clearForm} className="mb-1 btn btn-danger ">
-              Clear
-            </button>
-          </form>
-          {/* CV  PDF Component */}
-          <PDFViewer className="w-full h-[800px] lg:w-3/5">
-            <CV {...cvData} />
-          </PDFViewer>
+          {/* Form Submit button */}
+          <button type="submit" className="mb-1 btn btn-primary ">
+            Save
+          </button>
+          <button onClick={clearForm} className="mb-1 btn btn-danger ">
+            Clear
+          </button>
+        </form>
+        <div className="w-full h-[800px] lg:w-3/5">
+          <button className="m-1 btn" onClick={() => handleClick(1)}>
+            Template 1
+          </button>
+          <button className="m-1 btn" onClick={() => handleClick(2)}>
+            Template 2
+          </button>
+          <button className="m-1 btn" onClick={() => handleClick(3)}>
+            Template 3
+          </button>{" "}
+          {activeChild == 1 ? (
+            <PDFViewer className="w-full h-[800px] ">
+              <CV {...cvData} />
+            </PDFViewer>
+          ) : null}
+          {activeChild == 2 ? (
+            <PDFViewer className="w-full h-[800px] ">
+              <CVTEMP1 {...cvData} />
+            </PDFViewer>
+          ) : null}
+          {activeChild == 3 ? (
+            <PDFViewer className="w-full h-[800px] ">
+              <CVTEMP2 {...cvData} />
+            </PDFViewer>
+          ) : null}
         </div>
       </div>
     </div>
