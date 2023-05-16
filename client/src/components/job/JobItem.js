@@ -16,30 +16,30 @@ const JobItem = ({
     }
     }) => {
   return (
-    <div className="job bg-light">
-        <div>
-            <h2>{title} - {type}</h2>
-            <p>{name && name}</p>
-            <p className="my-1"> {location && <span>{location} </span>} </p>
-            <p className="my-1">{description}</p>
-            <Link className='btn btn-primary' to={`/job/${_id}`} >
-                <p>View Job</p>
-            </Link>
+    <div className=" bg-light text-secondary  gap-4 my-4 p-8 shadow-md  ">
+        <div className="flex justify-between">
+            <h2 className='text-3xl font-semibold '>{title}  </h2>
+            <p className='mr-6 bg-[#ccc] px-4 py-2 rounded-xl text-xl'><i className="fa fa-briefcase" aria-hidden="true"></i> {type}</p>
         </div>
-        <ul>
-            <li>
-                <h3 className='mt'>Required Skills:</h3>
-            </li>
+        <div className="mt-1 mb-3 flex space-x-16 items-center">
+            <p className='text-xl items-center '><i className="fa fa-building " aria-hidden="true"></i> <span className="inline-block"> {name && name}</span></p>
+            <p className="text-xl"> {location && <span><i className="fa fa-map-marker " aria-hidden="true"></i> {location} </span>} </p>
+            <p className='text-xl '> <i className="fa fa-clock-o" aria-hidden="true"></i> <span className='font-semibold '>Posted on:</span>  <Moment format='DD/MM/YYYY' >{date}</Moment></p> 
+        </div>
+        <div className='flex'>
             {requiredSkills.slice(0,4).map((skill, index) => (
-                <li key={index} className='text-primary' >
-                    <i className="fas fa-check"></i>
-                    {skill }
-                </li>
+                <div key={index} className='text-primary px-3 py-1 bg-[#ccc]  rounded shadow-sm mr-4'>
+                    <p className='inline-block  text-xl'>{skill }</p>
+                </div>
             ))}
-            <li className='mt-2' style={{display: 'flex'}} >
-                <h4 className='mr'>Posted on: <Moment format='DD/MM/YYYY' >{date}</Moment></h4> 
-            </li>
-        </ul>
+        </div>
+        <p className="leading-6 text-xl mt-3 mb-4">{description}</p>
+        <Link className='btn btn-primary' to={`/job/${_id}`} >
+            <p>View Job</p>
+        </Link>
+        
+        
+        
     </div>
   )
 }

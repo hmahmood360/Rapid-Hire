@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const ProfileTop = ({profile:{
+const ProfileTop = ({
+    auth,
+    profile:{
     status,
     company,
     qualification,
@@ -9,20 +12,29 @@ const ProfileTop = ({profile:{
     location,
     website,
     social,
-    user: {name, avatar}
+    user: {_id,name, avatar}
 }}) => {
   return (
-    <div className="profile-top bg-primary p-2">
+    <div className="profile-top bg-primary p-8 relative">
+          <div>
+          {auth.isAuthenticated && auth.loading === false && auth.user._id === _id && (
+                <Link to='/edit-profile' className='btn btn-light absolute right-6 flex shadow-md' >
+                    <i className="fa fa-pencil-square-o inline-block" aria-hidden="true"></i>
+                    <p className="ml-2 inline-block">Edit Profile</p>
+                    
+                </Link>
+            )}
+          </div>
           <img
             className="round-img my-1"
             src={avatar}
             alt="profile pic"
           />
-          <h1 className="large">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
-          {qualification && field && <p className="lead">{qualification} in {field}</p> }
-          <p className="lead">{status} {company && <span>at {company}</span>}</p>
-          <p className="lead">{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
-          <div className="icons my-1">
+          <h1 className="text-6xl my-3 font-medium">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
+          {qualification && field && <p className="text-3xl my-2"> {qualification} in {field}</p> }
+          <p className="text-3xl my-2 ">{status} {company && <span>at {company}</span>}</p>
+          <p className="text-3xl my-2">{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
+          <div className="icons my-2">
             {website && (
                 <a href={`https://${website}`} target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-globe fa-2x"></i>

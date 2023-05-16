@@ -10,6 +10,7 @@ import {
     DELETE_PROFILE
 } from './types'
 
+
 // Get current user profile
 export const getCurrentProfile = () => async dispatch => {
     try {
@@ -224,7 +225,7 @@ export const deleteEducation = (id) => async dispatch => {
 export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure you want to delete your account? This cannot be undone!')){
         try {
-            const res = await axios.delete('/api/profile')
+            await axios.delete('/api/profile')
             dispatch({ type: ACCOUNT_DELETED})
             dispatch({ type: CLEAR_PROFILE })
             dispatch(setAlert('Account deleted', 'success'))
@@ -241,7 +242,7 @@ export const deleteAccount = () => async dispatch => {
 export const deleteCompanyAccount = () => async dispatch => {
     if(window.confirm('Are you sure you want to delete your account? This cannot be undone!')){
         try {
-            const res = await axios.delete('/api/companyProfile')
+            await axios.delete('/api/companyProfile')
             dispatch({ type: ACCOUNT_DELETED})
             dispatch({ type: CLEAR_PROFILE })
             dispatch(setAlert('Account deleted', 'success'))
@@ -255,14 +256,15 @@ export const deleteCompanyAccount = () => async dispatch => {
 }
 
 // Delete Company Account as admin
-export const deleteCompanyAccountAsAdmin = () => async dispatch => {
+export const deleteCompanyAccountAsAdmin = (id) => async dispatch => {
     if(window.confirm('Are you sure you want to delete this company account? This cannot be undone!')){
         try {
-            const res = await axios.delete('/api/companyProfile/admin')
+            await axios.delete(`/api/companyProfile/admin/${id}`)
             dispatch({ type: ACCOUNT_DELETED})
             dispatch({ type: CLEAR_PROFILE })
             dispatch(setAlert('Account deleted', 'success'))
         } catch (err) {
+
             dispatch({
                 type: PROFILE_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status}
@@ -333,7 +335,7 @@ export const markCompanySpam = (id) => async dispatch => {
 // Remove company from spam companies
 export const removeFromSpamCompanies = (id) => async dispatch => {
     try {
-        const res = await axios.delete(`/api/spam/company/${id}`)
+        await axios.delete(`/api/spam/company/${id}`)
         dispatch({
             type: DELETE_PROFILE,
             payload: id

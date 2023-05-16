@@ -40,6 +40,7 @@ import store from './store'
 //actions
 import { loadUser } from './actions/auth';
 import { loadCompany } from './actions/auth';
+import Sidebar from './components/layout/Sidebar';
 
 
 if (localStorage.token){
@@ -58,6 +59,7 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
+          <Sidebar />
             <Alert />
             <Routes>
               <Route exact path="/" element={<Landing />} />

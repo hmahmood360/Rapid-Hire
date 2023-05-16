@@ -21,16 +21,14 @@ const Profile = ({getProfileById, profile:{profile, loading}, auth}) => {
         {profile === null || loading ? (
         <Spinner />
         ) : (
-        <Fragment>
-            <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
-            {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id && (
-                <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
-            )}
-            <div className="profile-grid my-1">
-                <ProfileTop profile={profile} />
+        <div className='ml-16'>
+            <button onClick={() => navigate(-1)} className='btn btn-light mr-6' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
+            
+            <div className="profile-grid my-12">
+                <ProfileTop profile={profile} auth={auth} />
                 <ProfileAbout profile={profile} />
-                <div className="profile-exp bg-white p-2">
-                    <h2 className="text-primary"> Experience: </h2>
+                <div className="profile-exp bg-white p-6">
+                    <h2 className="text-primary text-3xl font-semibold"> Experience: </h2>
                     {profile.experience.length > 0 ? (
                         <Fragment>
                             {profile.experience.map(experience => (
@@ -39,8 +37,8 @@ const Profile = ({getProfileById, profile:{profile, loading}, auth}) => {
                         </Fragment>
                     ) : (<h4> No expereince credentials found</h4>) }
                 </div>
-                <div className="profile-edu bg-white p-2">
-                    <h2 className="text-primary"> Education: </h2>
+                <div className="profile-edu bg-white p-6  ">
+                    <h2 className="text-primary text-3xl font-semibold"> Education: </h2>
                     {profile.education.length > 0 ? (
                         <Fragment>
                             {profile.education.map(education => (
@@ -50,7 +48,7 @@ const Profile = ({getProfileById, profile:{profile, loading}, auth}) => {
                     ) : (<h4> No expereince credentials found</h4>) }
                 </div>
             </div>
-        </Fragment> )}
+        </div> )}
     </div>
   )
 }
