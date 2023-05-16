@@ -389,6 +389,87 @@ router.delete('/apply/:id', auth, async (req, res) => {
       res.status(500).send('Server Error')
     }
   })
+
+
+// @route   Get api/jobs/search
+// @desc    User can search job by title
+// @access  public
+
+router.get('/search', async (req, res) => {
+  try {
+    const { title } = req.query;
+
+    // Create a regex pattern to perform a case-insensitive search
+    const pattern = new RegExp(title, 'i');
+
+    
+    // Find similar jobs based on keywords in the title
+    const similarJobs = await Job.find({
+      $or: [
+        { title: { $regex: pattern } },
+        { description: { $regex: pattern } }
+      ]
+    }).populate('company', ['name'])  ;
+
+    res.json({  similarJobs });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+// @route   Get api/jobs/filter
+// @desc    User can filter job
+// @access  public
+
+router.get('/filter', async (req, res) => {
+  try {
+    const {  location, type, gender, qualification, skills, salaryFrom, salaryTo } = req.query;
+
+    // Build the filter object based on the provided query parameters
+    const filter = {};
+
+
+    if (location) {
+      const locationPattern = new RegExp(location, 'i');
+      filter.location = locationPattern;
+    }
+
+    if (type) {
+      filter.type = type;
+    }
+
+    if (gender) {
+      filter.gender = gender;
+    }
+
+    if (qualification) {
+      filter.qualification = qualification;
+    }
+
+    if (skills) {
+      const skillsArray = skills.split(',');
+      filter.requiredSkills = { $all: skillsArray };
+    }
+
+    if (salaryFrom && !isNaN(parseFloat(salaryFrom))) {
+      filter.salaryFrom = { $gte: parseFloat(salaryFrom) };
+    }
+
+    if (salaryTo && !isNaN(parseFloat(salaryTo))) {
+      filter.salaryTo = { $lte: parseFloat(salaryTo) };
+    }
+
+    // Find jobs that match the provided filters
+    const jobs = await Job.find(filter).populate('company', ['name']) ;
+
+    res.json(jobs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
   
 
 module.exports = router;

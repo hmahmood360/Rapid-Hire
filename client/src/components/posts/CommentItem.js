@@ -13,7 +13,7 @@ const CommentItem = ({
 }) => {
   return (
     <div className="comments">
-        <div className="post bg-white p-1 my-1">
+        <div className="post bg-white px-4 py-4 my-1">
           <div>
             <Link to={`/profile/${user}`}>
               <img
@@ -28,11 +28,11 @@ const CommentItem = ({
             <p className="my-1">
               {text}
             </p>
-             <p className="post-date">
+             <p className="text-sm text-gray-500 mb-3">
                 <Moment format='DD/MM/YYYY'>{date}</Moment>
             </p>
             {!auth.loading && auth.user && auth.user._id=== user && (
-                <button onClick={() => deleteComment(postId, _id)} type='button' className='btn btn-danger' >
+                <button onClick={() => deleteComment(postId, _id)} type='button' className='btn  btn-danger' >
                     <i className="fas fa-times"></i>
                 </button>
             )}

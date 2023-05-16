@@ -22,22 +22,30 @@ const PostedJobs = ({jobs, deleteJob}) => {
     ))
   return (
     <div>
-        <h2 className="mt-2">Posted Jobs</h2>
+        <h2 className="ext-3xl font-semibold text-primary mb-5">Posted Jobs</h2>
         {postedJobs.length > 0 ? (
-            <table className="table">
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th className="hide-sm">Type</th>
-                    <th className="hide-sm">Location</th>
-                    <th ></th>
-                    <th ></th>
-                </tr>
-            </thead>
-            <tbody>
-                { postedJobs }
-            </tbody>
-        </table>
+            jobs.map( job => (
+                <div key={job._id} className='mb-5 shadow-md border py-4 px-12 rounded-md border-2 border-gray-300 grid grid-cols-6 text-secondary items-center'>
+                    <div className="col-span-4 ">
+                        <div className='grid grid-cols-2'>
+                            <h3 className='text-2xl font-semibold mb-1'>{job.title}</h3>
+                            <p className='text-xl'><span className='font-semibold'>Company: </span>{job.company.name}</p>
+                        </div>
+                        <div className="grid grid-cols-2">
+                            <p className="text-xl"><span className="font-semibold">Location: </span>{job.location}</p>
+                            <p className="text-xl"><span className="font-semibold">Type: </span> {job.type}</p>
+                        </div>
+                    </div>  
+                    <div className="grid justify-items-end">
+                        <Link className='btn btn-primary w-40 text-center ' to={`/job-company/${job._id}`} >
+                            <p>View Job</p>
+                        </Link>
+                    </div>
+                    <div className="grid justify-items-end">
+                        <button onClick={() => deleteJob(job._id)} className="btn btn-danger w-40 text-center">Delete Job</button>
+                    </div>
+                </div>
+            ) )
         ) : (
             <div>
                 <span>

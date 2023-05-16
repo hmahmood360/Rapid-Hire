@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
 import { logout } from '../../actions/auth'
 
-function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthenticated, user ,loading}, logout }) {
+function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthenticated, user ,loading, company}, logout }) {
 
   const authLinks = (
     <ul className=' divide-y '>
@@ -50,22 +50,29 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
     </ul>
   )
   const companyAuthLinks = (
-    <ul className='grid grid-cols-1'>
-      <li>
-        <Link to="/dashboard">
-          <i className='fas fa-user' />{' '} 
-          <span className='hide-sm'> Dashboard</span> 
+    <ul className='divide-y'>
+      <li className=' py-3 '>
+        <Link className='text-white px-2' to="/dashboard">
+        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+          <span className='text-xl ml-2'> Dashboard</span> 
         </Link>
       </li>
-      <li>
-        <Link to="/profiles"> Profiles </Link>
+      <li className=' py-3 '>
+        {company && (
+            <Link className='text-white px-2'to={`/company-profile/${company._id}`}>
+                <i className='fas fa-user ' />{' '} 
+                <span className='text-xl  ml-3'> My Profile</span> 
+            </Link>
+        )}
       </li>
-      <li>
-        <a href='#!' onClick={ logout }>
-          <i className='fas fa-sign-out-alt' />{' '} 
-          <span className='hide-sm' >Logout</span>
-        </a>
+      <li className=' py-3'>
+        <Link className='text-white  px-2' to="/profiles">
+            <i class="fa fa-users" aria-hidden="true"></i>  
+            <span className='text-xl  ml-3'>Profiles</span> 
+        </Link>
       </li>
+
+      
     </ul>
   )
 

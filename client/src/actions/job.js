@@ -3,6 +3,7 @@ import {setAlert} from './alert'
 import { 
     ADD_JOB,
     GET_JOBS,
+    SEARCH_JOBS,
     JOB_ERROR,
     GET_JOB,
     UPDATE_JOBS,
@@ -84,6 +85,43 @@ export const getJobs = () => async dispatch => {
             type: GET_JOBS,
             payload: res.data
         })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+// Search Jobs
+export const searchJobs = (title) => async dispatch => {
+    try {
+        const res = await axios.get('/api/jobs/search', {
+            params: { title }
+          });
+        dispatch({
+            type: SEARCH_JOBS,
+            payload: res.data.similarJobs
+        })
+    } catch (err) {
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+// Filter Jobs
+export const filterJobs = (formData) => async dispatch => {
+    try {
+        const response = await axios.get('/api/jobs/filter', {
+            params: formData
+          });
+          console.log(response.data)
+        dispatch({
+            type: SEARCH_JOBS,
+            payload: response.data
+        })
+        
     } catch (err) {
         dispatch({
             type: JOB_ERROR,

@@ -17,17 +17,19 @@ const Post = ({getPost, isAdminAuthenticated, post:{loading, post}}) => {
     const navigate = useNavigate()
   return (
     loading || post === null ? <Spinner /> : <div className='container'>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left " aria-hidden="true"></i> Back</button>
-            {!isAdminAuthenticated && <button className="btn btn-light"> Report</button>}
-            
+        <div className='ml-10'>
+            <div className='flex justify-between mb-6'>
+                <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left " aria-hidden="true"></i> Back</button>
+                {!isAdminAuthenticated && <button className="btn btn-light"> Report</button>}
+                
+            </div>
+            <PostItem post={post} showActions={false} /> 
+            {!isAdminAuthenticated && <CommentForm postId={post._id} />}        
+            {!isAdminAuthenticated && post.comments.map((comment)=> (
+                <CommentItem key={comment._id} comment={comment} postId={post._id} />
+            )) }
+            {isAdminAuthenticated && <button className='btn btn-danger'> Delete Post </button>}
         </div>
-        <PostItem post={post} showActions={false} /> 
-        {!isAdminAuthenticated && <CommentForm postId={post._id} />}        
-        {!isAdminAuthenticated && post.comments.map((comment)=> (
-            <CommentItem key={comment._id} comment={comment} postId={post._id} />
-        )) }
-        {isAdminAuthenticated && <button className='btn btn-danger'> Delete Post </button>}
     </div>
   )
 }

@@ -70,267 +70,269 @@ function CVForm() {
 
   return (
     <div className="container">
-      {/* Back Button */}
-      {/* <i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back */}
-      <Link to="/dashboard" aria-hidden="true">
-        <button className="mb-2 btn">
-          {" "}
-          <div className="fa fa-chevron-left text-dark"></div> Back
-        </button>
-      </Link>{" "}
-      <div className="lead">
-        <i className="fas fa-code-branch"></i>
-        Add your cv details here.
-      </div>
-      <div className="flex flex-col gap-3 lg:flex-row">
-        {/* CV Details form */}
-        <form
-          className="w-full form lg:w-2/5"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {/* Input for name */}
-          <input
-            type="text"
-            className="form-group"
-            placeholder="Name"
-            autoComplete="off"
-            id="name"
-            {...register("name")}
-          />
+      <div className="ml-10">
+        {/* Back Button */}
+        {/* <i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back */}
+        <Link to="/dashboard" aria-hidden="true">
+          <button className="mb-2 btn">
+            {" "}
+            <div className="fa fa-chevron-left text-dark"></div> Back
+          </button>
+        </Link>{" "}
+        <div className="lead">
+          <i className="fas fa-code-branch"></i>
+          Add your cv details here.
+        </div>
+        <div className="flex flex-col gap-3 lg:flex-row">
+          {/* CV Details form */}
+          <form
+            className="w-full form lg:w-2/5"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {/* Input for name */}
+            <input
+              type="text"
+              className="form-group"
+              placeholder="Name"
+              autoComplete="off"
+              id="name"
+              {...register("name")}
+            />
 
-          {/* Input for email */}
-          <input
-            type="text"
-            className="form-group"
-            placeholder="Email"
-            autoComplete="off"
-            id="email"
-            {...register("email")}
-          />
+            {/* Input for email */}
+            <input
+              type="text"
+              className="form-group"
+              placeholder="Email"
+              autoComplete="off"
+              id="email"
+              {...register("email")}
+            />
 
-          {/* Input for Address */}
-          <input
-            className="form-group"
-            type="text"
-            placeholder="Address"
-            autoComplete="off"
-            id="address"
-            {...register("address")}
-          />
+            {/* Input for Address */}
+            <input
+              className="form-group"
+              type="text"
+              placeholder="Address"
+              autoComplete="off"
+              id="address"
+              {...register("address")}
+            />
 
-          {/* Inpit for contact */}
-          <input
-            className="form-group"
-            type="text"
-            placeholder="Contact Number"
-            autoComplete="off"
-            id="contact-number"
-            {...register("contactNumber")}
-          />
+            {/* Inpit for contact */}
+            <input
+              className="form-group"
+              type="text"
+              placeholder="Contact Number"
+              autoComplete="off"
+              id="contact-number"
+              {...register("contactNumber")}
+            />
 
-          {/* Input for about section */}
-          <input
-            type="text"
-            className="form-group"
-            placeholder="About"
-            autoComplete="off"
-            id="about"
-            {...register("about")}
-          />
+            {/* Input for about section */}
+            <input
+              type="text"
+              className="form-group"
+              placeholder="About"
+              autoComplete="off"
+              id="about"
+              {...register("about")}
+            />
 
-          {/* Education feilds  */}
-          {educationalFeilds.map((field, index) => (
-            <div key={field.id} className="flex flex-col gap-2 form-group">
-              <div className="flex items-center justify-between">
-                <h1 className="text-gray-500">Education # {index + 1}</h1>
-                {/* Cross Button */}
-                <button
-                  type="button"
-                  onClick={() => educationalRemove(index)}
-                  className="text-xl text-red-500"
-                >
-                  ✘
-                </button>
-              </div>
-              {/* Institution input */}
-              <input
-                type="text"
-                placeholder="Institution Name"
-                autoComplete="off"
-                id={`education[${index}].institution`}
-                {...register(`education[${index}].institution`)}
-              />
-              <div className="flex gap-2 ">
-                {/* Degree Input */}
+            {/* Education feilds  */}
+            {educationalFeilds.map((field, index) => (
+              <div key={field.id} className="flex flex-col gap-2 form-group">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-gray-500">Education # {index + 1}</h1>
+                  {/* Cross Button */}
+                  <button
+                    type="button"
+                    onClick={() => educationalRemove(index)}
+                    className="text-xl text-red-500"
+                  >
+                    ✘
+                  </button>
+                </div>
+                {/* Institution input */}
                 <input
                   type="text"
-                  placeholder="Degree"
+                  placeholder="Institution Name"
                   autoComplete="off"
-                  id={`education[${index}].degree`}
-                  {...register(`education[${index}].degree`)}
+                  id={`education[${index}].institution`}
+                  {...register(`education[${index}].institution`)}
                 />
+                <div className="flex gap-2 ">
+                  {/* Degree Input */}
+                  <input
+                    type="text"
+                    placeholder="Degree"
+                    autoComplete="off"
+                    id={`education[${index}].degree`}
+                    {...register(`education[${index}].degree`)}
+                  />
 
-                {/* Grades Input */}
+                  {/* Grades Input */}
+                  <input
+                    type="text"
+                    placeholder="Grades"
+                    autoComplete="off"
+                    id={`education[${index}].grades`}
+                    {...register(`education[${index}].grades`)}
+                  />
+                </div>
+              </div>
+            ))}
+
+            {/* Add education Button */}
+            <button
+              className="mb-1 btn"
+              type="button"
+              onClick={() => educationalAppend({})}
+            >
+              📒 Add Education
+            </button>
+
+            {/* Experiance Feilds */}
+            {experianceFeilds.map((field, index) => (
+              <div key={field.id} className="flex flex-col gap-2 form-group">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-gray-500">Experiance # {index + 1}</h1>
+                  {/* Cross Button */}
+                  <button
+                    type="button"
+                    onClick={() => experianceRemove(index)}
+                    className="text-xl text-red-500"
+                  >
+                    ✘
+                  </button>
+                </div>
+                {/* Company Input */}
                 <input
                   type="text"
-                  placeholder="Grades"
+                  placeholder="Company Name"
                   autoComplete="off"
-                  id={`education[${index}].grades`}
-                  {...register(`education[${index}].grades`)}
+                  id={`experiance[${index}].company`}
+                  {...register(`experiance[${index}].company`)}
                 />
-              </div>
-            </div>
-          ))}
-
-          {/* Add education Button */}
-          <button
-            className="mb-1 btn"
-            type="button"
-            onClick={() => educationalAppend({})}
-          >
-            📒 Add Education
-          </button>
-
-          {/* Experiance Feilds */}
-          {experianceFeilds.map((field, index) => (
-            <div key={field.id} className="flex flex-col gap-2 form-group">
-              <div className="flex items-center justify-between">
-                <h1 className="text-gray-500">Experiance # {index + 1}</h1>
-                {/* Cross Button */}
-                <button
-                  type="button"
-                  onClick={() => experianceRemove(index)}
-                  className="text-xl text-red-500"
-                >
-                  ✘
-                </button>
-              </div>
-              {/* Company Input */}
-              <input
-                type="text"
-                placeholder="Company Name"
-                autoComplete="off"
-                id={`experiance[${index}].company`}
-                {...register(`experiance[${index}].company`)}
-              />
-              <div className="flex gap-2">
-                {/* Job Input */}
+                <div className="flex gap-2">
+                  {/* Job Input */}
+                  <input
+                    type="text"
+                    placeholder="Job Title"
+                    autoComplete="off"
+                    id={`experiance[${index}].jobTitle`}
+                    {...register(`experiance[${index}].jobTitle`)}
+                  />
+                  {/* Duaration Input */}
+                  <input
+                    type="text"
+                    placeholder="Duaration"
+                    autoComplete="off"
+                    id={`experiance[${index}].duaration`}
+                    {...register(`experiance[${index}].duaration`)}
+                  />
+                </div>
+                {/* Responsiblites Input */}
                 <input
                   type="text"
-                  placeholder="Job Title"
+                  placeholder="Responsiblites "
                   autoComplete="off"
-                  id={`experiance[${index}].jobTitle`}
-                  {...register(`experiance[${index}].jobTitle`)}
+                  id={`experiance[${index}].responsiblites`}
+                  {...register(`experiance[${index}].responsiblites`)}
                 />
-                {/* Duaration Input */}
+              </div>
+            ))}
+
+            {/* Add Experiance Button */}
+            <button
+              type="button"
+              onClick={() => experianceAppend({})}
+              className="mb-1 btn"
+            >
+              💼 Add Experiance
+            </button>
+
+            {/* Certifications Feilds */}
+            {certificationFeilds.map((field, index) => (
+              <div key={field.id} className="flex flex-col form-group">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-gray-500">Certification # {index + 1}</h1>
+                  {/* Cross Button */}
+                  <button
+                    type="button"
+                    onClick={() => certificationRemove(index)}
+                    className="text-xl text-red-500"
+                  >
+                    ✘
+                  </button>
+                </div>
+                {/* Certification Input */}
                 <input
                   type="text"
-                  placeholder="Duaration"
+                  placeholder="Certification"
                   autoComplete="off"
-                  id={`experiance[${index}].duaration`}
-                  {...register(`experiance[${index}].duaration`)}
+                  id={`certification[${index}].name`}
+                  {...register(`certification[${index}].name`)}
                 />
               </div>
-              {/* Responsiblites Input */}
-              <input
-                type="text"
-                placeholder="Responsiblites "
-                autoComplete="off"
-                id={`experiance[${index}].responsiblites`}
-                {...register(`experiance[${index}].responsiblites`)}
-              />
-            </div>
-          ))}
+            ))}
 
-          {/* Add Experiance Button */}
-          <button
-            type="button"
-            onClick={() => experianceAppend({})}
-            className="mb-1 btn"
-          >
-            💼 Add Experiance
-          </button>
+            {/* Add Certification Button */}
+            <button
+              type="button"
+              onClick={() => certificationAppend({})}
+              className="mb-1 btn"
+            >
+              🏅 Add Certifications
+            </button>
 
-          {/* Certifications Feilds */}
-          {certificationFeilds.map((field, index) => (
-            <div key={field.id} className="flex flex-col form-group">
-              <div className="flex items-center justify-between">
-                <h1 className="text-gray-500">Certification # {index + 1}</h1>
-                {/* Cross Button */}
-                <button
-                  type="button"
-                  onClick={() => certificationRemove(index)}
-                  className="text-xl text-red-500"
-                >
-                  ✘
-                </button>
+            {/* Skills Feilds */}
+            {skillFeilds.map((field, index) => (
+              <div key={field.id} className="flex flex-col form-group">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-gray-500">Skill # {index + 1}</h1>
+                  {/* Cross Button */}
+                  <button
+                    type="button"
+                    onClick={() => skillRemove(index)}
+                    className="text-xl text-red-500"
+                  >
+                    ✘
+                  </button>
+                </div>
+                {/* Skill name input */}
+                <input
+                  type="text"
+                  placeholder="Skill"
+                  autoComplete="off"
+                  id={`skill[${index}].name`}
+                  {...register(`skill[${index}].name`)}
+                />
               </div>
-              {/* Certification Input */}
-              <input
-                type="text"
-                placeholder="Certification"
-                autoComplete="off"
-                id={`certification[${index}].name`}
-                {...register(`certification[${index}].name`)}
-              />
-            </div>
-          ))}
+            ))}
 
-          {/* Add Certification Button */}
-          <button
-            type="button"
-            onClick={() => certificationAppend({})}
-            className="mb-1 btn"
-          >
-            🏅 Add Certifications
-          </button>
+            {/* Add Skill Button */}
+            <button
+              type="button"
+              className="mb-1 btn"
+              onClick={() => skillAppend({})}
+            >
+              🎯 Add Skills
+            </button>
 
-          {/* Skills Feilds */}
-          {skillFeilds.map((field, index) => (
-            <div key={field.id} className="flex flex-col form-group">
-              <div className="flex items-center justify-between">
-                <h1 className="text-gray-500">Skill # {index + 1}</h1>
-                {/* Cross Button */}
-                <button
-                  type="button"
-                  onClick={() => skillRemove(index)}
-                  className="text-xl text-red-500"
-                >
-                  ✘
-                </button>
-              </div>
-              {/* Skill name input */}
-              <input
-                type="text"
-                placeholder="Skill"
-                autoComplete="off"
-                id={`skill[${index}].name`}
-                {...register(`skill[${index}].name`)}
-              />
-            </div>
-          ))}
-
-          {/* Add Skill Button */}
-          <button
-            type="button"
-            className="mb-1 btn"
-            onClick={() => skillAppend({})}
-          >
-            🎯 Add Skills
-          </button>
-
-          {/* Form Submit button */}
-          <button type="submit" className="mb-1 btn btn-primary ">
-            Save
-          </button>
-          <button onClick={clearForm} className="mb-1 btn btn-danger ">
-            Clear
-          </button>
-        </form>
-        {/* CV  PDF Component */}
-        <PDFViewer className="w-full h-[800px] lg:w-3/5">
-          <CV {...cvData} />
-        </PDFViewer>
+            {/* Form Submit button */}
+            <button type="submit" className="mb-1 btn btn-primary ">
+              Save
+            </button>
+            <button onClick={clearForm} className="mb-1 btn btn-danger ">
+              Clear
+            </button>
+          </form>
+          {/* CV  PDF Component */}
+          <PDFViewer className="w-full h-[800px] lg:w-3/5">
+            <CV {...cvData} />
+          </PDFViewer>
+        </div>
       </div>
     </div>
   );

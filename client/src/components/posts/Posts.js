@@ -13,16 +13,17 @@ const Posts = ({getPosts, post:{ posts, loading}}) => {
     },[getPosts])
     const navigate = useNavigate()
   return (
-    <div className="container">
+    <div className="container ">
+        <div className='ml-10'>
         <button onClick={() => navigate(-1)} className='btn btn-light mb-1' ><i className="fa fa-chevron-left" aria-hidden="true"></i>  Back</button>
         {loading ? <Spinner /> : (
             <Fragment>
-                <h1 className="large text-primary">Posts</h1>
-                <p className="lead">
+                <h1 className="text-6xl font-semibold mt-6 text-primary">Posts</h1>
+                <p className="text-3xl mt-3">
                     <i className="fas fa-user"></i> Welcome to the community
                 </p>
                 <PostForm />
-                <div className="posts">
+                <div className="posts mb-10">
                     {posts.map(post => (
                         <PostItem key={post._id} post={post} />
                     ))}
@@ -30,6 +31,7 @@ const Posts = ({getPosts, post:{ posts, loading}}) => {
             </Fragment>
             ) 
         }
+        </div>
     </div>
   )
 }

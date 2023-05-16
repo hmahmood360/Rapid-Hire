@@ -14,10 +14,6 @@ import { getAppliedJobs, getFavoriteJobs } from '../../actions/job'
 import FavoriteJobs from './FavoriteJobs'
 import Sidebar from '../layout/Sidebar'
 
-
-const Dashboard = ({ getAppliedJobs, getFavoriteJobs, job:{applied_jobs,favorite_jobs}, getCurrentProfile, auth:{ user }, profile:{profile, loading}, deleteAccount }) => {
-
-
 const Dashboard = ({
   getAppliedJobs,
   getFavoriteJobs,

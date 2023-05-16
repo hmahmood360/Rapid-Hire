@@ -18,29 +18,31 @@ const CompanyProfile = ({getCompanyProfileById, markCompanySpam, profile:{profil
     const navigate = useNavigate()
   return (
     <div className='container'>
-        {profile === null || loading ? (
-            <Spinner />
-        ) : (
-            <Fragment>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
-                <div>
-                    {auth.isAdminAuthenticated && <button className='btn btn-danger'>Delete Company</button>}
-                    {!auth.isAdminAuthenticated && <button onClick={() => markCompanySpam(id)} className='btn btn-light'>Mark company Spam</button>}
-                </div>
-                </div>
-                
-                {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === profile.company._id && (
-                <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
-                )}
-                <div className="profile-grid mt-1">
-                    <CompanyProfileTop profile={profile} />
-                    <CompanyProfileAbout profile={profile} />
+        <div className='ml-10 mb-8'>
+            {profile === null || loading ? (
+                <Spinner />
+            ) : (
+                <Fragment>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
+                    <div>
+                        {auth.isAdminAuthenticated && <button className='btn btn-danger'>Delete Company</button>}
+                        {!auth.isAdminAuthenticated && <button onClick={() => markCompanySpam(id)} className='btn btn-light'>Mark company Spam</button>}
+                    </div>
+                    </div>
                     
-                </div>
-                <CompanyProfileBottom profile={profile} />
-            </Fragment>
-        )}
+                    {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === profile.company._id && (
+                    <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
+                    )}
+                    <div className="profile-grid mt-1">
+                        <CompanyProfileTop profile={profile} />
+                        <CompanyProfileAbout profile={profile} />
+                        
+                    </div>
+                    <CompanyProfileBottom profile={profile} />
+                </Fragment>
+            )}
+        </div>
     </div>
   )
 }

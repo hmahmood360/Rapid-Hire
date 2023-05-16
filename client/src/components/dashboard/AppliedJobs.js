@@ -35,9 +35,6 @@ const AppliedJobs = ({ jobs, deleteApplication, user }) => {
                     <div className="grid justify-items-end">
                         <button onClick={() => deleteApplication(job._id)} className="btn btn-danger w-40 text-center">Revoke</button>
                     </div>
-                    
-                    
-                    
                 </div>
             ))
             ) : (

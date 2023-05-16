@@ -2,6 +2,7 @@ import {
     ADD_JOB, 
     GET_JOB, 
     GET_JOBS,
+    SEARCH_JOBS,
     JOB_ERROR,   
     UPDATE_JOBS,
     DELETE_JOB,
@@ -34,6 +35,11 @@ export default function(state=initialState, action) {
         case UPDATE_JOBS:
             return{
                 ...state,
+                loading: false,
+                jobs: payload
+            }
+        case SEARCH_JOBS:
+            return{
                 loading: false,
                 jobs: payload
             }
