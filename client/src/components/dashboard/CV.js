@@ -363,6 +363,7 @@ function CVForm() {
           ) : null}
         </div>
       </div>
+      </div>
     </div>
   );
 }
