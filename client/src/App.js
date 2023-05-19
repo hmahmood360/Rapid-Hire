@@ -33,6 +33,7 @@ import CompanyProfile from './components/profile/CompanyProfile';
 import JobCompany from './components/job/JobCompany';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
+import Video from './components/videoSDK/Video';
 
 // Redux
 import { Provider } from 'react-redux'
@@ -63,6 +64,7 @@ function App() {
             <Alert />
             <Routes>
               <Route exact path="/" element={<Landing />} />
+              <Route exact path="/video" element={<Video />} />
               <Route exact path="/admin" element={<AdminLogin />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
