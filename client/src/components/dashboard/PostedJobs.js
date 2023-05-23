@@ -22,7 +22,7 @@ const PostedJobs = ({jobs, deleteJob}) => {
     ))
   return (
     <div>
-        <h2 className="ext-3xl font-semibold text-primary mb-5">Posted Jobs</h2>
+        <h2 className="text-3xl font-semibold text-primary mt-10 mb-5">Posted Jobs</h2>
         {postedJobs.length > 0 ? (
             jobs.map( job => (
                 <div key={job._id} className='mb-5 shadow-md border py-4 px-12 rounded-md border-2 border-gray-300 grid grid-cols-6 text-secondary items-center'>

@@ -14,7 +14,6 @@ import {
     markJobSpam
  } from '../../actions/job'
 import JobTop from './JobTop'
-import JobAbout from './JobAbout'
 import JobBottom from './JobBottom'
 
 const Job = ({
@@ -54,7 +53,7 @@ const Job = ({
         {job=== null || loading ? (
         <Spinner />
         ) : (
-        <Fragment>
+        <div className='ml-10 mb-14 '>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <button onClick={() => navigate(-1)} className='btn btn-light' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
                 {auth.isAdminAuthenticated && <button className="btn btn-danger">Delete Job</button> }
@@ -67,28 +66,28 @@ const Job = ({
             {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === job.company._id && (
                 <button onClick={() => deleteJob(job._id)} className="btn btn-danger">Delete Job</button>
             )}
-            <div className="job-grid my-1">
+            <div className=" mt-6">
                 <JobTop job={job} />
-                <JobAbout job={job} />
                 <JobBottom job={job} />
-            </div>
-            {!auth.isAdminAuthenticated && (
-                <div className="btn-to-right">
+                {!auth.isAdminAuthenticated && (
+                <div className=" bg-white px-24 pb-16">
                 {favorite ? (
-                    <button disabled={!auth.isAuthenticated} onClick={() => {removeFromFavorites(id); setFavorite(!favorite)}} style={{color: 'red'}} className={auth.isAuthenticated ? "btn btn-light" : "btn btn-disable"}><i className="fa-solid fa-heart "></i> Remove from Favourites</button>
+                    <button disabled={!auth.isAuthenticated} onClick={() => {removeFromFavorites(id); setFavorite(!favorite)}} className={auth.isAuthenticated ? "px-8 py-3 bg-primary text-lg text-gray-200 font-semibold hover:opacity-70 duration-300 uppercase mr-4" : "btn btn-disable"}> Remove from Favourites</button>
                 ) : (
-                    <button disabled={!auth.isAuthenticated} onClick={() => {addToFavorites(id); setFavorite(!favorite)}} className={auth.isAuthenticated ? "btn btn-light" : "btn btn-disable"}><i style={{color: 'red'}} className="fa-solid fa-heart "></i> Add to Favourites</button>
+                    <button disabled={!auth.isAuthenticated} onClick={() => {addToFavorites(id); setFavorite(!favorite)}} className={auth.isAuthenticated ? "px-8 py-3 bg-primary text-lg text-gray-200 font-semibold hover:opacity-70 duration-300 uppercase mr-4" : "btn btn-disable"}> Add to Favourites</button>
                 )}
                 
                 {applied ? (
-                    <button disabled={!auth.isAuthenticated} onClick={()=> {deleteApplication(id); setApplied(!applied)}} className={auth.isAuthenticated ? "btn btn-primary" : "btn btn-disable"}>Revoke Application</button>
+                    <button disabled={!auth.isAuthenticated} onClick={()=> {deleteApplication(id); setApplied(!applied)}} className={auth.isAuthenticated ? "px-8 py-3 bg-primary text-lg text-gray-200 font-semibold hover:opacity-70 duration-300 uppercase mr-4" : "btn btn-disable"}>Revoke Application</button>
                 ) : (
-                    <button disabled={!auth.isAuthenticated} onClick={()=> {applyForJob(id); setApplied(!applied)}} className={auth.isAuthenticated ? "btn btn-primary" : "btn btn-disable"} >Apply for job</button>
+                    <button disabled={!auth.isAuthenticated} onClick={()=> {applyForJob(id); setApplied(!applied)}} className={auth.isAuthenticated ? "px-8 py-3 bg-primary text-lg text-gray-200 font-semibold hover:opacity-70 duration-300 uppercase mr-4" : "btn btn-disable"} >Apply for job</button>
                 )}
             </div>
             )}
+            </div>
             
-        </Fragment> )}
+            
+        </div> )}
     </div>
   )
 }

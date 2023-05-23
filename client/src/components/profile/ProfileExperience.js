@@ -12,8 +12,8 @@ const ProfileExperience = ({experience:{
     from
 }}) => {
   return (
-    <div>
-        <h3 className="text-dark ">{company}</h3> 
+    <div className='text-gray-600 space-y-1'>
+        <h3 className="text-2xl font-semibold mt-3"> {company}</h3> 
         <p>
             <Moment format='DD/MM/YYYY' >{from}</Moment> - {current ? (<span>Now</span>) : (<Moment format='DD/MM/YYYY' >{to}</Moment>)}
         </p>

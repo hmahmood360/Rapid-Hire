@@ -45,6 +45,13 @@ img {
   padding: 0 2rem;
   margin-top: 7rem;
 }
+.video-container {
+  max-width: 1400px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+  margin-top: 5rem
+}
 .auth{
   background: linear-gradient(to right, #0f6b7c, #17a2b8);
   box-sizing: border-box;
@@ -53,6 +60,14 @@ img {
   height: 100vh;
   position:static;
   padding-top: 10rem;
+}
+.video{
+  background: #343541;
+  box-sizing: border-box;
+  margin: -20px 0 0 0;
+  padding: 0;
+  height: 94vh;
+  position:static;
 }
 .auth-container {
   max-width: 900px;
@@ -136,10 +151,7 @@ img {
   width: 100%;
   margin: 20px 0;
 }
-.btn-to-right{
-  display: flex;
-  justify-content: flex-end;
-}
+
 .btn-container .btn {
   flex: 1;
   margin: 0 5px;
@@ -249,7 +261,6 @@ img {
 .alert-white {
   background: #fff;
   color: #333;
-  border: #ccc solid 1px;
 }
 .btn-disable{
   cursor: not-allowed;

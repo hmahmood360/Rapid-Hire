@@ -58,7 +58,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <div className='relative'>
           <Navbar />
           <Sidebar />
             <Alert />
@@ -96,7 +96,7 @@ function App() {
                 
               </Route>
             </Routes>
-        </Fragment>
+        </div>
       </Router>
     </Provider>
   );

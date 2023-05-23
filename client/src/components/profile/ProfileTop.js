@@ -12,12 +12,25 @@ const ProfileTop = ({
     location,
     website,
     social,
-    user: {_id,name, avatar}
+    user
 }}) => {
   return (
-    <div className="profile-top bg-primary p-8 relative">
+    <div className="grid grid-cols-5  gap-5 flex bg-primary p-8 relative ">
           <div>
-          {auth.isAuthenticated && auth.loading === false && auth.user._id === _id && (
+            <img
+                className="round-img my-1"
+                src={user.avatar}
+                alt="profile pic"
+            />
+          </div>
+          <div className='col-span-3 text-gray-200 ml-5'>
+            <h1 className="text-6xl my-3 text-[#FF8C00] font-semibold">{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</h1>
+            {qualification && field && <p className="text-2xl my-2"> {qualification} in {field}</p> }
+            <p className="text-2xl my-2 ">{status} {company && <span>at {company}</span>}</p>
+            <p className="text-2xl my-2">{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
+          </div>
+          <div>
+            {user && auth.isAuthenticated && auth.loading === false && auth.user._id === user._id && (
                 <Link to='/edit-profile' className='btn btn-light absolute right-6 flex shadow-md' >
                     <i className="fa fa-pencil-square-o inline-block" aria-hidden="true"></i>
                     <p className="ml-2 inline-block">Edit Profile</p>
@@ -25,16 +38,9 @@ const ProfileTop = ({
                 </Link>
             )}
           </div>
-          <img
-            className="round-img my-1"
-            src={avatar}
-            alt="profile pic"
-          />
-          <h1 className="text-6xl my-3 font-medium">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
-          {qualification && field && <p className="text-3xl my-2"> {qualification} in {field}</p> }
-          <p className="text-3xl my-2 ">{status} {company && <span>at {company}</span>}</p>
-          <p className="text-3xl my-2">{location && <span> {location.charAt(0).toUpperCase() + location.slice(1)}</span>}</p>
-          <div className="icons my-2">
+          
+          
+          {/* <div className="icons my-2">
             {website && (
                 <a href={`https://${website}`} target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-globe fa-2x"></i>
@@ -65,7 +71,7 @@ const ProfileTop = ({
                     <i className="fab fa-instagram fa-2x"></i>
                 </a>
             )}
-          </div>
+          </div> */}
         </div>
   )
 }

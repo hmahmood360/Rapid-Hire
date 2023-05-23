@@ -24,30 +24,32 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
       {job === null || loading ? (
         <Spinner />
       ) : (
-        <Fragment>
-          <button onClick={() => navigate(-1)} className="btn btn-light">
-            <i className="fa fa-chevron-left" aria-hidden="true"></i> Back
-          </button>
-          {auth.isCompanyAuthenticated &&
-            auth.loading === false &&
-            auth.company._id === job.company._id && (
-              <Link to={`/edit-job/${job._id}`} className="btn btn-dark ">
-                Edit Job
-              </Link>
-            )}
-          {auth.isCompanyAuthenticated &&
-            auth.loading === false &&
-            auth.company._id === job.company._id && (
-              <button
-                onClick={() => deleteJob(job._id)}
-                className="btn btn-danger"
-              >
-                Delete Job
-              </button>
-            )}
+        <div className="ml-10">
+          <div className="mb-8">
+            <button onClick={() => navigate(-1)} className="btn btn-light">
+              <i className="fa fa-chevron-left" aria-hidden="true"></i> Back
+            </button>
+            {auth.isCompanyAuthenticated &&
+              auth.loading === false &&
+              auth.company._id === job.company._id && (
+                <Link to={`/edit-job/${job._id}`} className="btn btn-dark ">
+                  Edit Job
+                </Link>
+              )}
+            {auth.isCompanyAuthenticated &&
+              auth.loading === false &&
+              auth.company._id === job.company._id && (
+                <button
+                  onClick={() => deleteJob(job._id)}
+                  className="btn btn-danger"
+                >
+                  Delete Job
+                </button>
+              )}
+          </div>
           <div className="my-1 ">
             <div className="company-job bg-light">
-              <h2 className="mb-1 text-primary medium">Job Details:</h2>
+              <h2 className="mb-1 text-primary font-semibold text-4xl">Job Details:</h2>
               <p className="mt">
                 {" "}
                 <strong>Title: </strong> {job.title}
@@ -87,16 +89,15 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
               </p>
             </div>
           </div>
-          <div className="my-1">
+          <div className="my-8">
             <div className="company-job bg-light">
-              <h2 className="mb-1 text-primary medium">Job Applicants</h2>
-              <table className="table">
+              <h2 className="mb-1 text-primary font-semibold text-4xl">Job Applicants</h2>
+              <table className="table text-gray-600">
                 <tbody>
                   <tr>
                     <th>Picture</th>
                     <th>Name</th>
                     <th>Qualification</th>
-                    <th>Location</th>
                     <th>Status</th>
                     <th>Profile</th>
                     <th>Update Status</th>
@@ -111,12 +112,12 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
                             className="small-img"
                           />
                         </td>
-                        <td>
+                        <td className="text-lg font-semibold">
                           {" "}
                           {applicant.name.charAt(0).toUpperCase() +
                             applicant.name.slice(1)}{" "}
                         </td>
-                        <td className="hide-sm">
+                        <td className="hide-sm text-lg">
                           {" "}
                           {applicant.qualification && applicant.field ? (
                             applicant.qualification + " in " + applicant.field
@@ -124,15 +125,7 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
                             <span className="content-center">-</span>
                           )}{" "}
                         </td>
-                        <td className="hide-sm">
-                          {" "}
-                          {applicant.location ? (
-                            applicant.location
-                          ) : (
-                            <span className="content-center">-</span>
-                          )}{" "}
-                        </td>
-                        <td className="hide-sm">
+                        <td className="hide-sm text-lg">
                           {" "}
                           {applicant.approvedStatus ? (
                             applicant.approvedStatus
@@ -142,14 +135,15 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
                         </td>
                         <td>
                           <Link
-                            className="btn btn-primary"
+                            className=" hover:opacity-80 "
                             to={`/profile/${applicant.user}`}
                           >
-                            <p>View Profile</p>
+                            <p className="bg-primary text-base font-semibold px-3 py-2 rounded  ">View Profile</p>
                           </Link>
                         </td>
                         <td>
                           <select
+                            className=" h-10 rounded text-lg font-semibold text-gray-600 px-3 py-1 "
                             name="status"
                             onChange={(e) => {
                               console.log(e.target.value);
@@ -172,7 +166,7 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
                                 });
                             }}
                           >
-                            <option></option>
+                            <option>Select</option>
                             {statusOptions.map((status) => {
                               return <option>{status}</option>;
                             })}
@@ -187,7 +181,7 @@ const JobCompany = ({ getJobById, deleteJob, job: { job, loading }, auth }) => {
               </table>
             </div>
           </div>
-        </Fragment>
+        </div>
       )}
     </div>
   );

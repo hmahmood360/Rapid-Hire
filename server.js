@@ -33,6 +33,7 @@ app.use('/api/companyProfile', require('./routes/api/companyProfile'))
 app.use('/api/jobs', require('./routes/api/jobs'))
 app.use('/api/admin', require('./routes/api/admin'))
 app.use('/api/spam', require('./routes/api/spam'))
+app.use('/api/interview', require('./routes/api/interview'))
 
 app.put('/api/jobs/jobstatus/:id', async (req, res) => {
     try {

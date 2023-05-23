@@ -12,8 +12,8 @@ const ProfileEducation = ({education:{
     description
 }}) => {
   return (
-    <div>
-        <h3 className="text-dark"><strong>School: </strong>{school}</h3> 
+    <div className='text-gray-600 space-y-1'>
+        <h3 className="text-2xl font-semibold mt-3">School: {school}</h3> 
         <p>
             <strong>Degree: </strong>{degree} 
         </p>

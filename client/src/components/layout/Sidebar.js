@@ -10,7 +10,7 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
     <ul className=' divide-y '>
       <li className=' py-3 '>
         <Link className='text-white px-2' to="/dashboard">
-        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+        <i className="fa fa-id-card-o" aria-hidden="true"></i>
           <span className='text-xl ml-2'> Dashboard</span> 
         </Link>
       </li>
@@ -24,26 +24,32 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
       </li>
       <li className=' py-3'>
         <Link className='text-white  px-2' to="/edit-cv">
-            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            <i className="fa fa-file-text-o" aria-hidden="true"></i>
             <span className='text-xl  ml-5'>Build CV</span> 
         </Link>
       </li>
       <li className=' py-3'>
         <Link className='text-white  px-2' to="/jobs">
-            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <i className="fa fa-briefcase" aria-hidden="true"></i>
             <span className='text-xl  ml-5'>Jobs</span> 
         </Link>
       </li>
       <li className=' py-3'>
         <Link className='text-white  px-2' to="/posts">
-            <i class="fa fa-clipboard" aria-hidden="true"></i>
+            <i className="fa fa-clipboard" aria-hidden="true"></i>
             <span className='text-xl  ml-4'>Posts</span> 
         </Link>
       </li>
       <li className=' py-3'>
         <Link className='text-white  px-2' to="/profiles">
-            <i class="fa fa-users" aria-hidden="true"></i>  
+            <i className="fa fa-users" aria-hidden="true"></i>  
             <span className='text-xl  ml-3'>Profiles</span> 
+        </Link>
+      </li>
+      <li className=' py-3'>
+        <Link className='text-white  px-2 flex items-center mt-1' to="/video">
+            <i className="fa fa-video-camera" aria-hidden="true"></i>  
+            <span className='text-xl  ml-3'>Interviews</span> 
         </Link>
       </li>
       
@@ -53,7 +59,7 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
     <ul className='divide-y'>
       <li className=' py-3 '>
         <Link className='text-white px-2' to="/dashboard">
-        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+        <i className="fa fa-id-card-o" aria-hidden="true"></i>
           <span className='text-xl ml-2'> Dashboard</span> 
         </Link>
       </li>
@@ -67,7 +73,7 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
       </li>
       <li className=' py-3'>
         <Link className='text-white  px-2' to="/profiles">
-            <i class="fa fa-users" aria-hidden="true"></i>  
+            <i className="fa fa-users" aria-hidden="true"></i>  
             <span className='text-xl  ml-3'>Profiles</span> 
         </Link>
       </li>
@@ -93,8 +99,8 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
 
   return (
     isAdminAuthenticated || isAuthenticated || isCompanyAuthenticated ? (
-    <div className='sidebar fixed h-full bg-dark w-80 -mt-14' >
-        <div className='px-16 mt-14'>
+    <div className='sidebar fixed  h-screen bg-dark w-80 -mt-14' >
+        <div className='px-16 mt-20'>
                 {!loading && (
                 <Fragment>
                     {isAuthenticated && authLinks }

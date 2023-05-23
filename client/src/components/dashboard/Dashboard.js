@@ -13,10 +13,14 @@ import AppliedJobs from './AppliedJobs'
 import { getAppliedJobs, getFavoriteJobs } from '../../actions/job'
 import FavoriteJobs from './FavoriteJobs'
 import Sidebar from '../layout/Sidebar'
+import ScheduledInterview from './ScheduledInterview'
+import { getUserInterviews } from '../../actions/interview'
 
 const Dashboard = ({
+  interview: {interviews},
   getAppliedJobs,
   getFavoriteJobs,
+  getUserInterviews,
   job: { applied_jobs, favorite_jobs },
   getCurrentProfile,
   auth: { user },
@@ -24,10 +28,15 @@ const Dashboard = ({
   deleteAccount,
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-    getAppliedJobs();
-    getFavoriteJobs();
-  }, [getCurrentProfile, getAppliedJobs]);
+    const fetchData = async () => {
+      await getCurrentProfile();
+      await getAppliedJobs();
+      await getFavoriteJobs();
+      await getUserInterviews();
+    };
+  
+    fetchData();
+  }, [getCurrentProfile, getAppliedJobs, getFavoriteJobs, getUserInterviews]);
 
   return (
     <>
@@ -42,7 +51,7 @@ const Dashboard = ({
                 <img className='rounded-full w-36 h-36' src={user.avatar} alt="" />
                 <div className='flex mt-3 w-full justify-between'>
                   <div>
-                    <p className="lead block">Welcome <span className='text-primary'>{user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}</span></p>
+                    <p className="text-3xl mb-5 text-gray-700">Welcome <span className='text-primary font-semibold capitalize'>{user && user.name}</span></p>
                     <div>
                       {profile !== null ? (
                         user && <DashboardActions id={user._id} />
@@ -68,28 +77,28 @@ const Dashboard = ({
             <HashLink smooth to='#favorite_jobs' className="rounded bg-gradient-to-b from-[#FA9366] to-[#FEB39A] border border-[#FA9366] shadow-md p-6 border-lg">
               <p className="text-right text-lg">Favorite Jobs</p>
               <div className='flex items-center mt-3 justify-between'>
-                <i class="fa fa-heart text-5xl" aria-hidden="true"></i>
+                <i className="fa fa-heart text-5xl" aria-hidden="true"></i>
                 <p className='text-6xl'>{favorite_jobs.length}</p>
               </div>
             </HashLink>
             <HashLink smooth to='#applied_jobs' className="rounded bg-gradient-to-b from-[#06C47F] to-[#3FD09C] border border-[#06C47F] shadow-md p-6 border-lg">
               <p className="text-right text-lg">Applied Jobs</p>
               <div className='flex items-center mt-3 justify-between'>
-              <i class="fa fa-briefcase text-5xl" aria-hidden="true"></i>
+              <i className="fa fa-briefcase text-5xl" aria-hidden="true"></i>
               <p className='text-6xl'>{applied_jobs.length}</p>
               </div>
             </HashLink>
-            <div className="rounded bg-gradient-to-b from-[#FE6275] to-[#FC8393] border border-[#FE6275] shadow-md p-6 border-lg">
+            <HashLink smooth to='#scheduled_interviews' className="rounded bg-gradient-to-b from-[#FE6275] to-[#FC8393] border border-[#FE6275] shadow-md p-6 border-lg">
               <p className="text-right text-lg">Scheduled Interviews</p>
               <div className='flex items-center mt-3 justify-between'>
-                <i class="fa fa-video-camera text-5xl" aria-hidden="true"></i>
-                <p className='text-6xl'>0</p>
+                <i className="fa fa-video-camera text-5xl" aria-hidden="true"></i>
+                <p className='text-6xl'>{interviews.length}</p>
               </div>
-            </div>
+            </HashLink>
             <div className="rounded bg-gradient-to-b from-[#03ABAD] to-[#47C0C3] border border-[#03ABAD] shadow-md p-6 border-lg">
               <p className="text-right text-lg">Unread Messages</p>
               <div className='flex items-center mt-3 justify-between'> 
-                <i class="fa fa-comments text-5xl" aria-hidden="true"></i>
+                <i className="fa fa-comments text-5xl" aria-hidden="true"></i>
                 <p className='text-6xl'>0</p>
               </div>
             </div>
@@ -101,6 +110,7 @@ const Dashboard = ({
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
             <AppliedJobs jobs={applied_jobs} />
+            <ScheduledInterview interviews={interviews} user={user}/>
             <FavoriteJobs jobs={favorite_jobs} />
             <div className='mt-2 mb-10'>
               <button onClick={() => deleteAccount()} className="btn btn-danger">
@@ -130,6 +140,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
   job: state.job,
+  interview: state.interview
 });
 
 export default connect(mapStateToProps, {
@@ -137,4 +148,5 @@ export default connect(mapStateToProps, {
   deleteAccount,
   getAppliedJobs,
   getFavoriteJobs,
+  getUserInterviews,
 })(Dashboard);

@@ -6,13 +6,16 @@ import { Spinner } from '../layout/Spinner'
 import { getCurrentCompanyProfile, deleteCompanyAccount } from '../../actions/profile'
 import { getPostedJobs } from '../../actions/job'
 import PostedJobs from './PostedJobs'
+import { getCompanyInterviews } from '../../actions/interview'
+import CompanyScheduledInterviews from './CompanyScheduledInterviews'
 
-const CompanyDashboard = ({getCurrentCompanyProfile, getPostedJobs, job, deleteCompanyAccount, auth:{ company }, profile:{profile, loading}}) => {
+const CompanyDashboard = ({getCurrentCompanyProfile, getCompanyInterviews, getPostedJobs, job, deleteCompanyAccount, auth:{ company },interview:{interviews}, profile:{profile, loading}}) => {
 
   useEffect(() => {
      async function fetchData() {
       await getCurrentCompanyProfile()
       await getPostedJobs()
+      await getCompanyInterviews()
     }
     fetchData();
   }, [loading]);
@@ -53,6 +56,7 @@ const CompanyDashboard = ({getCurrentCompanyProfile, getPostedJobs, job, deleteC
         {profile !== null ? (
           // Company has profile
         <Fragment>
+          <CompanyScheduledInterviews interviews={interviews} />
           <PostedJobs jobs={job.jobs} />
           <div className='my-2'>
             <button onClick={() => deleteCompanyAccount()} className="btn btn-danger">
@@ -71,13 +75,15 @@ const CompanyDashboard = ({getCurrentCompanyProfile, getPostedJobs, job, deleteC
 CompanyDashboard.propTypes = {
   getCurrentCompanyProfile: PropTypes.func.isRequired,
   deleteCompanyAccount: PropTypes.func.isRequired,
-  getPostedJobs: PropTypes.func.isRequired
+  getPostedJobs: PropTypes.func.isRequired,
+  getCompanyInterviews: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
-  job: state.job
+  job: state.job,
+  interview: state.interview
 })
 
-export default connect(mapStateToProps,{getCurrentCompanyProfile, deleteCompanyAccount, getPostedJobs})(CompanyDashboard)
+export default connect(mapStateToProps,{getCurrentCompanyProfile, getCompanyInterviews, deleteCompanyAccount, getPostedJobs})(CompanyDashboard)

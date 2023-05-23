@@ -1,13 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const JobTop = ({job:{title,location,company}}) => {
+const JobTop = ({job:{company,title,location, description}}) => {
+
+
   return (
-    <div className="job-top bg-primary p-2">
+    <div className=" bg-primary px-24 py-16 text-gray-600">
         {/* insert image here */}
-        <h2 className="text-center large my-1">{title}</h2>
-        <p className="text-center medium">{company.name}</p>
-        <p className="text-center">{location}</p>  
+        <h2 className="text-7xl  font-bold text-[#FF8C00]">{title}</h2>
+        <p className="text-3xl text-gray-700 font-semibold my-3">at <span className='text-5xl '>{company.name}</span> </p>
+        <div className='grid grid-cols-3 text-gray-800'>
+          <p className='col-span-2 text-xl mt-2'>{description}</p>
+        </div>
+        <div className='space-x-4 mt-8'>
+          <Link to={`/company-profile/${company._id}`} className='px-12 py-4 bg-[#0E596D] text-lg text-gray-200 font-semibold hover:opacity-70 duration-300'>VIEW COMPANY</Link>
+        </div>
+        {/* <p className="">{location}</p>   */}
         {/* add socials here */}
     </div>
   )
