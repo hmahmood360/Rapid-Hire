@@ -33,18 +33,20 @@ export const addJob = (formData, update=0) => async dispatch => {
             setAlert('Job Posted', 'success')
         )
 
+
     } catch (err) { 
-        if (err.response) {
-            dispatch({
-              type: JOB_ERROR,
-              payload: {msg: err.response.statusText, status: err.response.status}
-            })
-          } else {
-            dispatch({
-              type: JOB_ERROR,
-              payload: {msg: err.message, status: null}
-            })
-          }
+        const errors = err.response.data.errors
+        if (errors){
+            errors.forEach(error => {
+                dispatch(setAlert(error.msg, 'danger'))
+            });
+        }
+        
+        dispatch({
+            type: JOB_ERROR,
+            payload: {msg: err.message, status: null}
+        })
+          
     }
 }
 
@@ -196,6 +198,7 @@ export const getJobById = (jobID) => async dispatch => {
         })
     }
 }
+
 
 // Delete Job by id
 export const deleteJob = (jobID) => async dispatch => {

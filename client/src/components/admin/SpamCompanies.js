@@ -7,8 +7,8 @@ import { removeFromSpamCompanies, deleteCompanyAccountAsAdmin } from '../../acti
 const SpamCompanies = ({profiles, removeFromSpamCompanies, deleteCompanyAccountAsAdmin}) => {
   
   return (
-    <div>
-      <h2 className="mt-3 text-primary">Companies Marked As Spam</h2>
+    <div className='mt-8'>
+      <h2 className="mt-3 text-primary text-4xl font-semibold mb-6">Companies Marked As Spam</h2>
       <table className="table mt-1">
         <thead>
           <tr>

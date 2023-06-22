@@ -69,8 +69,8 @@ const EditCompanyProfile = ({profile:{profile, loading}, createCompanyProfile, g
     <div className='container'>
         <div className='ml-10 mb-8'>
             <button onClick={() => navigate(-1)} className='btn btn-light my-1' ><i className="fa fa-chevron-left text-dark" aria-hidden="true"></i> Back</button>
-            <h1 className="large text-primary">
-                Create Company Profile
+            <h1 className="font-semibold text-6xl my-6 text-primary">
+                Edit Company Profile
             </h1>
             <div className="lead">
                 <i className="fas fa-user"></i> 
@@ -144,7 +144,7 @@ const EditCompanyProfile = ({profile:{profile, loading}, createCompanyProfile, g
                 </Fragment>}
                 
                 <input type="submit" className="btn btn-primary my-1"  />
-                <Link className="btn btn-light my-1" to="/company-dashboard">Skip</Link>
+                <Link className="btn btn-light my-1" to="/company-dashboard">Back</Link>
             </form>
         </div>
     </div>

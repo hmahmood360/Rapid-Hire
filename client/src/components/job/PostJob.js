@@ -43,7 +43,7 @@ const PostJob = ({addJob}) => {
   return (
     <div className='container'>
       <div className='ml-10 mb-8'>
-        <h1 className="large text-primary">Post a Job</h1>
+        <h1 className="font-semibold text-6xl mb-5 text-primary">Post a Job</h1>
         <p className="lead">
           <i className="fas fa-code-branch" /> Add a job posting
         </p>

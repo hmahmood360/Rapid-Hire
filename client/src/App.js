@@ -34,6 +34,8 @@ import JobCompany from './components/job/JobCompany';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import Video from './components/videoSDK/Video';
+import Parser from './components/parser/Parser'
+import Resumes from './components/parser/Resumes';
 
 // Redux
 import { Provider } from 'react-redux'
@@ -42,6 +44,7 @@ import store from './store'
 import { loadUser } from './actions/auth';
 import { loadCompany } from './actions/auth';
 import Sidebar from './components/layout/Sidebar';
+import ResumeList from './components/dashboard/ResumeList';
 
 
 if (localStorage.token){
@@ -73,6 +76,8 @@ function App() {
               <Route exact path="/company-profile/:id" element={<CompanyProfile />} />
               <Route exact path="/jobs" element={<Jobs />} />
               <Route exact path="/job/:id" element={<Job />} />
+              <Route exact path="/resume" element={<ResumeList />} />
+              <Route exact path="/parser" element={<Parser />} />
               <Route element={<PrivateRoutes/>} >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create-profile" element={<CreateProfile />} />
@@ -90,10 +95,10 @@ function App() {
                 <Route path="/job-company/:id" element={<JobCompany />} />
                 <Route path="/create-company-profile" element={<CreateCompanyProfile />} />
                 <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
+                <Route exact path="/resumes" element={<Resumes />} />
               </Route>
               <Route element={<PrivateAdminRoutes />}>
                 <Route path='/admin-dashboard' element={<AdminDashboard />} />
-                
               </Route>
             </Routes>
         </div>

@@ -34,14 +34,14 @@ const Jobs = ({getJobs, searchJobs, job:{ jobs, loading}}) => {
                                 placeholder="Enter job title"
                                 value={searchTitle}
                                 onChange={(e) => setSearchTitle(e.target.value)}
-                                className='px-3 rounded-l-lg'
+                                className='px-3 rounded-l-lg focus:outline-none'
                             />
                             <button className=' rounded-r-lg hover:opacity-80 transition duration-300 btn-primary text-md px-3 flex items-center' onClick={handleSearch}>
                             <i className="fa fa-search mr-2" aria-hidden="true"></i>
                             <p>Search</p>   
                             </button>
                         </div>
-                    </div>
+                    </div> 
                     
                     <p className="lead">
                         <i className="fas fa-user"></i> Welcome to the community

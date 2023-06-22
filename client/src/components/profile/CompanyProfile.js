@@ -12,13 +12,14 @@ import CompanyProfileBottom from './CompanyProfileBottom'
 const CompanyProfile = ({getCompanyProfileById, markCompanySpam, profile:{profile, loading}, auth}) => {
 
     const {id} = useParams()
+
     useEffect(()=> {
         getCompanyProfileById(id)
     },[getCompanyProfileById])
     const navigate = useNavigate()
   return (
     <div className='container'>
-        <div className='ml-10 mb-8'>
+        <div className='ml-10 mb-12'>
             {profile === null || loading ? (
                 <Spinner />
             ) : (
@@ -31,15 +32,11 @@ const CompanyProfile = ({getCompanyProfileById, markCompanySpam, profile:{profil
                     </div>
                     </div>
                     
-                    {auth.isCompanyAuthenticated && auth.loading === false && auth.company._id === profile.company._id && (
-                    <Link to='/edit-profile' className='btn btn-dark' >Edit Profile</Link>
-                    )}
-                    <div className="profile-grid mt-1">
-                        <CompanyProfileTop profile={profile} />
+                    <div className=" mt-6">
+                        <CompanyProfileTop profile={profile} auth={auth} />
                         <CompanyProfileAbout profile={profile} />
-                        
+                        <CompanyProfileBottom profile={profile} />
                     </div>
-                    <CompanyProfileBottom profile={profile} />
                 </Fragment>
             )}
         </div>

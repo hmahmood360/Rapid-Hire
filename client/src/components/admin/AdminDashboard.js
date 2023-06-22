@@ -32,16 +32,18 @@ const AdminDashboard = ({
 
   return (
     profile.loading || post.loading || job.loading ? <Spinner /> : <div className='container'>
-      <h1 className="large text-primary">Admin Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user "></i>
-        <span className='inline-block ml-1 '>Welcome Admin</span>
-      </p>
-      <Fragment>
+      <div className='mb-12'>
+        <h1 className="text-6xl font-semibold mt-3 mb-6 text-primary">Admin Dashboard</h1>
+        <p className="lead">
+          <i className="fas fa-user "></i>
+          <span className='inline-block ml-1 '>Welcome Admin</span>
+        </p>
+        <Fragment>
           <SpamCompanies profiles={profile.profiles} />
           <SpamJobs jobs={job.jobs} />
           <SpamPosts posts={post.posts} />
         </Fragment>
+      </div>
     </div>
   )
 }

@@ -348,3 +348,21 @@ export const removeFromSpamCompanies = (id) => async dispatch => {
         })
     }
 }
+
+// Search profiles based on skills
+export const searchProfile = (skills) => async dispatch => {
+    try {
+        console.log(skills)
+        const res = await axios.get(`/api/profile/search?skills=${skills}`)
+        console.log(res.data)
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}

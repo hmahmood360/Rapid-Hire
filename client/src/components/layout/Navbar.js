@@ -30,6 +30,7 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
   const guestLinks = (
     <ul>
       <li><Link to="/profiles">Profiles</Link></li>
+      <li><Link to="/parser">Parser</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login">Login</Link></li>
     </ul>

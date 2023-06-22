@@ -6,8 +6,8 @@ import { removeFromSpamJobs, deleteJobAsAdmin } from '../../actions/job'
 
 const SpamJobs = ({jobs, removeFromSpamJobs, deleteJobAsAdmin}) => {
   return (
-    <div>
-      <h2 className="mt-3 text-primary">Jobs Marked As Spam</h2>
+    <div className='mt-10'>
+      <h2 className="mt-3 text-primary font-semibold text-4xl mb-6">Jobs Marked As Spam</h2>
       <table className="table mt-1">
         <thead>
           <tr>
@@ -33,7 +33,7 @@ const SpamJobs = ({jobs, removeFromSpamJobs, deleteJobAsAdmin}) => {
                           <button onClick={() => removeFromSpamJobs(job._id)} className="btn btn-primary">Remove from spam</button>
                       </td>
                       <td className="hide-sm">
-                          <button onClick={() => deleteJobAsAdmin(job._id)} className="btn btn-danger">Delete Job</button>
+                          <button onClick={() => deleteJobAsAdmin(job.job)} className="btn btn-danger">Delete Job</button>
                       </td>
                   </tr>
             ))

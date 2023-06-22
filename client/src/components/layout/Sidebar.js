@@ -72,9 +72,21 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
         )}
       </li>
       <li className=' py-3'>
+        <Link className='text-white  px-2' to="/post-job">
+            <i className="fa fa-briefcase " aria-hidden="true"></i>  
+            <span className='text-xl  ml-3'>Post Job</span> 
+        </Link>
+      </li>
+      <li className=' py-3'>
         <Link className='text-white  px-2' to="/profiles">
             <i className="fa fa-users" aria-hidden="true"></i>  
             <span className='text-xl  ml-3'>Profiles</span> 
+        </Link>
+      </li>
+      <li className=' py-3'>
+        <Link className='text-white  px-2' to="/resumes">
+            <i className="fa fa-file" aria-hidden="true"></i>  
+            <span className='text-xl  ml-6'>Resumes</span> 
         </Link>
       </li>
 
@@ -98,7 +110,7 @@ function Navbar({ auth:{isAuthenticated,isCompanyAuthenticated, isAdminAuthentic
   )
 
   return (
-    isAdminAuthenticated || isAuthenticated || isCompanyAuthenticated ? (
+     isAuthenticated || isCompanyAuthenticated ? (
     <div className='sidebar fixed  h-screen bg-dark w-80 -mt-14' >
         <div className='px-16 mt-20'>
                 {!loading && (

@@ -13,54 +13,59 @@ const SpamJob = require('../../models/SpamJob');
 // @route   POST api/jobs
 // @desc    Post a new job
 // @access  Private
-
-router.post('/',[companyAuth, [
-    check('title','Enter Job title').not().isEmpty(),
-    check('description','Enter Job description').not().isEmpty(),
-    check('requiredSkills','Enter required Skills to post job').not().isEmpty(),
-    check('requiredSkills','Enter required Skills to post job').not().isEmpty(),
+router.post('/', [companyAuth, [
+  check('title', 'Enter Job title').not().isEmpty(),
+  check('description', 'Enter Job description').not().isEmpty(),
+  check('requiredSkills', 'Enter required Skills to post job').not().isEmpty(),
+  check('requiredSkills', 'Enter required Skills to post job').not().isEmpty(),
 ]], async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array() })
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+  }
   try {
-    const {
-      company,
-      title,
-      location,
-      description,
-      type,
-      gender,
-      qualification,
-      requiredSkills,
-      salaryFrom,
-      salaryTo,
-      positions
-    } = req.body;
+      const {
+          company,
+          title,
+          location,
+          description,
+          type,
+          gender,
+          qualification,
+          requiredSkills,
+          salaryFrom,
+          salaryTo,
+          positions
+      } = req.body;
 
-    const newJob = new Job({
-      company,
-      title,
-      location,
-      description,
-      type,
-      gender,
-      qualification,
-      requiredSkills,
-      salaryFrom,
-      salaryTo,
-      positions
-    });
-    newJob.company= req.company.id
+      // Check if a job with the same title has already been posted by this company
+      const existingJob = await Job.findOne({ company: req.company.id, title: title });
+      if (existingJob) {
+          return res.status(400).json({ errors: [{ msg: 'A job with the same title has already been posted.' }] });
+      }
 
-    const savedJob = await newJob.save();
+      const newJob = new Job({
+          company,
+          title,
+          location,
+          description,
+          type,
+          gender,
+          qualification,
+          requiredSkills,
+          salaryFrom,
+          salaryTo,
+          positions
+      });
+      newJob.company = req.company.id;
 
-    res.json(savedJob);
+      const savedJob = await newJob.save();
+
+      res.json(savedJob);
 
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+      console.error(err.message);
+      res.status(500).send('Server Error');
   }
 });
 
@@ -150,6 +155,7 @@ router.get('/', async (req, res) => {
 router.delete('/:id',companyAuth, async (req, res) => {
     try {
       const job = await Job.findById(req.params.id)
+      console.log(job)
       const spamJob = await SpamJob.findOne({job: req.params.id})
       if (!job) {
         return res.status(404).json({ msg: 'Job not found' })
@@ -158,7 +164,10 @@ router.delete('/:id',companyAuth, async (req, res) => {
       if (job.company._id.toString() !== req.company.id) {
         return res.status(401).json({ msg: 'You are not authorized to delete this job' })
       }
-      await spamJob.remove()
+      
+      if (spamJob){
+        await spamJob.remove()
+      }
       await job.remove()
       res.json({ msg: 'Job deleted' })
     } catch (err) {
@@ -170,7 +179,7 @@ router.delete('/:id',companyAuth, async (req, res) => {
     }
   })
 
-// @route   Delete api/jobs/admin/:id
+// @route   Delete api/jobs/admin/:id/:id
 // @desc    delete a job as admin
 // @access  private
 

@@ -28,7 +28,7 @@ const AdminLogin = ({ isAdminAuthenticated, adminLogin }) => {
   return (
     <div className='auth'>
         <div className="auth-container p-3">
-            <h1 className="large text-center text-primary">Admin Login</h1>
+            <h1 className="text-6xl font-semibold mt-10 mb-6 text-center text-primary">Admin Login</h1>
             <form className="form" onSubmit={e => handleSubmit(e)} >
                 <div className="form-group">
                     <input type="email" placeholder="Email Address" name="email" value={email} onChange={(e) => handleChange(e)} />
@@ -44,7 +44,7 @@ const AdminLogin = ({ isAdminAuthenticated, adminLogin }) => {
                     onChange={(e) => handleChange(e)} 
                     />
                 </div>
-                <input type="submit" className="btn btn-primary mb-1" value="Log in" />
+                <input type="submit" className="btn btn-primary  mb-8" value="Log in" />
             </form>
         </div>
     </div>

@@ -54,12 +54,12 @@ function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, 
          <button disabled={!showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-primary" : "btn btn-disable"}>User Registration</button>
          <button disabled={showCompanyRegister} onClick={()=> setShowCompanyRegister(!showCompanyRegister)} className={showCompanyRegister ? "btn btn-disable" : "btn btn-primary"}>Company Registration</button>
       </div>
-      <h1 className="large text-primary text-center ">
+      <h1 className="text-6xl my-4 font-semibold text-primary text-center ">
         {showCompanyRegister ? 'Company Registration' : 'User Sign Up'}
       </h1>
       <p className="lead">
         <i className="fas fa-user ml"></i> 
-        <p className='inline-block ml' >{showCompanyRegister ? 'Create Company Account' : 'Create User Account'}</p>
+        <p className='inline-block ml-4' >{showCompanyRegister ? 'Create Company Account' : 'Create User Account'}</p>
       </p>
       <form className="form" onSubmit={e => handleSubmit(e)} >
         {showCompanyRegister && (
@@ -111,9 +111,11 @@ function Register ({setAlert, register, isAuthenticated,isCompanyAuthenticated, 
         </div>
         <input type="submit" className="btn btn-primary mb-1" value="Register" />
       </form>
-      <p className="mb-3">
+      <p className="mb-6 mt-3">
         Already have an account?
-        {showCompanyRegister ? (<Link to="/login">Sign In</Link>) : (<Link to={{ pathname: '/login', state: { company: true } }}>Sign In</Link>)}
+        <span className='text-primary'>
+          {showCompanyRegister ? (<Link to="/login">Sign In</Link>) : (<Link to={{ pathname: '/login', state: { company: true } }}>Sign In</Link>)}
+        </span>
       </p>
       
     </div>

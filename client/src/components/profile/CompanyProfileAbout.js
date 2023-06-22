@@ -8,11 +8,11 @@ const CompanyProfileAbout = ({
   }
 }) => {
   return (
-    <div className="profile-about bg-light p-2">
+    <div className=" px-20 py-12 bg-light ">
       {about && (
         <Fragment>
-            <h2 className="text-primary">{name.trim().split(' ')[0].charAt(0).toUpperCase() + name.slice(1)}'s About</h2>
-            <p>
+            <h2 className="text-primary font-semibold text-4xl">Company's About:</h2>
+            <p className='mt-4 text-gray-600'>
                 {about}
             </p>
         </Fragment>)}

@@ -4,14 +4,19 @@ import PropTypes from 'prop-types'
 const CompanyProfileBottom = ({
     profile:{
         headcount,
-        industry
+        industry,
+        location
     }
 }) => {
   return (
-    <div className="profile-bottom bg-light p-2">
-        <h2 className='text-primary'>Copanies Details:</h2>
-        {headcount && <p><strong>HeadCount:</strong> {headcount} </p>}
-        <p><strong>Industry:</strong> {industry} </p>
+    <div className="bg-white  px-20 py-12 ">
+        <h2 className='text-primary font-semibold text-4xl'>Company Details:</h2>
+        <div className='mt-4 text-gray-600 '>
+          {headcount && <p><strong>HeadCount:</strong> {headcount} </p>}
+          <p><strong>Industry:</strong> {industry} </p>
+          <p><strong>Location:</strong> {location} </p>
+        </div>
+        
     </div>
   )
 }

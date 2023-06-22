@@ -24,10 +24,10 @@ const CompanyDashboard = ({getCurrentCompanyProfile, getCompanyInterviews, getPo
     loading && job.loading && profile === null ? <Spinner /> : <div className='container'>
       <div className='ml-10 mb-8'>
         <h1 className="text-6xl font-semibold  text-primary">Company Dashboard</h1>
-        <div className="my-5 shadow-md py-6 px-8  rounded-md border-2 border-gray-300 text-3xl">
+        <div className="my-6 shadow-md py-8 px-8  rounded-md border-2 border-gray-300 text-4xl">
           <i className="fas fa-user "></i>
           <p className='inline-block ml-2 '>
-            Welcome {company && company.name.charAt(0).toUpperCase() + company.name.slice(1)}
+            Welcome <span className='font-semibold capitalize text-orange-500'>{company && company.name}</span> 
           </p>
           {profile !== null ? (
             // Dashboard Actions

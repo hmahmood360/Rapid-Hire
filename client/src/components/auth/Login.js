@@ -64,8 +64,8 @@ function Login({login, isAuthenticated, isCompanyAuthenticated, companyLogin}) {
           </div>
           <input type="submit" className="btn btn-primary mb-1" value="Log in" />
         </form>
-        <p className="mb-3">
-          Do not have an account? <Link to="/register">Sign Up</Link>
+        <p className="mt-3 mb-6">
+          Do not have an account? <Link className='text-primary' to="/register">Sign Up</Link>
         </p>
       </div>
     </div>

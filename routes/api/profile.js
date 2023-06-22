@@ -313,4 +313,22 @@ router.delete('/education/:edu_id', auth, async (req,res) => {
         res.status(500).send('Server Error')
     }
 })
+
+// Route: GET /profiles/search?skills=<comma-separated-skills>
+// Description: Search profiles based on skills
+router.get('/search', async (req, res) => {
+    try {
+      const { skills } = req.query;
+      const searchSkills = skills.split(',').map(skill => skill.trim());
+  
+      // Find profiles that match the provided skills
+      const profiles = await Profile.find({ skills: { $in: searchSkills } }).populate('user',['name','avatar']);
+  
+      res.json(profiles);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+    }
+  });
+
 module.exports = router

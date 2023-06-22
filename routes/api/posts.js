@@ -86,7 +86,10 @@ router.delete('/:id', auth, async (req,res) => {
         if(!post){
             return res.status(404).json({msg: 'Post not found'})
         }
-        await spamPost.remove()
+        if(spamPost){
+            await spamPost.remove()
+        }
+        
         await post.remove()
         res.json({msg: 'post removed'})
     } catch (err) {

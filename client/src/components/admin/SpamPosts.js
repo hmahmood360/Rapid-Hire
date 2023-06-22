@@ -6,8 +6,8 @@ import { removeFromSpamPosts, deletePostAsAdmin } from '../../actions/post'
 
 const SpamPosts = ({posts, removeFromSpamPosts, deletePostAsAdmin}) => {
   return (
-    <div>
-      <h2 className="mt-3 text-primary">Posts Marked As Spam</h2>
+    <div className='mt-10'>
+      <h2 className="mt-3 text-primary font-semibold text-4xl mb-6">Posts Marked As Spam</h2>
       <table className="table mt-1">
         <thead>
           <tr>

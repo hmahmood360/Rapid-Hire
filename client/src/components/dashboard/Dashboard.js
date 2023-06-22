@@ -96,10 +96,10 @@ const Dashboard = ({
               </div>
             </HashLink>
             <div className="rounded bg-gradient-to-b from-[#03ABAD] to-[#47C0C3] border border-[#03ABAD] shadow-md p-6 border-lg">
-              <p className="text-right text-lg">Unread Messages</p>
+              <p className="text-right text-lg">Job Experiences</p>
               <div className='flex items-center mt-3 justify-between'> 
-                <i className="fa fa-comments text-5xl" aria-hidden="true"></i>
-                <p className='text-6xl'>0</p>
+                <i className="fa fa-briefcase text-5xl" aria-hidden="true"></i>
+                <p className='text-6xl'>1</p>
               </div>
             </div>
           </div>
